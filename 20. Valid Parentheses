@@ -1,0 +1,14 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        list=[]
+        dit={")":"(","}":"{","]":"["}
+        open={"(","[","{"}
+        for i in s :
+            if i in open :
+                list.append(i)
+            elif list and list[-1]==dit[i]:
+                list.pop()
+            else :
+                return False
+            
+        return list==[]
