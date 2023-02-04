@@ -12,3 +12,17 @@ class Solution:
 
         return len(nums)-nums.count(val)
         
+        
+        
+        
+        
+        
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        i=0
+        for r in nums:
+            if r!=val:
+                nums[i]=r
+                i=i+1
+        return i
+        
