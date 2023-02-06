@@ -1,0 +1,23 @@
+class Solution:
+    def shuffle(self, nums: List[int], n: int) -> List[int]:
+        result = []
+        for i in range(n) :
+            result.append(nums[i])
+            result.append(nums[i+n])
+
+        return result
+        
+        
+        
+        
+        
+class Solution:
+    def shuffle(self, nums: List[int], n: int) -> List[int]:
+        #put the half of the list in one list and another half in another list.
+        list1=nums[0:len(nums)//2]
+        list2=nums[len(nums)//2:len(nums)]
+        #append the list elements from each of the two lists
+        for i in range(len(list1)):
+            list1.append(list1[i])
+            list1.append(list2[i])
+        return list1[len(nums)//2:]
