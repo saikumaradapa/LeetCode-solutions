@@ -12,3 +12,28 @@ class Solution:
             i += 1
 
         return result
+        
+        
+        
+        
+        
+        
+        
+        
+        
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        short = strs[0]
+        for i in strs:
+            short = i if len(short) > len(i) else short
+        common = ''
+        a = 0
+        for i in short:
+            addit = True
+            for j in strs:
+                if i != j[a]:
+                    addit = False
+            if addit:
+                common += i
+                a += 1
+        return common
