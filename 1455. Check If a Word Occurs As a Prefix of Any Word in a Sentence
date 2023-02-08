@@ -1,0 +1,8 @@
+class Solution:
+    def isPrefixOfWord(self, sentence: str, searchWord: str) -> int:
+        strs = sentence.split(' ')
+        for i in strs :
+            if searchWord == i[:len(searchWord)] :
+                return strs.index(i)+1
+
+        return -1
