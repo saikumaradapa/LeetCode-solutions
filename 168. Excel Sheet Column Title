@@ -1,4 +1,20 @@
 class Solution:
+    def convertToTitle(self, n):
+        result = ''
+        while n > 0 :
+            cr = chr((n-1)%26 + ord('A'))
+            result = cr+result
+            n = (n-1)//26
+        return result
+
+
+
+
+
+
+
+
+class Solution:
     def convertToTitle(self, num):
             result = []
             while num > 0:
