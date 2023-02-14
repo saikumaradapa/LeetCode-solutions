@@ -1,0 +1,27 @@
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        t1 = list(t)
+        s1 = list(s)
+        for i in s1 :
+            if i in t1 :
+                t1.remove(i) 
+            elif i not in t1 :
+                return False             
+        return len(t1)==0
+        
+        
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        t1 = list(t)
+        s1 = list(s)
+        return  sorted(t1)==sorted(s1)
+        
+        
+        
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        combinedStrings = list(set(s + t))
+        for el in combinedStrings:
+            if(s.count(el) != t.count(el)):
+                return False
+        return True
