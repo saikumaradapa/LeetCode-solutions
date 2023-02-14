@@ -1,0 +1,46 @@
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        for i in s :
+            if s.count(i)==1 :
+                return s.index(i)  
+        return -1
+
+
+
+# best time complexity
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        dit = {}
+        for i in s :
+            if i in dit :
+                dit[i] +=1 
+            else :
+                dit[i] = 1
+        for i in s :
+            if dit[i] == 1:
+                return s.index(i)
+        return -1
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        s = list(s)
+        temp = 0
+        n=0
+        for i in s:
+            temp = i
+            s[n] = 0
+            if temp not in s:
+                return n
+            s[n] = temp
+            n +=1
+        return -1
