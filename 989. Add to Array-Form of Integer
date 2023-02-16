@@ -1,0 +1,23 @@
+class Solution:
+    def addToArrayForm(self, num: List[int], k: int) -> List[int]:
+        # return map(int,list(str(int(''.join(map(str,num)))+k)))
+        
+        sol = ''
+        for i in num : 
+            sol = sol+str(i)
+        print(sol) 
+        sol = int(sol)+k
+        res  = []
+        for i in str(sol) :
+            res.append(int(i))
+        return res
+        
+        
+        
+        
+        
+  class Solution(object):
+    def addToArrayForm(self, num, k):
+        s=''.join(map(str,num))
+        a=int(s)+k
+        return [int(i) for i in str(a)]
