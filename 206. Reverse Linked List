@@ -1,0 +1,49 @@
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev, curr = None, head
+
+        while curr :
+            temp = curr.next 
+            curr.next = prev
+            prev = curr
+            curr = temp 
+
+        return prev
+        
+        
+''' ####################################
+None  ->  [0,next]->[1,next]->[2,next]->[3,next]->None
+            ^ prev
+                      ^ head
+                                ^ next
+           [0,next]<-[1,next]<-[2,next]<-[3,next]<-None
+prev.next -> left
+head.next -> prev
+next = head
+''' #####################################
+
+#***********************************************************
+#***********************************************************
+# classical method with stack 
+
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head :
+            return 
+        stack = []
+        while head :
+            stack.append(head.val)
+            head = head.next
+        # print(stack)
+   
+        temp = head1 = ListNode(stack.pop())
+        while stack :
+            temp1 = ListNode(stack.pop())
+            head1.next = temp1
+            head1 = temp1
+
+        return temp
+#***********************************************************
+#***********************************************************
+
+
