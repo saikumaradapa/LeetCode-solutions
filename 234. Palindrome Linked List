@@ -1,0 +1,35 @@
+# O(N)space 
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        stack = []
+        curr = head
+        while curr :
+            stack.append(curr.val)
+            curr = curr.next
+        return stack == stack[::-1]
+        
+        
+        
+###################################################################33
+# O(1)space
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        slow, fast = head, head
+        # 1.find middle node 
+        while fast and fast.next :
+            slow = slow.next 
+            fast = fast.next.next 
+        # 2.reverse second half of linked list
+        prev = None 
+        while slow :
+            temp = slow.next 
+            slow.next = prev
+            prev = slow
+            slow = temp
+        # 3.check palindrome 
+        left, right = head, prev
+        while right :
+            if left.val != right.val :
+                return False
+            left, right = left.next, right.next
+        return True
