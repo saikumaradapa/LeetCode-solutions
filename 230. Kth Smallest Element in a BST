@@ -8,3 +8,25 @@ class Solution:
                 inorder(root.right, list)
         inorder(root, list)
         return list[k-1]
+        
+        
+        
+        
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+    # take a global variable 
+    # go with inorder traversal to get elements in ascending order 
+    # return the kth element 
+        self.count = 1
+        self.smallest = 0
+        def inorder(root) :
+            if not root :
+                return 
+            inorder(root.left)
+            if self.count == k :
+                self.smallest = root.val
+            self.count += 1
+            inorder(root.right)
+        inorder(root)
+        return self.smallest
+
