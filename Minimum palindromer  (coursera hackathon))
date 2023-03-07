@@ -1,0 +1,16 @@
+def palindrom() :
+    stri = input('Enter a stirng : ')
+    def is_pal(string) :
+        return string == string[::-1]
+    if is_pal(stri) :
+        return stri
+    else :
+        right = len(stri)-1
+        stri = stri+(stri[::-1])[1:]
+        while True :
+            if is_pal(stri[:right+2]) :
+                return stri[:right+2]
+            right +=1
+n = int(input('Enter number of strings : '))
+for i in range(n) :
+    print(palindrom())
