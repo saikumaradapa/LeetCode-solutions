@@ -1,0 +1,47 @@
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        for i in range(len(haystack)+1-len(needle)) :
+                if haystack[i:i+len(needle)]== needle :
+                    return i
+        return -1
+        
+        
+###################################################################################
+        
+O(N*M)
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        for i in range(len(haystack)+1-len(needle)) :
+            for j in range(len(needle)) :
+                if haystack[i+j] != needle[j] :
+                    break 
+                if j == len(needle)-1 :
+                    return i
+        return -1
+
+###################################################################################
+
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        if needle in haystack :
+            return haystack.index(needle)
+        else :
+            return -1
+
+###################################################################################
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        start = 0
+        break_flag = False
+        while start + len(needle) <= len(haystack):
+            for i in range(len(needle)):
+                if haystack[start+i] != needle[i]:
+                    break_flag = True
+                    break
+            if break_flag:
+                start += 1
+                break_flag = False
+            else:
+                return start
+
+        return -1
