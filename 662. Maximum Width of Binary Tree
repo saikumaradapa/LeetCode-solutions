@@ -1,0 +1,19 @@
+    def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        if not root :
+            return 0
+        width = 1  
+        q = [(root,0)]
+        while q :
+            level  = []
+            if len(q) != 0 :
+                width = max(width, q[-1][1]-q[0][1]+1)
+
+            while q :
+                node, position = q.pop(0)
+                if node.left :
+                    level.append((node.left,position*2))
+                if node.right :
+                    level.append((node.right,position*2+1))
+            q = level
+
+        return width
