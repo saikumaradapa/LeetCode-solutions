@@ -1,0 +1,20 @@
+class Solution:
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # take a dummy node 
+        dummy = ListNode(0,head) 
+        point = dummy 
+        while point.next and point.next.next :
+        
+        # select nodes to swap 
+            s1 = point.next 
+            s2 = point.next.next 
+            
+        # actuall swaping 
+            s1.next = s2.next 
+            s2.next = s1
+            
+       # update nodes for next iteration 
+            point.next = s2
+            point = s1 
+        
+        return dummy.next
