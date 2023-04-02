@@ -1,11 +1,28 @@
 class Solution:
     def rotate(self, matrix: List[List[int]]) -> None:
-        """
-        Do not return anything, modify matrix in-place instead.
-        """
+        left, right = 0, len(matrix)-1
+        while left < right :
+            for i in range(right-left) :
+                top, bottom = left, right 
+                topleft = matrix[top][left+i]
+                matrix[top][left+i] = matrix[bottom-i][left] 
+                matrix[bottom-i][left] = matrix[bottom][right-i] 
+                matrix[bottom][right-i] = matrix[top+i][right] 
+                matrix[top+i][right] = topleft
+
+            left, right = left+1, right-1 
+
+
+
+
+
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+
         n = len(matrix)
         for i in range((n+1)// 2) :
             for j in range((n)//2) :
+              # bottom left 
                 temp = matrix[n-1-j][i]
                 matrix[n-j-1][i] = matrix[n-1-i][n-1-j]
                 matrix[n-1-i][n-1-j] = matrix[j][n-1-i]
