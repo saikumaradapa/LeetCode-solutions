@@ -2,3 +2,10 @@ class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
     # O(NlogN)time  O(1)space
         return sorted(nums)[-k]
+        
+        
+# with head O(NlogN) 
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        # print(heapq.nlargest(k,nums)[len(heapq.nlargest(k,nums))-1])
+        return heapq.nlargest(k,nums)[-1]
