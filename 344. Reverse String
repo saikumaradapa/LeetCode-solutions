@@ -1,0 +1,20 @@
+# time O(n) and space O(n) for recurrsive call stack 
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        def reverse(l,r) :
+            if l<r :
+                s[l], s[r] = s[r], s[l]
+                reverse(l+1, r-1)
+
+        reverse(0, len(s)-1)
+        
+        
+        
+# time O(n) and space O(1) 
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        l, h = 0 , len(s)-1
+        while l < h :
+            s[l] , s[h] = s[h], s[l]
+            l +=1
+            h -=1
