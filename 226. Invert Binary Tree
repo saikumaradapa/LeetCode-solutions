@@ -1,0 +1,30 @@
+# with help of tree level order traversal 
+# time O(n) and space O(n)
+class Solution:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        q = [root]
+        while q :
+            lenght = len(q)
+            for i in range(lenght) :
+                node = q.pop(0)
+                if node :
+                    node.left, node.right = node.right, node.left
+                    q.append(node.left)
+                    q.append(node.right)
+
+        return root 
+
+
+
+
+
+# Recurrsion approach 
+class Solution:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if not root :
+            return 
+        root.left, root.right = root.right, root.left
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        
+        return root
