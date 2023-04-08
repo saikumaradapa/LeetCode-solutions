@@ -1,0 +1,30 @@
+# O(n) take the advantage of sorted values 
+# consider left and right sum of current number
+
+
+class Solution:
+    def getSumAbsoluteDifferences(self, nums: List[int]) -> List[int]:
+        result = []
+        tsum,n = sum(nums), len(nums)
+        lnum, lsum = 0, 0
+
+        for i in range(n) :
+            rsum = tsum-lsum
+            rnum = n-lnum
+            res = (lnum*nums[i] - lsum) + (rsum - rnum*nums[i] )
+            lnum, lsum = lnum+1, lsum+nums[i]
+            result.append(res)
+        return result
+
+
+
+# time O(N²) and TLE 
+class Solution:
+    def getSumAbsoluteDifferences(self, nums: List[int]) -> List[int]:
+        result = []
+        for i in range(len(nums)) :
+            temp = []
+            for j in range(len(nums)) :
+                temp.append(abs(nums[i]-nums[j]))
+            result.append(sum(temp))
+        return result
