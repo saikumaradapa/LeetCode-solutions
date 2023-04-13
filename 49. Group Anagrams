@@ -1,0 +1,36 @@
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        dit = {}
+        for string in strs :
+            s = ''.join(sorted(string))
+            if s in dit :
+                dit[s].append(string)
+            else :
+                dit[s] = [string]
+        return dit.values()
+        
+        
+        
+        
+# to get frequence of sting insted of sorting technique 
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        # a3b2c10 
+        def getfreqstring(string) :
+            result = ''
+            albet = [0 for i in range(26)] 
+            for i in string :
+                albet[ord(i) - ord('a')] += 1
+            for i in range(len(albet)) :
+                if albet[i] != 0 :
+                    result += chr(97+i)+str(albet[i])
+            return result
+        
+        dit = {}
+        for string in strs :
+            s = getfreqstring(string)
+            if s in dit :
+                dit[s].append(string)
+            else :
+                dit[s] = [string]
+        return dit.values()
