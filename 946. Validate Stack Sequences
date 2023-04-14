@@ -1,0 +1,30 @@
+class Solution:
+    def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
+        stack, i, n = [], 0, len(popped)
+        for p in pushed :
+            stack.append(p)
+            while stack and i < n and stack[-1] == popped[i] :
+                stack.pop()
+                i += 1
+        return stack == []
+        
+        
+        
+        
+        
+class Solution:
+    def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
+        stack = []
+        pushed.reverse()
+        popped.reverse()
+        while pushed or popped :
+            print(stack)
+            if stack and popped and stack[-1] == popped[-1] :
+                stack.pop()
+                popped.pop()
+            elif pushed :
+                stack.append(pushed.pop())
+            else :
+                return False 
+        return stack == []
+        
