@@ -1,0 +1,20 @@
+# time O(n) and space O(1)
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        res = 0
+        i = len(s)-1
+        while s[i] == ' ' :
+            i -= 1
+        while s[i] != ' ' and i >= 0 :
+            res += 1
+            i -= 1
+        return res 
+        
+        
+        
+        
+# time O(n)  and space O(n)
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        words = [w for w in s.split(' ') if w != '']
+        return len(words[-1])        
