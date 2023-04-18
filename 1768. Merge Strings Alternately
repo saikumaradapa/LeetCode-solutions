@@ -1,0 +1,10 @@
+time O(n), space O(1) n- max len of strings 
+
+class Solution:
+    def mergeAlternately(self, word1: str, word2: str) -> str:
+        res = ''
+        for i in range(max(len(word1),len(word2))) :
+            a = word1[i] if i < len(word1) else ''
+            b = word2[i] if i< len(word2) else ''
+            res += a+b
+        return res
