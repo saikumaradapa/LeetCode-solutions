@@ -1,0 +1,35 @@
+class Solution:
+    def lastStoneWeight(self, stones: List[int]) -> int:
+        if len(stones) == 1 :
+            return stones[0]
+        while stones :
+            y = max(stones)
+            stones.remove(y)
+            x = max(stones)
+            stones.remove(x)
+            if y-x > 0 :
+                stones.append(y-x)
+            if len(stones) == 0 :
+                return 0
+            if len(stones) == 1 :
+                return stones[0]
+            # print(stones)
+
+        
+        
+class Solution:
+    def lastStoneWeight(self, stones: List[int]) -> int:
+        stones = [-x for x in stones]
+        heapq.heapify(stones)
+
+        while len(stones) > 1 :
+            first = heapq.heappop(stones)
+            second = heapq.heappop(stones)
+            rem = first - second 
+            if rem != 0 :
+                heapq.heappush(stones,-abs(rem))
+            print(stones)
+        stones.append(0)
+        return abs(stones[0])
+
+# solution with help of heaps, max heap not existed so min heap is used as max heap by negation of list 
