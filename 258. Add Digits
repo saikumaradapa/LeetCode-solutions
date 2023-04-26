@@ -1,0 +1,47 @@
+class Solution:
+    def addDigits(self, num: int) -> int:
+        res = 0
+        while num > 0 :
+            rem = num % 10
+            num = num // 10
+            res += rem 
+            if num == 0 and res > 9 : 
+                num = res
+                res = 0
+        return res 
+
+
+
+
+
+
+# using Digital root method (math formula)
+
+class Solution:
+    def addDigits(self, num: int) -> int:
+        if num < 9 :
+            return num
+        if num % 9 == 0:
+            return 9
+        else :
+            return num % 9 
+
+
+
+
+
+
+class Solution:
+    def addDigits(self, num: int) -> int:
+        result = num
+        while result > 9 and num != 0 :
+            result = 0
+            while num > 0 :
+                rem = num % 10
+                num = num // 10
+                result += rem 
+            # result += rem 
+            num = result 
+
+        return result
+        
