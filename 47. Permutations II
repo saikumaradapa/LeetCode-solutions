@@ -1,0 +1,25 @@
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        count = {n : 0 for n in nums}
+        res = []
+        perm = []
+        for i in nums :
+            count[i] += 1
+        def backtrack() :
+            if len(perm) == len(nums) :
+                res.append(perm[:])
+                return 
+            for i in count :
+                if count[i] != 0:
+                    count[i] -= 1
+                    perm.append(i)
+                    backtrack()
+                    count[i] += 1
+                    perm.pop()
+          
+        backtrack()
+        return res
+        
+        
+        '''time O(n*n2)
+            space O(n+n) for dictionary and stack recursions '''
