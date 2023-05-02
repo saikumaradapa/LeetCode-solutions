@@ -1,0 +1,35 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        ans = []
+        def addp(strs, on, cn):
+            if len(strs) == n*2:
+                ans.append("".join(strs))
+            else:
+                if on-cn>0:
+                    addp(strs + ")", on, cn+1)
+                if on<n:
+                    addp(strs + "(", on+1, cn)
+        addp("", 0, 0)
+        return ans
+
+
+
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        result = []
+        stack = []
+        def backtrack(opens, closes) :
+            if n == opens == closes :
+                result.append("".join(stack))
+                return 
+            if opens < n :
+                stack.append("(") 
+                backtrack(opens+1, closes)
+                stack.pop()
+            if closes < opens :
+                stack.append(")")
+                backtrack(opens, closes+1)
+                stack.pop()
+           
+        backtrack(0, 0)
+        return result
