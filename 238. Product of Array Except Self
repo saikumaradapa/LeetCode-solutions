@@ -1,0 +1,30 @@
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        arr = [1]*len(nums)
+        prefix = 1
+        postfix = 1
+        for i in range(len(nums)) :
+            arr[i] = prefix
+            prefix = prefix * nums[i]
+        for i in range(len(nums)-1,-1,-1) :
+            arr[i] =arr[i]  * postfix
+            postfix = postfix * nums[i]
+        return arr
+
+        """ [1, 2, 3, 4] --> prefix product [1, 1, 2, 6]
+            [1 ,1, 2, 3] --> postfix product [24, 12, 4, 1]
+            product of both prefix and postfix  [24, 12, 8, 6]
+            time complexity O(n)
+            space complexity is O(n) to evalute the result """     
+    
+    
+TLE 
+
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        a = [1]*len(nums)
+        for i in range(len(nums)):
+            for j in range(len(nums)) :
+                if i!=j :
+                    a[i] =a[i] * nums[j]
+        return a
