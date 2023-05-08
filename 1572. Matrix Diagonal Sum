@@ -1,0 +1,23 @@
+# time O(len(mat[0])) space O(1)
+class Solution:
+    def diagonalSum(self, mat: List[List[int]]) -> int:
+        sum = 0
+        n = len(mat)
+        for i in range(n) :
+            sum += mat[i][i]
+            sum += mat[i][n-i-1]
+        if len(mat)%2 == 1 :
+            sum -= mat[n//2][n//2]
+        return sum 
+
+# time O(n^2) space O(1)
+class Solution:
+    def diagonalSum(self, mat: List[List[int]]) -> int:
+        sum = 0
+        for i in range(len(mat)) :
+            for j in range(len(mat[0])) :
+                if i==j :
+                    sum += mat[i][j]
+                elif (i+j==len(mat)-1 and i!=j) :
+                    sum += mat[i][j]
+        return sum 
