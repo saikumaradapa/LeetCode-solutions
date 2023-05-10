@@ -1,0 +1,30 @@
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        if n == 1 :
+            return [[1]]
+        res = [[0 for j in range(n)] for i in range(n) ]
+        c = 1
+        topend, bottomend, leftend, rightend = 0, n-1, 0, n-1
+        while topend <= bottomend and leftend <= rightend :
+            for i in range(leftend, rightend+1) :
+                res[topend][i] = c 
+                c += 1
+            topend += 1
+
+            for i in range(topend, bottomend+1) :
+                res[i][rightend] = c
+                c += 1
+            rightend -= 1
+
+            for i in range(rightend, leftend-1, -1) :
+                res[bottomend][i] = c
+                c += 1
+            bottomend -= 1
+
+            for i in range(bottomend, topend-1, -1) :
+                res[i][leftend] = c
+                c += 1
+            leftend += 1
+        return res
+        
+        """ O(n^2) time and O(n^2) space complexity """
