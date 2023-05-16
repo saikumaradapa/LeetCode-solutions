@@ -1,0 +1,14 @@
+class Solution:
+    def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
+        n = head 
+        dummy = ListNode(0, head)
+        prev = dummy
+        while  n :
+            if n.val == val :
+                prev.next = n.next
+            else :
+                prev = n
+            n = n.next
+        return dummy.next
+                
+                
