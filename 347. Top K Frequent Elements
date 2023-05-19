@@ -1,0 +1,45 @@
+# Bucket sort technique 
+# taking the same frequent elements in an bucket 
+
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        dit = {}
+        frq = [[] for i in range(len(nums)+1)]
+        for i in nums :
+            dit[i] = 1+dit.get(i,0)
+
+        res = []
+        for i,j in dit.items():
+            frq[j].append(i)
+        # print(frq)
+        for i in range(len(frq)-1,0,-1) :
+            for j in frq[i] :
+                res.append(j)
+                if len(res)==k :
+                    return res
+""" time complexity O(n)
+    space complexity O(2n) """
+        
+
+
+
+
+
+
+
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        dit = {}
+        for i in nums :
+            if i in dit :
+                dit[i] += 1
+            else :
+                dit[i] = 1
+        result = []
+        # sorting the dictionary based on frequency and returning the top elements 
+        res  = sorted(dit.items(), key=lambda x:x[1])
+        for i in res[::-1]:
+            if k > 0 :
+                result.append(i[0])
+                k -= 1
+        return result
