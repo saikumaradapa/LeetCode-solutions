@@ -1,0 +1,14 @@
+class Solution:
+    def findCenter(self, edges: List[List[int]]) -> int:
+        return list((set((edges[0][0], edges[0][1]))).intersection(set((edges[1][0],edges[1][1]))))[0]
+
+
+
+
+class Solution:
+    def findCenter(self, edges: List[List[int]]) -> int:
+        if edges[0][0] in edges[1] :
+            res = edges[0][0]
+        elif edges[0][1] in edges[1] :
+            res = edges[0][1]
+        return res
