@@ -1,0 +1,15 @@
+class Solution:
+    def arrayPairSum(self, nums: List[int]) -> int:
+        return sum(sorted(nums)[::2])
+        
+
+class Solution:
+    def arrayPairSum(self, nums: List[int]) -> int:
+        nums = sorted(nums, reverse= True)
+        i = 0
+        sum = 0
+        while i < len(nums) :
+            sum += min(nums[i], nums[i+1]) 
+            # print(nums[i], nums[i+1]) 
+            i += 2
+        return sum
