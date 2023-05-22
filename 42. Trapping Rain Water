@@ -1,0 +1,30 @@
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        n = len(height)
+        left = [0] * n 
+        right = [0] * n
+
+        left[0] = height[0]
+        maxl = height[0]
+        for i in range(n) :
+            if maxl < height[i] :
+                maxl = height[i] 
+            left[i] = maxl 
+        
+        right[n-1] = height[n-1]
+        maxr = height[n-1]
+        for i in range(n-1, -1, -1) :
+            if maxr < height[i] :
+                maxr = height[i] 
+            right[i] = maxr
+
+        res = 0
+        for i in range(n) :
+            res += min(left[i], right[i]) - height[i] 
+        # print(height, left, right)
+        return res
+
+
+
+
+        # time complexity of O(3n) with space of O(2n)
