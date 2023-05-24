@@ -1,0 +1,35 @@
+class Solution:
+    def dailyTemperatures(self, temp: List[int]) -> List[int]:
+        res = [0] * len(temp) 
+        stack = []    # (temp, index)
+        for i, t in enumerate(temp) :
+            while stack and t > stack[-1][0] :
+                st, id = stack.pop()
+                res[id] = i-id
+            stack.append((t, i))
+        return res
+
+""" time complexity of O(n) and space O(n) for stack """
+# solution with monotonic stack --- stack with elements in decreasing order 
+
+
+
+
+class Solution:
+    def dailyTemperatures(self, t: List[int]) -> List[int]:
+        res = [0] * len(t) 
+        n = len(t)
+        stack = []
+        for i in range(len(t)-1, -1, -1) :
+
+            while stack and t[stack[-1]] <= t[i] :
+                stack.pop()
+            if stack :
+                res[i] = stack[-1]-i
+                stack.append(i)
+            else :
+                stack.append(i)
+            # print(res, stack)
+        return res
+
+""" time complexity of O(n) and space O(n) for stack """
