@@ -1,0 +1,20 @@
+class Solution:
+    def asteroidCollision(self, asteroids: List[int]) -> List[int]:
+        stack = []
+        for a in asteroids :
+            while stack and a < 0 and stack[-1] > 0 : # condition to occure the collision top >0 and ast <0
+                if a + stack[-1] == 0 :  # same size of asteroids
+                    stack.pop()
+                    break
+                elif abs(a) < stack[-1] :  # collision with top > ast
+                    break 
+                else :                     # collision with top < ast : critical condition 
+                    stack.pop()
+                    continue 
+            else :                         # no collision occured 
+                stack.append(a)  
+        return stack 
+        
+        
+    """ time complexity O(n) 
+        space O(n)  """
