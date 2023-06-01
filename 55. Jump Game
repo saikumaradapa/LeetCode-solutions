@@ -1,0 +1,73 @@
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        goal = len(nums) - 1
+        for i in range(len(nums)-1, -1, -1) :
+            if i+nums[i] >= goal :          # if you can reach the position greater than the range[pos+maxJumps] then move goal to right 
+                goal = i                    # updating the goal 
+        return goal == 0                    # checking wheather can reach the first postion from the last 
+
+    # try to reach first position from the last postion, 
+    # Greedy approach with O(n) time and constant space complexity 
+
+
+
+
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        dp = [False] * len(nums)
+        dp[0] = True 
+        for i in range(len(nums)) :
+            for j in range(i) :
+                if dp[j] and (j + nums[j]) >= i :
+                    dp[i] = True
+                    break 
+        # print(dp)
+        return dp[-1]
+ # solution using dynamic programmin time complexity O(n^2) and space O(n)
+
+
+class Solution(object):
+    def canJump(self, nums):
+        # Take curr variable to keep the current maximum jump...
+        curr = nums[0]
+        # Traverse all the elements through loop...
+        for i in range(1,len(nums)):
+            # If the current index 'i' is less than current maximum jump 'curr'...
+            # It means there is no way to jump to current index...
+            # so we should return false...
+            if curr == 0:
+                return False
+            curr -= 1
+            # Update the current maximum jump...
+            curr = max(curr, nums[i])       # It’s possible to reach the end of the array...
+        return True
+    # greedy approach with O(n) time and constant space complexity 
+
+
+
+#--- TLE --- brute force approach with memorization technique 
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        dp = {}
+        n = len(nums)-1
+        def dfs (i) :
+            # print(dp)
+            if i == n :
+                dp[i] = True
+                return True
+            elif i > n :
+                dp[i] = False
+                return False
+            else :
+                if i in dp :
+                    return dp[i]
+                else :
+                    flag = False
+                    for j in range(1,nums[i]+1) :
+                        flag = flag or dfs(i+j)
+                    if flag :
+                        dp[i] = True
+                    else :
+                        dp[i] = False
+                    return dp[i]
+        return dfs(0)
