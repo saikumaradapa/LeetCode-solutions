@@ -1,0 +1,8 @@
+class Solution:
+    def semiOrderedPermutation(self, nums: List[int]) -> int:
+        start = 1 
+        end = max(nums)
+        res = nums.index(start) + len(nums) - nums.index(end) - 1
+        if nums.index(start) > nums.index(end) :
+            res -= 1
+        return res
