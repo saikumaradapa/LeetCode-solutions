@@ -1,0 +1,28 @@
+class Solution:
+    def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
+        x1, x2, y1, y2 = coordinates[0][0], coordinates[1][0], coordinates[0][1], coordinates[1][1]
+        print((((x2+x1)**2)-4*x1*x2))
+        m = (y2-y1)/(x2-x1) if x2-x1 != 0 else float("inf")
+
+
+        for i in range(1, len(coordinates)-1) :
+            m1 = (coordinates[i+1][1] - coordinates[i][1])/(coordinates[i+1][0]-coordinates[i][0]) if (coordinates[i+1][0]-coordinates[i][0]) else float("inf")
+            if m1 != m :
+                return False 
+        return True
+# solution with linear time and constant space 
+
+
+
+#------------------------------------------------------------------------------------------
+
+class Solution:
+    def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
+        (x1,y1) = coordinates[0]
+        (x2,y2) = coordinates[1]
+        # (y2-y1)/(x2-x1) = (y3-y1)/(x3-x1)
+        for (x3,y3) in coordinates[2:]:
+            if (y2-y1) * (x3-x1) != (y3-y1) * (x2-x1):
+                return False
+        return True
+            
