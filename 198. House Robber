@@ -1,0 +1,58 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if len(nums) <= 1 :
+            return nums[0]
+
+        lastsec = nums[0]
+        last = max(nums[0], nums[1])
+        now = max(lastsec, last)
+
+        for i in range(2, len(nums)) :
+            now = max(lastsec + nums[i], last)
+            lastsec = last
+            last = now
+        return now
+
+
+# optimised dynamic programming 
+# time complexity O(N)
+# space complexity O(1)
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if len(nums) <= 1 :
+            return nums[0]
+        dp = [0] * len(nums)
+        dp[0] = nums[0]
+        dp[1] = max(nums[0], nums[1])
+        for i in range(2, len(nums)) :
+            dp[i] = max(dp[i-2]+nums[i], dp[i-1])
+        return dp[len(nums)-1]
+
+
+# solution with true dynamic programming 
+# time complexity O(N)
+# space complexity O(N)
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        def recursive(i) :
+            if i < 0 :
+                return 0
+            if i in dit :
+                return dit[i]
+            
+            result = max(recursive(i-2)+nums[i], recursive(i-1))
+            dit[i] = result
+            return result 
+        dit = {}
+        return recursive(len(nums)-1)
+
+    # recursive approach with memorization O(N) time complexity  
+    # without memorization is O(2^n)
