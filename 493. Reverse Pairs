@@ -1,0 +1,24 @@
+class Solution:
+    def reversePairs(self, arr: List[int]) -> int:
+        res = []
+        def mergesort(arr) :
+            if len(arr) > 1 :
+                left = arr[:len(arr)//2]
+                right = arr[len(arr)//2:]
+                mergesort(left)
+                mergesort(right)
+
+                i,j = 0,0
+                while i < len(left) :
+                    while j < len(right) and left[i] > 2 * right[j] :
+                        j += 1
+                    if j != 0 : res.append(j)
+                    i += 1
+                arr[:] = sorted(left+right)
+
+
+        mergesort(arr)
+        return sum(res)
+
+
+# solution with help of merge sort technique 
