@@ -1,0 +1,20 @@
+class Solution:
+    def minDepth(self, root: Optional[TreeNode]) -> int:
+        if not root :
+            return 0
+        q = [root]
+        res  = 1
+        while q :
+            n = len(q)
+            for i in range(n) :
+                node = q.pop(0)
+                if node.left :
+                    q.append(node.left)
+                if node.right :
+                    q.append(node.right)
+                    print(node.val, end=' ')
+                if not node.left and not node.right :
+                    return res
+            res += 1
+        return res
+''' time complexity O(n) and space complexity O(n) for queue'''
