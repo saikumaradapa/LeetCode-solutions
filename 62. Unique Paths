@@ -1,0 +1,40 @@
+import math
+class Solution:
+    def uniquePaths(self, m: int, n: int, i=0, j=0) -> int:
+        if i >= m or j >= n : return 0
+        if i == m-1 and j == n-1 : return 1
+        return self.uniquePaths(m,n, i+1, j) + self.uniquePaths(m,n, i, j+1)
+
+'''  
+    time complexity O(2 pow(m+n))
+    space complexity O(m+n) required by implicit recursive stack'''
+------------------------------------------------------------------------------------------------------------------------------------------------
+import math
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        dp = dict()
+        def helper(m,n) :
+            if m==1 or n==1 :
+                return 1
+            if (m,n) in dp :
+                return dp[(m,n)]
+            dp[(m,n)] = helper(m-1,n)+helper(m,n-1)
+            return dp[(m,n)]
+        return helper(m,n)
+
+''' solution with memorization 
+    time complexity O(m*n)
+    space complexity O(m*n) '''
+------------------------------------------------------------------------------------------------------------------------------------------------
+import math
+class Solution:
+    def uniquePaths(self, m: int, n: int, i=0, j=0) -> int:
+        dp = [[1]*n for i in range(m)]
+        for i in range(1,m) :
+            for j in range(1,n) :
+                dp[i][j]  = dp[i-1][j] + dp[i][j-1]
+        return dp[m-1][n-1]
+
+''' pure dynamic programming 
+    time complexity O((m*n))
+    space complexity O(m*n) '''
