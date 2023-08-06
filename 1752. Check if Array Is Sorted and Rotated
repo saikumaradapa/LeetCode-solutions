@@ -1,0 +1,37 @@
+class Solution:
+    def check(self, nums: List[int]) -> bool:
+        decrease_count = 0
+        for i in range(len(nums)):
+
+            if nums[i] > nums[(i + 1) % len(nums)]:
+                decrease_count += 1
+            print(nums[i], nums[(i + 1) % len(nums)],"-->",decrease_count)
+        return decrease_count <= 1
+
+''' time complexity O(n)
+    space complexity O(1) 
+    modulo operation is used to handle the circular nature of the rotation.
+'''
+##############################################################################################################################
+class Solution:
+    def check(self, nums: List[int]) -> bool:
+        sortd = True
+        rotated = False
+        for i in range(1,len(nums)) :
+            if nums[i-1] > nums[i] :
+                sortd = False
+                break
+        if sortd :
+            # print("sorted")
+            return True
+
+        snums = sorted(nums)
+        for i in range(len(nums)) :
+            snums = snums[1:]+[snums[0]]
+            if snums == nums :
+                return True
+        return False
+
+''' time complexity O(n^2)
+    space complexity O(n) 
+'''
