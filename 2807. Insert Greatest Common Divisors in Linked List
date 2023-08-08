@@ -1,0 +1,19 @@
+
+import math
+class Solution:
+    def insertGreatestCommonDivisors(self, root: Optional[ListNode]) -> Optional[ListNode]:
+        if not root or not root.next :
+            return root
+        left, right = root, root.next
+        while right :
+            temp = ListNode(math.gcd(left.val, right.val))
+            left.next = temp
+            temp.next = right
+            
+            left = right
+            right = right.next
+        return root
+
+''' time complexity : O(n)
+    space complexity : O(1) 
+'''
