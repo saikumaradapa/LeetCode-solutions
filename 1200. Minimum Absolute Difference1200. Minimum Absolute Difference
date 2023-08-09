@@ -1,0 +1,15 @@
+class Solution:
+    def minimumAbsDifference(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        diff = max(nums)-min(nums)
+        temp = []
+        for i in range(len(nums)-1) :
+            if nums[i+1]-nums[i] < diff :
+                temp = [[nums[i], nums[i+1]]]
+                diff = nums[i+1]-nums[i] 
+            elif nums[i+1]-nums[i] == diff :
+                temp.append([nums[i],nums[i+1]])
+        return temp
+''' time coplexity : O(nlogn)
+    space coplexity : O(n)
+''' 
