@@ -1,0 +1,56 @@
+class Solution:
+    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+        m,n = len(obstacleGrid), len(obstacleGrid[0])
+        dp = [0] * n
+        dp[n-1] = 1
+        for r in range(m-1,-1,-1) :
+            for c in range(n-1,-1,-1) :
+                if obstacleGrid[r][c] :
+                    dp[c] = 0
+                elif c + 1 < n :
+                    dp[c] = dp[c] + dp[c+1]
+        return dp[0]
+
+
+''' time complexity : O(m*n)    pure dp with 1D array
+    space complexity : O(n)  
+'''
+
+
+########################################################################################################################################################################
+class Solution:
+    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+        m,n = len(obstacleGrid)-1, len(obstacleGrid[0])-1
+        dp = {(m,n) : 1}
+        def helper(i, j):
+            if i > m or j > n or obstacleGrid[i][j] == 1:
+                dp[(i, j)] = 0
+                return 0
+            if i == m and j == n :
+                return 1
+            if (i,j) in dp :
+                return dp[(i,j)]
+            dp[(i,j)] = (helper(i+1,j) + helper(i, j+1))
+            return dp[(i,j)]
+        return helper(0,0)
+
+''' time complexity : O(n)    memorization technique
+    space complexity : O(n)  
+'''
+
+########################################################################################################################################################################
+
+class Solution:
+    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+        m,n = len(obstacleGrid)-1, len(obstacleGrid[0])-1
+        def helper(i, j):
+            if i > m or j > n or obstacleGrid[i][j] == 1:
+                return 0
+            if i == m and j == n :
+                return 1
+            return (helper(i+1,j) + helper(i, j+1))
+        return helper(0,0)
+
+''' time complexity : O(2^n)           BFS technique 
+    space complexity : O(n) for recursive call stack 
+'''
