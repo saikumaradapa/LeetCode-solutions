@@ -1,0 +1,41 @@
+class Solution:
+    def maxSum(self, nums: List[int]) -> int:
+        # Dictionary to store the maximum and second maximum value for each digit
+        digit_max = {}
+
+        for num in nums:
+            max_digit = max(str(num))
+            
+            if max_digit not in digit_max:
+                digit_max[max_digit] = [num, -1]  # Initialize with -1 to handle single occurrence
+            else:
+                if num > digit_max[max_digit][0]:
+                    digit_max[max_digit][1] = digit_max[max_digit][0]
+                    digit_max[max_digit][0] = num
+                elif num > digit_max[max_digit][1]:
+                    digit_max[max_digit][1] = num
+
+        # Compute the maximum sum possible
+        max_sum = -1
+        for max_digit, values in digit_max.items():
+            if values[1] != -1:  # Check if there's more than one occurrence of the max_digit
+                max_sum = max(max_sum, sum(values))
+
+        return max_sum
+
+
+
+
+
+
+
+
+
+class Solution:
+    def maxSum(self, nums: List[int]) -> int:
+        sum = -1
+        for i in range(len(nums)) :
+            for j in range(i+1, len(nums)) :
+                if max(set(str(nums[i]))) == max(set(str(nums[j]))) :
+                    sum = max(sum,nums[i] + nums[j] )
+        return sum 
