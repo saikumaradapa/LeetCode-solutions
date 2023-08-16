@@ -1,0 +1,59 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def doubleIt(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head.val > 4 :
+            head = ListNode(0,head)
+        node = head 
+        while node :
+            node.val = (2*node.val) % 10
+            if node.next and node.next.val > 4 :
+                node.val += 1
+            node = node.next
+        return head
+''' since the node values are less than 10, carry shoud either 1 or 0 
+'''
+
+########################################################################################################################################################
+#  reverse approach 
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def doubleIt(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        def reverse(head) :
+            prev = None
+            curr = head
+            while curr :
+                temp = curr.next 
+                curr.next = prev 
+                prev = curr
+                curr = temp
+            return prev
+        head = reverse(head)
+        temp = head
+        carr = 0
+        while temp.next  :
+            val = 2*temp.val + carr
+            carr = val//10
+            val = val%10
+            temp.val = val
+            # print(temp.val,end="-->")
+            temp = temp.next
+        val = 2*temp.val + carr
+        carr = val//10
+        val = val%10
+        temp.val = val  
+        if carr :
+            temp.next = ListNode(1)
+
+        return reverse(head)
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
