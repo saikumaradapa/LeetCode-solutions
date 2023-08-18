@@ -1,0 +1,16 @@
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        dit = {0:1}
+        res = 0
+        sum = 0
+        for i in range(len(nums)) :
+            sum += nums[i]
+            if sum-k in dit :
+                res += dit[sum-k]
+            if sum in dit  :
+                dit[sum] += 1
+            else : dit[sum] = 1
+        return res      
+''' time complexity : O(n)      
+    space complexity : O(n)
+'''
