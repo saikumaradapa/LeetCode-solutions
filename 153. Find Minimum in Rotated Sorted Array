@@ -1,0 +1,35 @@
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        low, high = 0, len(nums) - 1
+        while low < high:
+            mid = (low + high) // 2
+            if nums[mid] > nums[high]:  
+                    low = mid + 1
+            else:  
+                high = mid
+        return nums[low]
+''' time complexity : O(logn)
+    space complexity : O(1)
+'''
+
+checking left and right sorted sub-arrays
+#######################################################################################################################################################################################
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        low, high = 0, len(nums) - 1
+        while low < high:
+            mid = (low + high) // 2
+            if nums[low] <= nums[mid]:  # This means the left half is sorted
+                if nums[mid] > nums[high]:  # If right half is unsorted
+                    low = mid + 1
+                else:  # If both halves are sorted, the min is in the left half
+                    high = mid
+            else:  # This means the left half is not sorted and minimum lies in left half or at mid
+                high = mid
+
+        return nums[low]
+
+
+''' time complexity : O(logn)
+    space complexity : O(1)
+'''
