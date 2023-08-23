@@ -14,7 +14,7 @@ class Solution:
 
 
 
-# Iteration 
+# Iteration 1
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         result = []
@@ -28,3 +28,22 @@ class Solution:
             result.append(curr.val)
             curr = curr.right
         return result
+
+# Iteration 2
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        res = []
+        stack = []
+        curr = root
+        while True :
+            if curr :
+                stack.append(curr)
+                curr = curr.left
+            else :
+                if stack :
+                    node = stack.pop()
+                    res.append(node.val)
+                    curr = node.right
+                else :
+                    break
+        return res
