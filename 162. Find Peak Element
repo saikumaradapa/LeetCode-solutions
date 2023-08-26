@@ -1,0 +1,29 @@
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        l,r = 0, len(nums)-1
+        while l <= r :
+            m = l + ((r-l)//2)
+            # left 
+            if m > 0 and nums[m-1] > nums[m] :
+                r = m - 1
+            elif m < len(nums)-1 and nums[m] < nums[m+1] :
+                l = m + 1
+            else :
+                return m
+
+''' time complexity : O(logn)
+    space complexity : O(1)
+'''
+##################################################################################################################################################################
+# linear time complexity 
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        res = 0
+        for i in range(1, len(nums))  :
+            if nums[i-1] <= nums[i] :
+                res = i 
+            else :
+                break 
+        return res
+
+            
