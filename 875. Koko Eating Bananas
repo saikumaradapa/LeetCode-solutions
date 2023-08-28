@@ -1,0 +1,42 @@
+import math
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        def ck_sp(sp) :
+            t = 0
+            for i in piles :
+                t += math.ceil(i/sp)
+            return t
+        for sp in range(1,max(piles)+1) :
+            time = ck_sp(sp)
+            # print(sp,time)
+            ans = sum(piles)
+            if time <= h :
+                return sp
+        return -1
+''' time complexity : O(len(piles)*max(piles))
+    space complexity : O(1)
+'''
+###########################################################################################################################################################
+import math
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        def ck_sp(sp) :
+            t = 0
+            for i in piles :
+                t += math.ceil(i/sp)
+            return t
+
+        l,r = 1,max(piles)
+        while l<=r :
+            m = (l+r)//2
+            time = ck_sp(m)
+            if time <= h :
+                ans = m
+                r = m -1
+            else :
+                l = m +1
+        return ans
+
+''' time complexity : O(len(piles)* log(max(piles)))
+    space complexity : O(1)
+'''
