@@ -1,0 +1,30 @@
+class Solution:
+    def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
+        if m*k > len(bloomDay) : return -1
+        def possible(days) :
+            res = 0
+            curr = 0
+            for i in bloomDay :
+                if i <= days :
+                    curr += 1
+                else : 
+                    curr = 0
+                if curr == k :
+                    res += 1
+                    curr = 0
+            return res 
+        
+        l,r = min(bloomDay), max(bloomDay) 
+        while l<=r :
+            mid = (l+r)//2
+            possibility = possible(mid)
+            print(possibility, mid)
+            if possibility >= m :
+                r = mid-1
+            else :
+                l = mid+1
+        return l
+
+''' time complexity : O(len(bloomDay)*log(max(bloomDay)-min(bloomDay)))
+    space complexity : O(1)
+'''
