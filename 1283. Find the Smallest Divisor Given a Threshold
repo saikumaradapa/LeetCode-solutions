@@ -1,0 +1,46 @@
+import math
+class Solution:
+    def smallestDivisor(self, nums: List[int], threshold: int) -> int:
+        def pos(val) :
+            res = 0
+            for i in nums :
+                res += math.ceil(i/val)
+            return res
+        l,r = 1,max(nums)
+        while l<=r  :
+            m = (l+r)//2
+            th = pos(m)
+            if th > threshold :
+                l = m + 1
+            else :
+                r = m - 1
+        return l
+
+
+''' time complexity : O(log(max(nums))*len(nums))
+    space complexity : O(1)
+'''
+
+
+
+
+###################################################################################################################
+
+
+
+import math
+class Solution:
+    def smallestDivisor(self, nums: List[int], threshold: int) -> int:
+        def pos(val) :
+            res = 0
+            for i in nums :
+                res += math.ceil(i/val)
+            return res
+
+        for i in range(1,max(nums)+1) :
+            th = pos(i)
+            if th <= threshold :
+                return i
+''' time complexity : O(max(nums)*len(nums))
+    space complexity : O(1)
+'''
