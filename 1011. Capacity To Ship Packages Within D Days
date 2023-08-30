@@ -1,0 +1,48 @@
+class Solution:
+    def shipWithinDays(self, weights: List[int], days: int) -> int:
+        def pos(cap):
+            curr = 0
+            res = 1   # start with 1 day since you'll always use at least one day
+            for i in weights:
+                if (curr + i) <= cap:
+                    curr += i
+                else:
+                    curr = i
+                    res += 1
+            return res
+
+        left, right = max(weights), sum(weights)
+        while left < right:
+            mid = (left + right) // 2
+            if pos(mid) <= days:
+                right = mid
+            else:
+                left = mid + 1
+
+        return left
+''' time complexity : O(len(weights) * log(sum(weights)-max(weights)))
+    space complexity : O(1)
+'''
+
+
+###################################################################################################################################################
+
+class Solution:
+    def shipWithinDays(self, weights: List[int], days: int) -> int:
+        def pos(cap):
+            curr = 0
+            res = 1   # start with 1 day since you'll always use at least one day
+            for i in weights:
+                if (curr + i) <= cap:
+                    curr += i
+                else:
+                    curr = i
+                    res += 1
+            return res
+
+        for i in range(max(weights), sum(weights)+1) :
+            if pos(i) <= days : return i
+
+''' time complexity : O(len(weights) * (sum(weights)-max(weights)))
+    space complexity : O(1)
+'''
