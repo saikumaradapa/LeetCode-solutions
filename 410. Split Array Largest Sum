@@ -1,0 +1,52 @@
+class Solution:
+    def splitArray(self, nums: List[int], k: int) -> int:
+        def pos(val) :
+            res = 1
+            curr = 0
+            for i in range(len(nums)) :
+                if curr + nums[i] <= val: 
+                    curr += nums[i]
+                else :
+                    curr = nums[i]
+                    res += 1
+            return res
+
+        l,r = max(nums), sum(nums)
+        while l<=r :
+            mid = (l+r)//2
+            if pos(mid) <= k :
+                r = mid - 1
+            else :
+                l = mid + 1
+        return l
+
+''' time complexity : O(log(sum(nums)-max(nums)) * n)
+    space complexity : O(1)
+'''
+
+
+################################################################################################################################################################
+
+
+
+class Solution:
+    def splitArray(self, nums: List[int], k: int) -> int:
+        def pos(val) :
+            res = 1
+            curr = 0
+            for i in range(len(nums)) :
+                if curr + nums[i] <= val: 
+                    curr += nums[i]
+                else :
+                    curr = nums[i]
+                    res += 1
+            return res
+
+        for i in range(max(nums), sum(nums)+1) :
+            if pos(i) == k :
+                return i
+        return max(nums)
+
+''' time complexity : O(sum(nums)-max(nums) * n)
+    space complexity : O(1)
+'''
