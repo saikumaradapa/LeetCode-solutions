@@ -1,0 +1,38 @@
+class Solution:
+    def numberOfPoints(self, nums: List[List[int]]) -> int:
+        res = 0
+        mi, ma = nums[0][0], nums[0][0]
+        for i in nums :
+            if i[0] < mi : 
+                mi = i[0] 
+            elif i[0] > ma :
+                ma = i[0]
+            if i[1] < mi : 
+                mi = i[1] 
+            elif i[1] > ma :
+                ma = i[1]
+        arr = [x for x in range(mi, ma+1)]
+        for i in nums : 
+            for x in range(i[0], i[1]+1) :
+                if x in arr :
+                    res += 1
+                    arr.remove(x) 
+        return res
+
+''' time complexity : O(n^2)
+    space complexity :  O(100) 
+'''
+
+############################################################################################################################################################################################################
+
+class Solution:
+    def numberOfPoints(self, nums: List[List[int]]) -> int:
+        line = [0] * 101
+        for car in nums:
+            for i in range(car[0], car[1] + 1):
+                line[i] = 1
+        return sum(line)
+''' time complexity : O(n)
+    space complexity :  O(100) 
+'''
+        
