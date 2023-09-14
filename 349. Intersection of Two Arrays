@@ -1,0 +1,41 @@
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        res = set()
+        for i in set(nums1) :
+            if i in set(nums2) :
+                res.add(i)
+        return res
+
+''' time complexity : O(n×m)
+    space complexity : O(n+m)
+'''
+#######################################################################################################################################
+
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        dit = dict()
+        res = []
+        for i in nums1 :
+            if i in dit : continue 
+            dit[i] = 1
+        for i in nums2 :
+            if i in dit and dit[i] == 1: 
+                dit[i] = 2
+        for i,j in dit.items() :
+            if j == 2 :
+                res.append(i)
+        return res
+
+''' time complexity : O(n+m)
+    space complexity : O(n)
+'''
+#######################################################################################################################################
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        set1 = set(nums1)
+        return list(set(i for i in nums2 if i in set1))
+
+
+''' time complexity : O(n+m)
+    space complexity : O(n)
+'''
