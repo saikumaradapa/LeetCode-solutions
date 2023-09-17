@@ -1,0 +1,27 @@
+class Solution:
+    def sumIndicesWithKSetBits(self, nums: List[int], k: int) -> int:
+      return sum(val for i, val in enumerate(nums) if bin(i).count('1') == k)
+
+################################################################################################################################################################################################################
+
+
+
+
+class Solution:
+    def sumIndicesWithKSetBits(self, nums: List[int], k: int) -> int:
+        def countSetBits(num) :
+            bits = 0
+            while num :
+                if num & 1 == 1 : bits += 1
+                num = num >> 1
+            return bits
+        
+        res = 0
+        for i,v in enumerate(nums) :
+            if countSetBits(i)==k : 
+                res += v
+        return res
+        
+''' time complexity : O(nlogn)    countSetBits function takes O(log(i)) 
+    space complexity : O(1) 
+'''
