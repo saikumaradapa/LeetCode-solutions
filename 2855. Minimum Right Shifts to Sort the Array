@@ -1,0 +1,26 @@
+class Solution:
+    def minimumRightShifts(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n == 1  :
+            return 0
+        # 1752. Check if Array Is Sorted and Rotated 
+        decrease_count = 0
+        for i in range(n):
+            if nums[i] > nums[(i + 1) % len(nums)]:
+                decrease_count += 1                
+        if decrease_count > 1 : return -1
+        
+        # return rotations required to make sorted
+        l,r = 0,n-1
+        while l<=r :
+            mid = (l+r)//2
+            if nums[mid] < nums[r] :
+                r = mid 
+            else : 
+                l = mid + 1
+        return (n-l+1)%n
+        
+        
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
