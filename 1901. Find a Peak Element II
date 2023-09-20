@@ -1,0 +1,45 @@
+class Solution:
+    def findPeakGrid(self, mat: List[List[int]]) -> List[int]:
+        n, m = len(mat), len(mat[0])
+        def isPeak(i, j):
+            temp = mat[i][j]
+            return ((i == 0 or mat[i - 1][j] < temp) and (j == 0 or mat[i][j - 1] < temp) and (
+                    i == (len(mat) - 1) or mat[i + 1][j] < temp) and ((j == len(mat[0]) - 1) or mat[i][j + 1] < temp))
+        l, r = 0, m - 1
+        while l <= r:
+            mid = (l + r) // 2
+            maxE, idx = mat[0][mid], 0
+            for i in range(n):
+                if maxE < mat[i][mid]:
+                    maxE = mat[i][mid]
+                    idx = i
+            # print('ispeak -->',(idx, mid), isPeak(idx, mid))
+            if isPeak(idx, mid):
+                return [idx, mid]
+
+            if (mat[idx][mid-1] < mat[idx][mid+1]):
+                l = mid + 1
+
+            else:
+                r = mid - 1
+
+''' time complexity : O(n * logm)
+    space complexity : O(1)
+'''
+
+##################################################################################################################################################################################################################
+
+class Solution:
+    def findPeakGrid(self, mat: List[List[int]]) -> List[int]:
+        def isPeak(i,j) :
+            temp = mat[i][j]
+            return  ((i== 0 or mat[i-1][j]<temp) and (j==0 or mat[i][j-1]<temp) and (i==(len(mat)-1) or mat[i+1][j]<temp) and ((j==len(mat[0])-1) or mat[i][j+1]<temp))
+        for i in range(len(mat)) :
+            for j in range(len(mat[0])) :
+                print(i,j)
+                if isPeak(i,j) : return [i,j]
+        return -1
+
+''' time complexity : O(n^2)
+    space complexity : O(1)
+'''
