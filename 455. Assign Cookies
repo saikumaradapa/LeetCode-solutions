@@ -1,0 +1,35 @@
+class Solution:
+    def findContentChildren(self, g: List[int], s: List[int]) -> int:
+        g.sort()
+        s.sort()
+        
+        child, cookie = 0, 0
+        while child < len(g) and cookie < len(s):
+            if g[child] <= s[cookie]:
+                child += 1
+            cookie += 1
+            
+        return child
+
+''' time complexity : O(nlogn)
+    space complexity : O(1)
+'''
+
+
+####################################################################################################################################################################################
+class Solution:
+    def findContentChildren(self, g: List[int], s: List[int]) -> int:
+        i,j = 0,0
+        res = 0
+        g.sort()
+        s.sort()
+        while i<len(g) and j<len(s) :
+            while i<len(g) and j<len(s) and g[i] <= s[j] :
+                res += 1
+                i,j = i+1, j+1
+            
+            j += 1
+        return res
+''' time complexity : O(nlogn)
+    space complexity : O(1)
+'''
