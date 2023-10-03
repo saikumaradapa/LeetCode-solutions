@@ -1,0 +1,43 @@
+class Solution:
+    def removeOuterParentheses(self, s: str) -> str:
+        res = []
+        stack = []
+        start = 0
+        
+        for i, char in enumerate(s):
+            if char == '(':
+                stack.append(char)
+            else:
+                stack.pop()                
+            if not stack:
+                res.append(s[start+1:i])  # Append without outer parentheses
+                start = i + 1        
+        return ''.join(res)
+
+#######################################################################################################################################
+
+class Solution:
+    def removeOuterParentheses(self, s: str) -> str:
+        res = ''
+        temp = ''
+        stack = []
+        i = 0
+        while i < len(s) :
+            if s[i] == '(' :
+                stack.append('(')
+                temp += '('
+            elif s[i] == ')' :
+                if stack[-1] == '(' :
+                    stack.pop()                    
+                else : 
+                    stack.append(')')
+                temp += ')'
+                if not stack and temp :
+                    res += temp[1:len(temp)-1]
+                    temp = ''
+            i += 1
+        return res
+
+''' time complexity : O(n)
+    space complexity : O(n)
+'''
