@@ -1,0 +1,29 @@
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        arr = s.split()
+        return ' '.join(arr[::-1])
+
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
+
+
+######################################################################
+
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        res = []
+        temp = ""
+        for c in s:
+            if c != " ":
+                temp += c 
+            elif temp != "":
+                res.append(temp)
+                temp = ""
+        if temp != "":
+            res.append(temp)
+        return " ".join(res[::-1])
+
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
