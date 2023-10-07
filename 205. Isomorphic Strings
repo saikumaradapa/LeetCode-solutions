@@ -1,0 +1,44 @@
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        mapping = {}
+        seen = set()
+        
+        for i in range(len(s)):
+            # If s[i] is already in mapping
+            if s[i] in mapping:
+                # Check if the existing mapping matches the current character in t
+                if mapping[s[i]] != t[i]:
+                    return False
+            # If s[i] is not in mapping but t[i] is already mapped
+            elif t[i] in seen:
+                return False
+            else:
+                # Otherwise, add to mapping and to seen set
+                mapping[s[i]] = t[i]
+                seen.add(t[i])                
+        return True
+
+''' Time Complexity: O(n)
+    Space Complexity: O(n) # n is uniques characters in s
+'''
+########################################################################################################################################################################################################
+
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        map1 = [0] * 200
+        map2 = [0] * 200
+        
+        if len(s) != len(t):
+            return False
+        
+        for i in range(len(s)):
+            if map1[ord(s[i])] != map2[ord(t[i])]:
+                return False
+            
+            map1[ord(s[i])] = i + 1
+            map2[ord(t[i])] = i + 1      
+        return True
+
+''' Time Complexity: O(n)
+    Space Complexity: O(200)
+'''
