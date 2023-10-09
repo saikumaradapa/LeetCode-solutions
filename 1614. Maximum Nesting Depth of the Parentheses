@@ -1,0 +1,15 @@
+class Solution:
+    def maxDepth(self, s: str) -> int:
+        res = 0
+        curr = 0
+        for ch in s :
+            if ch == '(' :
+                curr += 1         
+                res = res if res > curr else curr       
+            elif ch == ')' :
+                curr -= 1            
+        return res
+
+''' time complexity : O(n)   
+    space complexity : O(1)
+'''
