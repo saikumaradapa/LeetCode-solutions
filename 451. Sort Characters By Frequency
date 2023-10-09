@@ -1,0 +1,14 @@
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        dit = dict()
+        for ch in s :
+            dit[ch] = dit.get(ch, 0) + 1
+        dit = dict(sorted(dit.items(), key= lambda dit : dit[1], reverse=True))
+        res = ''
+        for ch in dit.keys() : 
+            res += ch * dit[ch]
+        return res       
+
+''' time complexity : O(n+klogk)
+    space complexity : O(n)
+'''
