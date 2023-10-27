@@ -1,0 +1,19 @@
+class Solution:
+    def largestValues(self, root: Optional[TreeNode]) -> List[int]:
+        q = [root]
+        if not root : return []
+        res = []
+        while q :
+            level = []
+            n = len(q)
+            for i in range(n) :
+                node = q.pop(0)
+                level.append(node.val)
+                if node.left : q.append(node.left)
+                if node.right : q.append(node.right)
+            res.append(max(level))
+        return res
+
+''' time complexity : O(n)
+    space complexity : O(n)
+'''
