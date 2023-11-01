@@ -1,0 +1,63 @@
+class Solution:
+    def findMode(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+
+        def inorder(node):
+            if not node:
+                return
+            inorder(node.left)
+            update_count(node.val)
+            inorder(node.right)
+
+        self.result = []
+        self.current_value = None
+        self.current_count = 0
+        self.max_count = 0
+
+        def update_count(val):
+            if val == self.current_value:
+                self.current_count += 1
+            else:
+                self.current_value = val
+                self.current_count = 1
+
+            if self.current_count > self.max_count:
+                self.max_count = self.current_count
+                self.result = [self.current_value]
+            elif self.current_count == self.max_count:
+                self.result.append(self.current_value)
+
+        inorder(root)
+        return self.result
+
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
+
+#####################################################################################################################################################################
+
+
+
+class Solution:
+    def findMode(self, root: Optional[TreeNode]) -> List[int]:
+        dit = dict()
+        def inorder(root) :
+            if root :
+                inorder(root.left)
+                dit[root.val] = dit.get(root.val, 0)+1
+                inorder(root.right)
+        inorder(root)
+        if not dit : return []
+        res = []
+        maxF = 0
+        for i,f in dit.items() :
+            if f > maxF : maxF = f
+        for i,f in dit.items() :
+            if f == maxF :
+                res.append(i)    
+        return res
+''' time complexity : O(n)
+    space complexity : O(n)
+'''
+
