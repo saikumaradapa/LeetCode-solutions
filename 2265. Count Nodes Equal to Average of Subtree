@@ -1,0 +1,63 @@
+class Solution:
+    def averageOfSubtree(self, root: Optional[TreeNode]) -> int:
+        
+        dit = dict()
+        res = 0
+
+        def help(root) :
+            if root in dit :
+                return dit[root]
+
+            if not root.left and not root.right :
+                dit[root] = [root.val, 1]                 
+            elif not root.left :
+                temp = help(root.right)
+                dit[root] = [root.val+temp[0], 1+temp[1]]                                 
+            elif not root.right :
+                temp = help(root.left)
+                dit[root] = [root.val+temp[0], 1+temp[1]]             
+            else :
+                temp1 = help(root.left)
+                temp2 = help(root.right)
+                dit[root] = [root.val+temp1[0]+temp2[0], 1+temp1[1]+temp2[1]]
+            return  dit[root]
+        help(root)
+        for k,v in dit.items() :
+            # print(k.val, v[0]//v[1])
+            if k.val == v[0]//v[1] : res += 1
+        return res
+
+''' time complexity : O(n)        
+    space complexity : O(n) uses an dictionary and recursive stack 
+'''
+
+
+##########################################################################################################################################################################################
+# optimal one
+
+class Solution:
+    def averageOfSubtree(self, root: Optional[TreeNode]) -> int:
+        result = 0
+		
+        def traverse(node):
+            nonlocal result
+            
+            if not node:
+                return 0, 0
+            
+            left_sum, left_count = traverse(node.left)
+            right_sum, right_count = traverse(node.right)
+            
+            s = node.val + left_sum + right_sum
+            c = 1 + left_count + right_count
+            
+            if s // c == node.val:
+                result += 1
+            
+            return s, c        
+        traverse(root)        
+        return result
+
+''' time complexity : O(n)        
+    space complexity : O(h) for only recursive stack 
+'''                    
