@@ -1,0 +1,19 @@
+class Solution:
+    def buildArray(self, target: List[int], n: int) -> List[str]:
+        stack = []
+        nOfTarget = len(target)
+        currPos = 0
+        for i in range(1,n+1) :
+            if nOfTarget == currPos :
+                break 
+            if target[currPos] == i:
+                stack.append("Push")
+                currPos += 1
+            else :
+                stack.append("Push")
+                stack.append("Pop")
+        return stack 
+
+''' time complexity: O(n)
+    space complexity : O(n)
+'''
