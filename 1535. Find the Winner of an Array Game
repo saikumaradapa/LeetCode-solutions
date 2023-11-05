@@ -1,0 +1,73 @@
+class Solution:
+    def getWinner(self, arr: List[int], k: int) -> int:
+        win = None 
+        winC = 0
+        while True :
+            if len(arr) == 2 : return max(arr)
+            if arr[0] > arr[1] :
+                currW = arr[0]
+                arr.pop(1)
+
+            else :
+                currW = arr[1]
+                arr.pop(0)
+             
+            if win and currW == win :
+                winC += 1
+            else :
+                win = currW
+                winC = 1
+            if winC == k : return win 
+
+''' time complexity : O(k)
+    constant space 
+'''
+
+
+########################################################################################################################################################
+# optimal 
+class Solution:
+    def getWinner(self, arr: List[int], k: int) -> int:
+        winner = max(arr[0], arr[1])
+        consecutive_wins = 1
+        if consecutive_wins == k : return winner
+
+        for i in range(2, len(arr)):
+            if arr[i] > winner:
+                winner = arr[i]
+                consecutive_wins = 1
+            else:
+                consecutive_wins += 1
+
+            if consecutive_wins == k:
+                return winner
+        return winner
+''' time complexity : O(n)
+    constant space 
+'''
+
+
+
+########################################################################################################################################################
+# game simulattion
+class Solution:
+    def getWinner(self, arr: List[int], k: int) -> int:
+        win = None 
+        winC = 0
+        while True :
+            if arr[0] > arr[1] :
+                currW = arr[0]
+                temp = arr.pop(1)
+                arr.append(temp)
+            else :
+                currW = arr[1]
+                temp = arr.pop(0)
+                arr.append(temp)  
+             
+            if win and currW == win :
+                winC += 1
+            else :
+                win = currW
+                winC = 1
+            if winC == k : return win 
+                     
