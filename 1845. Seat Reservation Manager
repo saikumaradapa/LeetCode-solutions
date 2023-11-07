@@ -1,0 +1,45 @@
+import heapq 
+class SeatManager:
+
+    def __init__(self, n: int):
+        self.heap = list(range(1,n+1))
+
+    def reserve(self) -> int:
+        return heapq.heappop(self.heap)
+
+
+    def unreserve(self, seatNumber: int) -> None:   
+        heapq.heappush(self.heap, seatNumber)                 
+        
+''' time complexity : O(logn)
+    space complexity : O(n)
+'''
+
+
+
+###########################################################################################################################
+
+
+
+
+class SeatManager:
+
+    def __init__(self, n: int):
+        self.dit = dict()
+        self.n = n
+        for i in range(1,self.n+1) :
+            self.dit[i] = 0
+
+    def reserve(self) -> int:
+        for i in range(1,self.n+1) :
+            if self.dit[i] == 0 :
+                self.dit[i] = 1
+                return i
+
+
+    def unreserve(self, seatNumber: int) -> None:            
+        self.dit[seatNumber] = 0
+
+''' time complexity : O(n)
+    space complexity : O(n)
+'''
