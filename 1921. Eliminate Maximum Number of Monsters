@@ -1,0 +1,47 @@
+class Solution:
+    def eliminateMaximum(self, dist: List[int], speed: List[int]) -> int:
+
+        if not dist or not speed:
+            return 0
+        
+        time = [0] * len(dist)
+        for i in range(len(dist)):
+            time[i] = dist[i] / speed[i]
+
+        time.sort()
+        count = 0
+        for i in range(len(time)):
+            if time[i] <= i:
+                break
+            count += 1
+        return count 
+''' time complexity : O(nlogn)
+    space complexity : O(n)
+'''
+#########################################################################################################################################################################################################
+
+import math
+import heapq
+
+class Solution:
+    def eliminateMaximum(self, dist: List[int], speed: List[int]) -> int:
+        minTime = []
+        for i in range(len(dist)):
+            minutes = math.ceil(dist[i] / speed[i])
+            minTime.append(minutes)
+
+        heapq.heapify(minTime)  # Properly heapify the list
+
+        res = 0  # Initialize the result as 0
+
+        while minTime:
+            if minTime[0] <= res:
+                break  # A monster has reached the city in the same minute, so you lose
+            heapq.heappop(minTime)  # Eliminate a monster
+            res += 1
+
+        return res
+
+''' time complexity : O(nlogn)
+    space complexity : O(n)
+'''
