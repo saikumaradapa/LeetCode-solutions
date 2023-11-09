@@ -1,0 +1,15 @@
+class Solution:
+    def isReachableAtTime(self, sx: int, sy: int, fx: int, fy: int, t: int) -> bool:
+        xDiff = abs(sx - fx)
+        yDiff = abs(sy - fy)
+        digDist = min(xDiff, yDiff)
+
+        xDiff -= digDist
+        yDiff -= digDist
+
+        minDist = digDist + xDiff + yDiff
+        if minDist == 0 and t == 1 : return False
+        return minDist <= t 
+''' time complexity : O(1)
+    space complexity : O(1)
+'''
