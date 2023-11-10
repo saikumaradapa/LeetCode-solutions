@@ -1,0 +1,49 @@
+class Solution:
+    def restoreArray(self, adjacentPairs: List[List[int]]) -> List[int]:
+        dit = dict()
+        for [x,y] in adjacentPairs :
+            if x not in dit :
+                dit[x] = [y]
+            elif y not in dit[x] :
+                dit[x].append(y)
+            
+            if y not in dit :
+                dit[y] = [x]
+            elif x not in dit[y] :
+                dit[y].append(x)
+        # print(dit)
+        res = list()
+        s = set()
+        curr = None
+        for i,v in dit.items()  :
+            if len(dit[i]) == 1 :
+                # print(dit[i])
+                curr = i
+        res.append(curr)
+        s.add(curr)
+        curr = dit[curr][0]
+
+        while True :
+            res.append(curr)
+            s.add(curr)
+            temp = dit[curr]
+            # print(res)
+            if len(temp) == 1 : 
+                print('return')
+                return res
+            for v in temp :
+                if v not in  s:
+                    curr = v 
+                    break 
+
+        return res
+
+
+
+
+
+
+
+'''time complexity : O(n)
+    space complexity : O(n)
+'''
