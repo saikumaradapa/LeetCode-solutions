@@ -1,0 +1,37 @@
+class Solution:
+    def countNodes(self, root: Optional[TreeNode]) -> int:
+        if not root :
+            return 0
+
+        def helper(root) :
+            if root.left and root.right :
+                return 1 + helper(root.left) + helper(root.right)               
+            if root.left and not root.right :
+                return 1 + helper(root.left)            
+            if not root.left and root.right :
+                return 1 + helper(root.right)
+            return 1
+        return helper(root)
+
+''' time complexity : O(n)
+    space complexity : O(n) for recurssive stack 
+'''
+
+####################################################################################################################################################################################
+
+class Solution:
+    def countNodes(self, root: Optional[TreeNode]) -> int:
+        binaryTree = []
+
+        def get_value(array, root):
+            if root:
+                array.append(root.val)
+                get_value(array, root.left)
+                get_value(array, root.right)
+        
+        get_value(binaryTree, root)
+
+        return len(binaryTree)
+''' time complexity : O(n)
+    space complexity : O(n) for recursive and array 
+'''
