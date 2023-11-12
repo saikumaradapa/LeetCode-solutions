@@ -1,0 +1,29 @@
+class Solution:
+    def findHighAccessEmployees(self, access_times: List[List[str]]) -> List[str]:
+        dit = dict()
+        res = []
+        for e,t in access_times :
+            if e in dit :
+                dit[e].append(int(t))
+            else :
+                dit[e] = [int(t)]
+        for e,v in dit.items() :
+            dit[e].sort()
+            # print(e,v)
+            for i in range(len(v)) :
+                base = v[i] + 100
+                c = 1
+                for j in range(i+1, len(v)) :
+                    if v[j] < base :
+                        c += 1
+                    else : break 
+
+                if c >= 3 : 
+                    res.append(e)
+                    break                              
+        return res
+
+
+''' time complexity : O(nlogn)             
+    space complexity : O(n)    
+'''        
