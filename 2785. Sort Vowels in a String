@@ -1,0 +1,29 @@
+class Solution:
+    def sortVowels(self, s: str) -> str:
+        t = list(s)
+        s = []
+        alphSet = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+        for ch in t :
+            if ch in alphSet :
+                s.append(ch)
+        s.sort()
+        i = 0
+        for idx,ch in enumerate(t) :
+            if ch in alphSet :
+                t[idx] = s[i]
+                i += 1
+        return ''.join(t)
+
+''' time complexity : O(nlogn)
+    space complexity : (n)
+'''     
+
+
+###############
+it can be solved without sorting in linear time -- can you find?
+
+
+
+
+
+hint -- using count of vowels 
