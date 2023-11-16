@@ -1,0 +1,9 @@
+class Solution:
+    def findDifferentBinaryString(self, nums: List[str]) -> str:
+        arr = [int(x, 2) for x in nums]
+        for i in range(len(nums)+1) :
+            if i not in arr :
+                res =  str(bin(i))[2:] 
+                if len(res) < len(nums[0]) :
+                    res = (len(nums[0])-len(res))*'0'+res
+                return res
