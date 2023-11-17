@@ -1,0 +1,16 @@
+class Solution:
+    def minPairSum(self, nums: List[int]) -> int:
+        nums.sort()
+        n = len(nums)
+        
+        # Initialize the minimum possible maximum pair sum
+        result = float('-inf')
+        
+        # Pair up the smallest and largest elements
+        for i in range(n // 2):
+            result = max(result, nums[i] + nums[n - i - 1])
+        
+        return result
+''' time complexity : O(nlogn)
+    space complexity : O(1)
+'''
