@@ -1,0 +1,23 @@
+class Solution:
+    def countNicePairs(self, nums: List[int]) -> int:
+        m = 10**9 + 7
+        dit = {}
+        for num in nums:
+            rev_num = int(str(num)[::-1])
+            diff = num - rev_num
+            if diff in dit:
+                dit[diff] += 1
+            else:
+                dit[diff] = 1
+
+        res = 0
+        for count in dit.values():
+            if count > 1:
+                # Calculate combinations (C(n, 2))
+                res += count * (count - 1) // 2
+
+        return res % m
+
+''' time complexity : O(n + d), where n is the length of the nums array, and d is the number of distinct differences.
+    space complexity : O(n)
+'''
