@@ -1,0 +1,27 @@
+class Solution:
+    def maxCoins(self, piles: List[int]) -> int:
+        piles.sort(reverse = True)
+        return sum(piles[1:-len(piles)//3:2])
+
+''' time complexity : O(nlogn)    
+    space complexity : O(1)
+'''
+
+############################################################################################################################################################################
+
+class Solution:
+    def maxCoins(self, piles: List[int]) -> int:
+        c = 0
+        n = len(piles)
+        piles.sort()
+        i = n - 2
+        res = 0 
+        while c != n :
+            res += piles[i]
+            i -= 2
+            c += 3
+        return res
+
+''' time complexity : O(nlogn)    
+    space complexity : O(1)
+'''
