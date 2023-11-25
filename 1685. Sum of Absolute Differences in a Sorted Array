@@ -1,7 +1,5 @@
 # O(n) take the advantage of sorted values 
 # consider left and right sum of current number
-
-
 class Solution:
     def getSumAbsoluteDifferences(self, nums: List[int]) -> List[int]:
         result = []
@@ -16,7 +14,33 @@ class Solution:
             result.append(res)
         return result
 
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
+########################################################################################################################################################################################################
 
+class Solution:
+    def getSumAbsoluteDifferences(self, nums: List[int]) -> List[int]:
+        total = sum(nums)
+
+        n = len(nums)
+        res = [0] * n
+        pre = [0] * n
+        post = [0] * n
+        for i in range(1,n) :
+            pre[i] = pre[i-1] + nums[i-1]
+        for i in range(n-2, -1, -1) :
+            post[i] = post[i+1] + nums[i+1]
+
+        for i in range(n) :
+            res[i] = (nums[i]*i-pre[i]) + (post[i]-(n-i-1)*nums[i])        
+        return res
+        
+''' time complexity : O(n)
+    space complexity : O(n)
+'''
+
+########################################################################################################################################################################################################
 
 # time O(N²) and TLE 
 class Solution:
