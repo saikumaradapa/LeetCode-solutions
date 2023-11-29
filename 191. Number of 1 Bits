@@ -6,17 +6,40 @@ class Solution:
                 res += 1 
             n >>= 1
         return res
-        
-        
+'''
+time complexity: O(1)
+space complexity: O(1)
+'''
+
+########################################################################################################################################################
         
 class Solution:
     def hammingWeight(self, n: int) -> int:
         return len([num for num in str(bin(n)) if num =='1'])
-        
-        
-        
+''' time complexity : O(logn)
+    space complexity : O(logn)
+'''           
+
+########################################################################################################################################################        
         
         
 class Solution:
     def hammingWeight(self, n: int) -> int:
         return bin(n).count('1')
+''' time complexity : O(logn)
+    space complexity : O(logn)
+'''     
+
+########################################################################################################################################################
+
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        res = 0
+        while n > 0 :
+            if n&1 == 1 : 
+                res += 1
+            n = n >> 1 
+        return res
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
