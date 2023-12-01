@@ -6,3 +6,29 @@ class Solution:
 ''' time complexity : O(n)
     space complexity : O(n)
 '''
+
+**********************************************************************************************************************************************************
+**********************************************************************************************************************************************************
+
+class Solution:
+    def arrayStringsAreEqual(self, word1: List[str], word2: List[str]) -> bool:
+        wordPointer1 = wordPointer2 = strPointer1 = strPointer2 = 0
+        while wordPointer1 < len(word1)  and wordPointer2 < len(word2) :
+            if word1[wordPointer1][strPointer1] != word2[wordPointer2][strPointer2] :
+                return False 
+            if strPointer1 + 1 == len(word1[wordPointer1]) :
+                wordPointer1 += 1
+                strPointer1 = 0
+            else :
+                strPointer1 += 1
+            if strPointer2 + 1 == len(word2[wordPointer2]) :
+                wordPointer2 += 1
+                strPointer2 = 0
+            else :
+                strPointer2 += 1                
+        return wordPointer1 == len(word1)  and wordPointer2 == len(word2)
+
+
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
