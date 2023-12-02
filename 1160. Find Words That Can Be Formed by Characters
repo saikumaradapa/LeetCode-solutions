@@ -1,0 +1,24 @@
+class Solution:
+    def countCharacters(self, words: List[str], chars: str) -> int:
+        counts = [0] * 26 
+        res = 0
+        for ch in chars :
+            idx = ord(ch) - ord('a')
+            counts[idx] += 1
+        
+        for word in words :
+            temp = [0]*26 
+            for ch in word :
+                idx = ord(ch) - ord('a')
+                temp[idx] += 1            
+
+            for i in range(26) :
+                if temp[i] > counts[i] :
+                    break 
+            else :
+                res += len(word)
+        return res
+
+''' time complexity : O(n*k)
+    space complexity : O(1)
+'''
