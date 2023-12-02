@@ -43,7 +43,21 @@ class Solution:
             head1 = temp1
 
         return temp
+
 #***********************************************************
 #***********************************************************
 
+# Recurrsive approach 
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next :
+            return head 
+        newhead = self.reverseList(head.next)
+        front = head.next 
+        head.next = None 
+        front.next = head
+        return newhead
 
+''' time complexity : O(n)
+    space complexity : O(n)
+'''
