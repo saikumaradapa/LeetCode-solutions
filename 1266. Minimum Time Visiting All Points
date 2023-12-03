@@ -1,0 +1,41 @@
+class Solution:
+    def minTimeToVisitAllPoints(self, points: List[List[int]]) -> int:
+        def findDist(p1,p2) :
+            [x1,y1], [x2,y2] = p1,p2
+            xDist = abs(x1-x2)
+            yDist = abs(y1-y2)
+
+            dDist = min(xDist, yDist)
+            xDist -= dDist 
+            yDist -= dDist 
+
+            return dDist+xDist+yDist
+        res = 0
+        for i in range(len(points)-1) :
+            x1,y1 = points[i]
+            x2,y2 = points[i+1]
+            res += findDist([x1,y1], [x2,y2])
+        return res
+
+
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
+
+##########################################################################################################################################################################
+
+class Solution:
+    def minTimeToVisitAllPoints(self, points: List[List[int]]) -> int:
+        ans = 0
+        for i in range(len(points) - 1):
+            curr_x, curr_y = points[i]
+            target_x, target_y = points[i + 1]
+            # print((target_x, curr_x), (target_y, curr_y),(abs(target_x - curr_x), abs(target_y - curr_y)))
+            ans += max(abs(target_x - curr_x), abs(target_y - curr_y))
+        
+        return ans
+
+
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
