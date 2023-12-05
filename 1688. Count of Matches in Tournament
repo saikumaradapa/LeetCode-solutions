@@ -1,0 +1,21 @@
+class Solution:
+    def numberOfMatches(self, n: int) -> int:
+        res = 0
+        while n > 1 :
+            res += n//2 if n%2 == 0 else (n -1)//2 
+            n = n//2 if n%2 == 0 else (n-1) //2 +1
+
+        return res
+''' time complexity : O(logn)   the number of teams is halved in each iteration
+    space complexity : O(1)
+'''
+
+####################################################################################################################################################
+
+
+class Solution:
+    def numberOfMatches(self, n: int) -> int:
+        return n-1
+''' time complexity : O(1)   
+    space complexity : O(1)
+'''
