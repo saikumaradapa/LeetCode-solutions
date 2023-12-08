@@ -1,0 +1,61 @@
+class Solution:
+    def tree2str(self, root: Optional[TreeNode]) -> str:
+        global arr 
+        arr = ''        
+
+        def preorder(root) :
+            global arr             
+            if root :
+                if not root.left and not root.right :
+                  arr += str(root.val)
+                elif root.left and root.right :
+                    arr += str(root.val)+'('
+                    preorder(root.left) 
+                    arr += ')'+'('
+                    preorder(root.right) 
+                    arr += ')'
+                elif not root.left and root.right :
+                    arr += str(root.val)
+                    arr += '()'+'(' 
+                    preorder(root.right) 
+                    arr += ')'
+                elif root.left and not root.right :
+                    arr += str(root.val)+'('
+                    preorder(root.left) 
+                    arr += ')'
+        preorder(root)
+        # print(arr)
+
+        return arr
+
+''' time complexity : O(n)        
+    space coplexity : O(n) for recursive stack 
+'''
+
+
+####################################################################################################################################################################################################
+# more concise and unified approach
+
+
+
+
+class Solution:
+    def tree2str(self, root):
+        if not root:
+            return ""
+
+        result = str(root.val)
+
+        left = self.tree2str(root.left)
+        right = self.tree2str(root.right)
+
+        if not left and not right:
+            return result
+        if not right:
+            return f"{result}({left})"
+        
+        return f"{result}({left})({right})"
+        
+''' time complexity : O(n)        
+    space coplexity : O(n) for recursive stack 
+'''
