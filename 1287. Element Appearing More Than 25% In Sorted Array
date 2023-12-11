@@ -1,0 +1,27 @@
+class Solution:
+    def findSpecialInteger(self, arr: List[int]) -> int:
+        size = len(arr)//4
+        for i in range(len(arr)-size) :
+            if arr[i] == arr[i+size] :
+                return arr[i]
+        return -1
+
+''' time complexity : O(n)
+    space complexity : O(1)
+'''    
+
+###################################################################################################################################################
+
+class Solution:
+    def findSpecialInteger(self, arr: List[int]) -> int:
+        counts = defaultdict(int)
+        target = len(arr) / 4
+        for num in arr:
+            counts[num] += 1
+            if counts[num] > target:
+                return num
+        return -1
+
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
