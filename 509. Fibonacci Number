@@ -1,0 +1,23 @@
+class Solution:
+    hashMap = {0:0, 1:1}
+    def fib(self, n: int) -> int:
+        if n in self.hashMap : 
+            return self.hashMap[n]
+        temp = self.fib(n-1)+self.fib(n-2)
+        self.hashMap[n] = temp
+        return self.hashMap[n] 
+
+''' time complexity : O(n)        
+    space complexity : O(n)
+'''
+
+############################################################################################################################################################
+
+class Solution:
+    def fib(self, n: int) -> int:
+        if n <= 1 : return n 
+        return self.fib(n-1)+self.fib(n-2)
+        
+''' time complexity : O(2^n)        
+    space complexity : O(n)
+'''
