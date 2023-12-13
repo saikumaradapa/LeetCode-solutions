@@ -1,0 +1,43 @@
+class Solution:
+    def numSpecial(self, mat: List[List[int]]) -> int:
+        res = 0
+        colSum = []
+        for col in range(len(mat[0])) :
+            temp = 0
+            for row in range(len(mat)) :
+                temp += mat[row][col]
+            colSum.append(temp)
+
+        for i in range(len(mat))  :
+            rowSum = sum(mat[i])
+            for j in range(len(mat[0])) :
+                if mat[i][j] == 1 and rowSum+colSum[j] == 2 :
+                    res += 1 
+        return res
+
+''' time complexity : O(n*m)        
+    space complexity : O(n)
+'''
+
+
+##########################################################################################################################################################################################
+
+class Solution:
+    def numSpecial(self, mat: List[List[int]]) -> int:
+        colSum = [0] * len(mat[0])
+        rowSum = [0] * len(mat)
+        for row in range(len(mat)) :
+            for col in range(len(mat[0])) :
+                rowSum[row] += mat[row][col] 
+                colSum[col] += mat[row][col]
+        print(rowSum, colSum)
+        res = 0
+        for row in range(len(mat)) :
+            for col in range(len(mat[0])) :
+                if mat[row][col] ==1 and rowSum[row] == 1 and colSum[col] == 1 : 
+                    res += 1
+        return res
+
+''' time complexity : O(n*m)        
+    space complexity : O(n+m)
+'''
