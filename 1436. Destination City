@@ -1,0 +1,32 @@
+class Solution:
+    def destCity(self, paths: List[List[str]]) -> str:
+        mySet = set()
+        for city in paths :
+            mySet.add(city[0])
+        
+        for city in paths :
+            if city[1] not in mySet :
+                return city[1] 
+
+''' time complexity : O(n)        
+    space complexity : O(n)
+'''            
+
+#########################################################################################################################################################
+
+
+class Solution:
+    def destCity(self, paths: List[List[str]]) -> str:
+        dit = dict()
+        for [cityA, cityB] in paths :
+            dit[cityA] =cityB
+        destination = paths[0][0]
+        while True :
+            if destination in dit :
+                destination = dit[destination]
+            else :
+                return destination
+        return destination 
+''' time complexity : O(n)        
+    space complexity : O(n)
+'''
