@@ -1,5 +1,22 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t) : return False
+        arr = [0]*26 
+        for ch in s :
+            arr[ord(ch)-ord('a')] += 1
+        for ch in t :
+            arr[ord(ch)-ord('a')] -= 1                
+        for v in arr :
+            if v != 0 :
+                return False
+        return True
+
+''' time complexity : O(n)        
+    space complextiy : O(1)
+'''
+################################################################################################################################################################
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
         t1 = list(t)
         s1 = list(s)
         for i in s1 :
@@ -8,7 +25,8 @@ class Solution:
             elif i not in t1 :
                 return False             
         return len(t1)==0
-        
+
+################################################################################################################################################################
         
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
@@ -16,7 +34,7 @@ class Solution:
         s1 = list(s)
         return  sorted(t1)==sorted(s1)
         
-        
+################################################################################################################################################################        
         
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
