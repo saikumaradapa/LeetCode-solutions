@@ -1,0 +1,30 @@
+class Solution:
+    def diffWaysToCompute(self, exp: str) -> List[int]:
+        dit = dict()
+        def solver(s) :
+            if s in dit :
+                return dit[s] 
+            res = []
+            operators = ['+', '-', '*']
+            for i in range(len(s)) :
+                if s[i] in operators :
+                    a = solver(s[:i])
+                    b = solver(s[i+1:])
+                    for a1 in a :
+                        for b1 in b :
+                            if s[i] == '+' :
+                                res.append(int(a1)+int(b1))
+                            elif s[i] == '-' :
+                                res.append(int(a1)-int(b1))                            
+                            else :
+                                res.append(int(a1)*int(b1)) 
+            if s.isdigit() : 
+                res.append(int(s))   
+            dit[s] = res
+            # print(dit)
+            return res
+        return solver(exp)
+
+''' time complextiy : O(n ), which is exponential in the string length (n)
+    space complexity : O(n * log(n)), due to the stack usage and the list size growing logarithmically with the number of recursive calls.
+'''    
