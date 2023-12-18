@@ -1,0 +1,59 @@
+##### SortedSet
+from sortedcontainers import SortedSet
+class FoodRatings:
+    # O(n)
+    def __init__(self, foods: List[str], cuisines: List[str], ratings: List[int]):
+        self.map = defaultdict(SortedSet)
+        self.cuisine_map = dict()
+        self.rating_map = dict()
+        for i in range(len(foods)) :
+            self.map[cuisines[i]].add((-ratings[i], foods[i]))
+            self.cuisine_map[foods[i]] = cuisines[i]
+            self.rating_map[foods[i]] = ratings[i]
+
+
+        
+    # O(logn)
+    def changeRating(self, food: str, newRating: int) -> None:
+        c = self.cuisine_map[food]
+        r = self.rating_map[food]
+
+        self.map[c].remove((-r, food))
+        self.map[c].add((-newRating, food))
+
+        self.rating_map[food] = newRating
+         
+        
+    # O(1)
+    def highestRated(self, cuisine: str) -> str:
+        return self.map[cuisine][0][1]
+
+#####################################################################################################################################################################
+
+
+class FoodRatings:
+
+    def __init__(self, foods: List[str], cuisines: List[str], ratings: List[int]):
+        self.map = dict()
+        self.s = dict()
+        for i in range(len(foods)) :
+            if cuisines[i] in self.map :
+                self.map[cuisines[i]].append([-ratings[i], foods[i]])
+            else :
+                self.map[cuisines[i]] = [[-ratings[i], foods[i]]]
+            self.s[foods[i]] = cuisines[i]
+        # print(self.map)
+        # print(self.s)
+
+    def changeRating(self, food: str, newRating: int) -> None:
+        cuisine = self.s[food]
+        idx = 0 
+        for temp in self.map[cuisine] :
+            [r, f] = temp
+            if f == food :
+                self.map[cuisine][idx][0] = -newRating
+            idx += 1        
+
+    def highestRated(self, cuisine: str) -> str:
+        temp = min(self.map[cuisine])
+        return temp[1]
