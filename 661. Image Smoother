@@ -1,0 +1,23 @@
+class Solution:
+    def imageSmoother(self, img: List[List[int]]) -> List[List[int]]:
+        m,n = len(img), len(img[0])
+        def avg_sum(row, col) :
+            # print(row,  col, end="-->")
+            res = 0
+            c = 0
+            for i in range(row-1, row+2) :
+                for j in range(col-1, col+2) :
+                    if 0<=i<m and 0<=j<n :
+                        res += img[i][j]
+                        c += 1
+            # print(res//c)
+            return res//c
+        mat = [[0 for j in range(n)] for i in range(m)]
+        for i in range(m) :
+            for j in range(n) :
+                mat[i][j] = avg_sum(i,j)
+        return mat
+
+''' time complexity : O(m*n *3*3)        
+    space complexity : O(m*n)
+'''
