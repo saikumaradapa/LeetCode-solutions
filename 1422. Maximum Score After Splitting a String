@@ -1,17 +1,31 @@
 class Solution:
     def maxScore(self, s: str) -> int:
-        ans = 0
-        
-        for i in range(len(s) - 1):
-            curr = 0
-            for j in range(i + 1):
-                if s[j] == "0":
-                    curr += 1
-            
-            for j in range(i + 1, len(s)):
-                if s[j] == "1":
-                    curr += 1
-            
-            ans = max(ans, curr)
-    
-        return ans
+        ones = s.count('1')
+        zeros = 0
+
+        score = 0
+        for i in range(len(s)-1) :
+            if s[i] == '1' :
+                ones -= 1
+            else :
+                zeros += 1 
+            score = max(score, ones+zeros)
+        return score
+
+''' time complexity : O(n)        
+    space complexity : O(1)
+'''
+
+####################################################################################################################################################################################
+
+
+class Solution:
+    def maxScore(self, s: str) -> int:
+        score = 0
+        for i in range(1, len(s)) :
+            score = max(score, s[:i].count('0') + s[i:].count('1')) 
+        return score
+
+''' time complexity : O(n^2)        
+    space complexity : O(1)
+'''
