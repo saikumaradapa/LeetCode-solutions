@@ -1,0 +1,26 @@
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        m,n = len(board), len(board[0])
+        l = len(word)
+        def helper(pos, i,j, seen) :
+            if pos == l :
+                return True            
+            if ((i,j) in seen) or i<0 or j<0 or i>=m or j>=n or (word[pos] != board[i][j]):
+                return False
+            
+            seen.add((i,j))
+            res = (helper(pos+1, i+1,j,seen) or helper(pos+1, i-1,j,seen)or helper(pos+1, i,j+1,seen) or helper(pos+1, i,j-1,seen))
+            seen.remove((i,j))
+            return res
+
+
+  
+        for i in range(m)  :
+            for j in range(n) :               
+                if helper(0, i, j,set()) :
+                    return True
+        return False
+
+''' time complexity : O(n*m* 4^len(word))        
+    space complexity : O(n)
+'''
