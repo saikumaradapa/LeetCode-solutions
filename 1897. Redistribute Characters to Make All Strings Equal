@@ -1,0 +1,16 @@
+class Solution:
+    def makeEqual(self, words: List[str]) -> bool:
+        arr = [0]*26 
+        for word in words :
+            for ch in word :
+                arr[ord(ch)-ord('a')] += 1
+        n = len(words)
+        print(arr)
+        for v in arr :
+            if (v % n) != 0:             
+                return False
+        return True 
+
+''' time complexity : O(n)        
+    space complexity : O(1)
+'''
