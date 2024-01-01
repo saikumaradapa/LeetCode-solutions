@@ -1,0 +1,32 @@
+class Solution:
+    def solveSudoku(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        def isValid(board,r,c,ch) :
+            for i in range(9) :
+                if board[i][c] == ch :
+                    return False
+                if board[r][i] == ch :
+                    return False 
+                if board[3*(r//3)+(i//3)][3*(c//3)+(i%3)] == ch :
+                    return False 
+            return True
+
+        def solver() :
+            for row in range(9) :
+                for col in range(9) :
+                    if board[row][col] == "." :
+                        for ch in "123456789" :
+                            if isValid(board, row, col, ch) :
+                                board[row][col] = ch 
+                                if solver() :
+                                    return True 
+                                board[row][col] = "."
+                        return False 
+            return True 
+        solver()    
+
+''' time complexity : O(9^(n^2))        
+    space complexity : O(n^2)
+'''
