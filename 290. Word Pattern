@@ -1,0 +1,19 @@
+class Solution:
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        arr = s.split()
+        if len(pattern) != len(arr) :
+            return False
+        dit = dict()
+        for idx,ch in enumerate(pattern) :
+            if ch not in dit :
+                if arr[idx] not in dit.values() :
+                    dit[ch] = arr[idx]
+                else :
+                    return False
+            elif dit[ch] != arr[idx]  :
+                return False
+        return True
+
+''' time complexity : O(n)
+    space complexity : O(n)
+'''
