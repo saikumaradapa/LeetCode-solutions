@@ -1,0 +1,35 @@
+class Solution:
+    def findMatrix(self, nums: List[int]) -> List[List[int]]:
+        dit = defaultdict(list)
+        nums.sort()
+        for v, g in groupby(nums) :
+            for i in range(len(list(g))) :
+                dit[i].append(v)
+        return list(dit.values())
+
+''' time complexity : O(n^2)        
+    space complexity : O(n)
+'''
+
+##########################################################################################################################################################
+
+class Solution:
+    def findMatrix(self, nums: List[int]) -> List[List[int]]:
+        rows = 1
+        dit = dict()
+        dit[1] = set()
+        for v in nums : 
+            flag = False  
+            for row in range(1,rows+1) :
+                if v not in dit[row] :
+                    dit[row].add(v)
+                    flag = True     
+                    break  
+            if flag == False :
+                rows = rows+1
+                dit[rows] = set([v])
+        return list(dit.values())
+
+''' time complexity : O(n)        
+    space complexity : O(n)
+'''
