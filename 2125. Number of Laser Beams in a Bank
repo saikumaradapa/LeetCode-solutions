@@ -1,0 +1,37 @@
+class Solution:
+    def numberOfBeams(self, bank: List[str]) -> int:
+        res = 0
+        prev = bank[0].count('1')
+        for i in range(1, len(bank)) :
+            curr = bank[i].count('1')
+            if curr :
+                res += (prev * curr)
+                prev = curr
+        return res
+
+''' time complexity : O(n*m)        
+    space complexity : O(1)
+'''    
+
+##########################################################################################################################################################################################
+
+
+class Solution:
+    def numberOfBeams(self, bank: List[str]) -> int:
+        res = 0
+        prev,prevC, cC = None,0,0
+        for row in bank :
+            if prev :
+                if '1' in row :
+                    cC = row.count('1') 
+                    res += prevC * cC
+                    prevC = cC
+                    prev = row
+            else:
+                prev = row 
+                prevC = row.count('1')
+        return res
+
+''' time complexity : O(n*m)        
+    space complexity : O(1)
+'''                    
