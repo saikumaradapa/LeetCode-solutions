@@ -1,0 +1,24 @@
+class Solution:
+    def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:
+        dit = defaultdict(list)
+        q = [(root, 0, 0)]
+        res = []
+        while q :
+            n = len(q)
+            for i in range(n) :
+                node,c,r= q.pop(0)
+                if node :                        
+                    dit[c].append((r,node.val))
+                    q.append((node.left, c-1, r+1))
+                    q.append((node.right, c+1, r+1))
+        for i in range(min(dit.keys()), max(dit.keys())+1) :
+
+            temp = sorted(dit[i])
+            temp = [ele[1] for ele in temp ]
+            res.append(temp)
+        # print(res)
+        return res
+
+''' time complexity : O(n) + O( k log k)        
+    space complexity : O(n)
+'''
