@@ -17,3 +17,32 @@
             q = level
 
         return width
+
+
+##########################################################################################################################################################################################
+
+
+
+class Solution:
+    def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        q = [(root, 0)]  
+        res = 0       
+        while q :
+            level = [[],[]]
+            n = len(q)
+            for i in range(n) :
+                node, idx = q.pop(0)
+                if node :
+                    if not level[0] :
+                        level[0].append(idx)
+                    level[1] = idx
+                    q.append((node.left, 2*idx+1))
+                    q.append((node.right, 2*idx+2))  
+            print(level)      
+            if level and level[0] and level[1] :            
+                res = max(res, level[1]-level[0][0]+1)
+        return res
+
+''' time complexity : O(n)   
+    space complexity : O(h)
+'''    
