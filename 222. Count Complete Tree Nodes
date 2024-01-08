@@ -2,6 +2,43 @@ class Solution:
     def countNodes(self, root: Optional[TreeNode]) -> int:
         if not root :
             return 0
+        if root.left and root.right :
+            return 1 + self.countNodes(root.left)+self.countNodes(root.right)            
+        if root.left :
+            return 1+self.countNodes(root.left)
+        return 1+self.countNodes(root.right)
+
+''' time complexity : O(n)  DFS
+    space complexity : O(n)
+'''
+
+#####################################################################################################################################################################
+
+
+class Solution:
+    def countNodes(self, root: Optional[TreeNode]) -> int:
+        res = 0
+        q = [root]
+        while q  :
+            n = len(q)
+            for i in range(n) :
+                node = q.pop(0)
+                if node :
+                    q.append(node.left)
+                    q.append(node.right)
+                    res += 1
+        return res
+
+''' time complexity : O(n)  BFS
+    space complexity : O(n)
+'''
+
+#####################################################################################################################################################################
+
+class Solution:
+    def countNodes(self, root: Optional[TreeNode]) -> int:
+        if not root :
+            return 0
 
         def helper(root) :
             if root.left and root.right :
