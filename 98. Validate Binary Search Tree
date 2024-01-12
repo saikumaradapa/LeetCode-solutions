@@ -1,20 +1,20 @@
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        
-        def helper(root, l, r) :
+        def dfs(root, l, r) :
             if not root :
                 return True 
-            if (root.val <= l or root.val >= r) :
-                return False 
-            return (helper(root.left, l, root.val) and helper(root.right, root.val, r))
+            if l < root.val < r :
+                return dfs(root.left, l, min(root.val, r)) and dfs(root.right, max(root.val, l), r)
+            return False 
+        return dfs(root, float("-inf"), float("inf"))        
 
-        return helper(root, -math.inf, math.inf)
+''' time complexity : O(n)        
+    space complexity : O(n) auxiliary space
+'''
 
+########################################################################################################################################################################################
 
-        """" time complexity of O(2n) """
-
-
-
+# use property that inorder traversal gives a sorted list with BST
 
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
