@@ -1,0 +1,20 @@
+class Solution:
+    def findTarget(self, root: Optional[TreeNode], target: int) -> bool:
+        s = set()
+        curr = root 
+        stack = [] 
+        while curr  or stack :
+            while curr :                
+                stack.append(curr)            
+                if target-curr.val in s :
+                    return True 
+                else :
+                    s.add(curr.val)
+                curr = curr.left 
+            curr = stack.pop()
+            curr = curr.right 
+        return False 
+
+''' time complexity : O(n)    # with help of iterator preorder traversal 
+    space complexity : O(n)
+'''
