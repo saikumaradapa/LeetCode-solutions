@@ -1,0 +1,46 @@
+class Solution:
+    def minSteps(self, s: str, t: str) -> int:
+        arr = [0]*26
+        for ch in s:
+            arr[ord(ch)-ord('a')] += 1
+        for ch in t:
+            arr[ord(ch)-ord('a')] -= 1
+
+        res = 0
+        for v in arr :
+            if v > 0 :
+                res += v 
+        return res
+                
+''' time complexity : O(n)        
+    space complexity : O(1) 
+'''
+
+####################################################################################################################################################################################################
+
+class Solution:
+    def minSteps(self, s: str, t: str) -> int:
+        sdit = dict()
+        tdit = dict()
+        for ch in s :
+            if ch in sdit :
+                sdit[ch] += 1
+            else :
+                sdit[ch] = 1
+        res = 0
+        for ch in t :
+            if ch in tdit :
+                tdit[ch] += 1
+            else :
+                tdit[ch] = 1
+        for ch, c in tdit.items() :
+            if ch in sdit :
+                if tdit[ch] > sdit[ch] :
+                    res += tdit[ch]-sdit[ch]
+            else :
+                res += c 
+        return res
+
+''' time complexity : O(n)        
+    space complexity : O(n) 
+'''
