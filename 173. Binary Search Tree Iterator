@@ -1,0 +1,56 @@
+class BSTIterator:
+
+    def __init__(self, root: Optional[TreeNode]):
+        self.stack = []     
+        while root :
+            self.stack.append(root)
+            root = root.left
+
+    def next(self) -> int:
+        node = self.stack.pop()
+        curr = node.right
+        while curr :
+            self.stack.append(curr)
+            curr = curr.left 
+        return node.val 
+        
+
+    def hasNext(self) -> bool:
+        return self.stack != []
+        
+
+''' time complexity : O(n)        
+    space complexity : O(h)  -- optimized version (no need of storing entire tree nodes)
+'''
+
+############################################################################################################################################################################################################
+
+
+class BSTIterator:
+    def __init__(self, root: Optional[TreeNode]):
+        self.arr = []
+        self.i = 0
+        stack = []
+        curr = root 
+        while curr or stack :
+            while curr :
+                stack.append(curr)
+                curr = curr.left 
+            curr = stack.pop()
+            self.arr.append(curr.val)
+            curr = curr.right 
+        self.n = len(self.arr)
+
+
+    def next(self) -> int:
+        self.i += 1
+        return self.arr[self.i-1]
+        
+
+    def hasNext(self) -> bool:
+        return self.i < self.n 
+        
+
+''' time complexity : O(n)        
+    space complexity : O(n)  -- to store all node values 
+'''
