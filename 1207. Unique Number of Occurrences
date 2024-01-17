@@ -1,0 +1,24 @@
+class Solution:
+    def uniqueOccurrences(self, arr: List[int]) -> bool:
+        seen = set()
+        for val in set(arr) :
+            c = arr.count(val)
+            if c in seen :
+                return False
+            seen.add(c) 
+        return True 
+
+''' time complexity : O(n)        
+    space complexity : O(n)
+'''
+
+############################################################################################################################################################################################
+
+class Solution:
+    def uniqueOccurrences(self, arr: List[int]) -> bool:
+        c = collections.Counter(arr)
+        return len(c) == len(set(c.values())) 
+
+''' time complexity : O(n)        
+    space complexity : O(n)
+'''
