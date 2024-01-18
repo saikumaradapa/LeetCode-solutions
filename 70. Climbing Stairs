@@ -1,4 +1,31 @@
 class Solution:
+    def climbStairs(self, n: int) -> int:
+        a,b = 1,1
+        for i in range(n) :
+            a,b = b,a+b        
+        return a
+
+''' time complexity : O(n)    
+    space complexity : O(1)
+'''
+
+############################################################################################################################################################
+
+
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        dp = [1] * (n+1)
+        for i in range(2, n+1) :
+            dp[i] = dp[i-1] + dp[i-2]
+        return dp[-1]
+
+''' time complexity : O(n)    dynamic programming
+    space complexity : O(n)
+'''
+
+############################################################################################################################################################
+
+class Solution:
     temp = {}
     def climbStairs(self, n: int) -> int:
         if n == 0 or n == 1 :
@@ -8,13 +35,7 @@ class Solution:
         self.temp[n] = self.climbStairs(n-1)+self.climbStairs(n-2)
         return self.temp[n]
         
-        
-        
-        
-class Solution:
-    def climbStairs(self, n: int) -> int:
-        a,b = 1,1
-        for i in range(n) :
-            a,b = b,a+b
-        
-        return a
+
+''' time complexity : O(n)    memorization technique
+    space complexity : O(n)
+'''
