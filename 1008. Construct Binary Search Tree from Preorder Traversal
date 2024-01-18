@@ -1,5 +1,52 @@
+class Solution:
+    def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
+        idx = 0
+        n = len(preorder)
+        def dfs(bound) :
+            nonlocal idx 
+            if idx < n and preorder[idx] < bound :
+                root = TreeNode(preorder[idx])
+                idx += 1
+                root.left = dfs(root.val)
+                root.right = dfs(bound)
+                return root 
+            return None 
+        return dfs(float("inf"))
 
-O(N) time and O(N) space 
+''' time complexity : O(n)                
+    space complexity : O(logn) for recursive call stack 
+'''
+
+####################################################################################################################################################################################
+Construct Binary Search Tree from Preorder and inorder traversal (sort preorder to get inorder)
+####################################################################################################################################################################################
+
+
+class Solution:
+    def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
+        root = TreeNode(preorder[0])
+        def insert(root, val) :
+            if root.val < val :
+                if root.right :
+                    insert(root.right, val)
+                else :
+                    root.right = TreeNode(val)
+            elif root.val > val :
+                if root.left :
+                    insert(root.left, val)
+                else :
+                    root.left = TreeNode(val)
+            return root 
+        for val in preorder[1:] :
+            insert(root, val)
+        return root
+
+
+''' time complexity : O(n logn)
+    space complexity : O(1) except auxiliary space
+'''
+
+####################################################################################################################################################################################
 
 class Solution:
     def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
@@ -22,3 +69,7 @@ class Solution:
                 stack.append(last.right)
 
         return root 
+
+''' time complexity : O(n)                
+    space complexity : O(n) 
+'''
