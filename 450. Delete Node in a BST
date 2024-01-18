@@ -17,3 +17,9 @@ class Solution:
                 root.val = curr.val 
                 root.right = self.deleteNode(root.right, root.val)
         return root 
+
+
+
+''' time complexity : O(h)
+    space complexity : O(1)    ignore aux space 
+''' 
