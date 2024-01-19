@@ -1,0 +1,63 @@
+# Optimal Solution 
+
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        first = middle = second = prev = None 
+        prev = TreeNode(float("-inf"))
+        def inorder(root) :
+            if root :
+                nonlocal first, second, middle, prev 
+                inorder(root.left)
+                if prev.val > root.val :
+                    if not first :
+                        first = prev
+                        middle = root 
+                    else :
+                        second = root
+                prev = root 
+                inorder(root.right)
+        inorder(root)
+        if second :
+            first.val, second.val = second.val, first.val 
+        else :
+            first.val, middle.val = middle.val, first.val 
+
+''' time complexity : O(n)    
+    space complexity : O(1)    we can traverse with constant time by Morris Traversal
+'''
+
+
+
+#############################################################################################################################################################################################################
+
+
+# Brute Force Approach 
+
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        inorder = []
+        stack = []
+        curr = root 
+        while stack or curr :
+            while curr :
+                stack.append(curr)
+                curr = curr.left 
+            curr = stack.pop()
+            inorder.append(curr.val)
+            curr = curr.right 
+        print(inorder)
+        inorder.sort()
+
+        i = 0
+        while stack or root :
+            while root :
+                stack.append(root)
+                root = root.left 
+            root = stack.pop()
+            root.val = inorder[i]
+            i += 1
+            root = root.right         
+        
+''' time complexity : O(n logn)        
+    space complexity : O(n)
+'''
