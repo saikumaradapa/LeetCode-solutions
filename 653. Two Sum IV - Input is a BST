@@ -18,3 +18,56 @@ class Solution:
 ''' time complexity : O(n)    # with help of iterator preorder traversal 
     space complexity : O(n)
 '''
+
+################################################################################################################################################################################
+
+# Binary Search Tree Iterator approach 
+
+class Solution:    
+    def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
+        stack1 = []
+        stack2 = []
+        curr = root 
+        while curr :
+            stack1.append(curr)
+            curr = curr.left 
+        while root :
+            stack2.append(root)
+            root = root.right 
+        
+
+        def next() :
+            if not stack1 : return None 
+            node = stack1.pop()
+            curr = node.right 
+            while curr :
+                stack1.append(curr)
+                curr = curr.left 
+            return node 
+
+
+        def before() :
+            if not stack2 : return None 
+            node = stack2.pop()
+            curr = node.left 
+            while curr :
+                stack2.append(curr)
+                curr = curr.right 
+            return node 
+
+
+        node1 = next()
+        node2 = before()
+
+        while node1 and node2 and node1 != node2 :                        
+            if node1.val + node2.val == k :
+                return True 
+            elif node1.val + node2.val < k :
+                node1 = next()
+            else :
+                node2 = before()
+        return False 
+
+''' time complexity : O(n)        
+    space complexity : O(h)
+'''
