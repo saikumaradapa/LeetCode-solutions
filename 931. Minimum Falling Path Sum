@@ -1,0 +1,72 @@
+class Solution:
+    def minFallingPathSum(self, dp: List[List[int]]) -> int:
+        n = len(dp)        
+        for i in range(n-2, -1, -1) :
+            for j in range(n-1, -1, -1) :
+                left = dp[i+1][j-1] if (i<n-1 and j>0) else float("inf")
+                right = dp[i+1][j+1] if (i<n-1 and j<n-1) else float("inf")
+                below = dp[i+1][j] if (i<n-1) else float("inf")
+                dp[i][j] = min(left, right, below) + dp[i][j]
+        return min(dp[0])
+
+
+''' time complexity : O(n*n)     dp solution 
+    space complexity : O(1)
+'''            
+
+####################################################################################################################################################################################
+
+class Solution:
+    def minFallingPathSum(self, matrix: List[List[int]]) -> int:
+        n = len(matrix)
+        res = float("inf")
+        def dfs(row, col, curr) :
+            nonlocal res
+            if col >= n or col < 0 or row >= n:
+                if row >= n : res = min(res, curr)
+                return 
+            dfs(row+1, col-1, curr + matrix[row][col])
+            dfs(row+1, col, curr + matrix[row][col])
+            dfs(row+1, col+1, curr + matrix[row][col])
+
+        for i in range(n) :
+           dfs(0,i,0)
+        return res
+
+''' time complexity : O(3 (n*n))     recursive solution 
+    space complexity : O(n)
+'''            
+
+####################################################################################################################################################################################
+
+class Solution:
+    def minFallingPathSum(self, matrix: List[List[int]]) -> int:
+        n = len(matrix)
+        memo = [[None] * n for _ in range(n)]  # Memoization table
+
+        def dfs(row, col):
+            if col >= n or col < 0 or row >= n:
+                if row >= n:
+                    return 0
+                return float('inf')
+
+            if memo[row][col] is not None:
+                return memo[row][col]
+
+            left = dfs(row + 1, col - 1)
+            down = dfs(row + 1, col)
+            right = dfs(row + 1, col + 1)
+
+            memo[row][col] = min(left, down, right) + matrix[row][col]
+            return memo[row][col]
+
+        res = float('inf')
+        for i in range(n):
+            res = min(res, dfs(0, i))
+
+        return res
+
+
+''' time complexity : O(n*n)     memorisation solution 
+    space complexity : O(n*n)
+'''            
