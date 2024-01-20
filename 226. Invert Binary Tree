@@ -1,5 +1,5 @@
-# with help of tree level order traversal 
-# time O(n) and space O(n)
+# iterative solution 
+
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         q = [root]
@@ -11,14 +11,16 @@ class Solution:
                     node.left, node.right = node.right, node.left
                     q.append(node.left)
                     q.append(node.right)
-
         return root 
 
-
-
+''' time complexity : O(n)
+    space complexity : O(n)
+'''
+########################################################################################################################################################################
 
 
 # Recurrsion approach 
+
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         if not root :
@@ -26,5 +28,8 @@ class Solution:
         root.left, root.right = root.right, root.left
         self.invertTree(root.left)
         self.invertTree(root.right)
-        
-        return root
+                return root
+
+''' time complexity : O(n)
+    space complexity : O(1)    ignore auxiliary space complexity 
+'''
