@@ -1,0 +1,46 @@
+# iterative solution 
+
+class Solution:
+    def goodNodes(self, root: TreeNode) -> int:
+        res = 1
+        q = [(root, root.val)]
+         
+        while q :
+            n = len(q)
+            for i in range(n) :
+                node, val = q.pop(0)
+                if node :
+                    if node.left :
+                        if node.left.val >= val :
+                            res += 1
+                        q.append((node.left, max(val, node.left.val)))
+                    if node.right :
+                        if node.right.val >= val :
+                            res += 1
+                        q.append((node.right, max(val, node.right.val)))
+        return res
+
+''' time complexity : O(n)
+    space complextiy : O(n)
+'''
+
+
+########################################################################################################################################################################
+
+
+# recursive solution 
+
+class Solution:
+    def goodNodes(self, root: TreeNode) -> int:
+        
+        def dfs(root, maxVal) :
+            if not root : return 0
+
+            res = 1 if root.val >= maxVal else 0
+            maxVal = max(maxVal, root.val)
+            return res + dfs(root.left, maxVal) + dfs(root.right, maxVal)
+        return dfs(root, root.val)
+
+''' time complexity : O(n)
+    space complexity : O(1)    ignore aux space for recursive calls 
+'''
