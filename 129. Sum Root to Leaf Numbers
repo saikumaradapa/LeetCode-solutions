@@ -1,0 +1,21 @@
+class Solution:
+    def sumNumbers(self, root: Optional[TreeNode]) -> int:
+        res = 0
+
+        def dfs(root, curr) :
+            nonlocal res        
+            if not root : return 
+
+            curr += str(root.val)
+            if not root.left and not root.right : 
+                res += int(curr)
+                return 
+            
+            dfs(root.left, curr)
+            dfs(root.right, curr)
+        dfs(root, "")    
+        return res
+    
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
