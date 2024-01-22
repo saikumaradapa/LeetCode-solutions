@@ -1,0 +1,33 @@
+class Solution:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        rep, mis = None, None 
+        for i in range(1, len(nums)+1) :
+            c = nums.count(i)
+            if c == 2 :
+                rep = i 
+            elif c == 0 :
+                mis = i 
+            if rep and mis : return [rep, mis]  
+
+''' time complexity : O(n^2)        
+    space complexity : O(1)
+'''
+
+############################################################################################################################################################################
+
+class Solution:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        seen = set()
+        rep = None 
+        for val in nums :
+            if val in seen :
+                rep = val 
+                break 
+            seen.add(val)        
+        n = len(nums)
+        mis = (n * (n+1) // 2) - sum(nums) + rep 
+        return [rep, mis]
+
+''' time complexity : O(n)        
+    space complexity : O(n)
+'''
