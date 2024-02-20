@@ -4,19 +4,39 @@ class Solution:
         sum1 = (n*(n+1))//2
         sum2 = sum(nums)
         return sum1-sum2
+
+''' time complexity : O(n)        
+    space complexity : O(1)
+'''
         
         
         
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
         n = len(nums)
-        for i in range(len(nums)) :
+        for i in range(n) :
             n ^= i
             n ^= nums[i]
-
         return n        
+
+''' time complexity : O(n)        
+    space complexity : O(1)
+'''        
         
         
         
         
-        
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        nums.sort()
+        start = 0 
+        for num in nums :
+            if num == start :
+                start += 1
+            else :
+                return start 
+        return start 
+
+''' time complexity : O(n logn)        
+    space complexity : O(1)
+'''
