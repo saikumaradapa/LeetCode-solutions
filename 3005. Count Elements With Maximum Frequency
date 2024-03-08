@@ -1,0 +1,37 @@
+from collections import defaultdict
+class Solution:
+    def maxFrequencyElements(self, nums: List[int]) -> int:
+        freq = defaultdict(int)
+        maxFreq = 1
+        for val in nums:
+            freq[val] += 1
+        
+            if maxFreq < freq[val]:
+                maxFreq = freq[val]
+        res = 0
+        for f in freq.values():
+            if f == maxFreq:
+                res += f
+        return res
+
+''' time complexity : O(n)        
+    space complexity : O(n)
+'''
+
+#########################################################################################################################################################################################################################
+
+class Solution(object):
+    def maxFrequencyElements(self, nums):
+        freq_counter = Counter(nums)
+        
+        max_frequency = max(freq_counter.values())
+
+        max_freq_elements = [num for num, freq in freq_counter.items() if freq == max_frequency]
+
+        total_frequency = max_frequency * len(max_freq_elements)
+
+        return total_frequency
+
+''' time complexity : O(n)        
+    space complexity : O(n)
+'''
