@@ -1,0 +1,39 @@
+from collections import defaultdict
+class Solution:
+    def customSortString(self, order: str, s: str) -> str:
+        arr = [0] * 26
+        for ch in s:
+            arr[ord(ch) - ord('a')] += 1        
+        
+        res = []
+        for ch in order:
+            idx = ord(ch)-ord('a')
+            res.append(ch * arr[idx])
+            arr[idx] = 0
+
+        for idx in range(26):
+            if arr[idx] != 0:
+                ch = chr(idx + ord('a'))
+                res.append(ch * arr[idx])
+        
+        return ''.join(res)
+
+''' time complexity : O(n)        
+    space complexity : O(1)
+'''
+
+##############################################################################################################################################################################################################################################
+
+from collections import defaultdict
+class Solution:
+    def customSortString(self, order: str, s: str) -> str:
+
+        cnt = Counter(s)                            # count each char in T. 
+        ans = [cnt.pop(c, 0) * c for c in order]    # sort chars both in T and order by the sequence of order.
+        for c, v in cnt.items():
+            ans.append(c * v)                       # group chars in T but not in order.
+        return ''.join(ans)
+
+''' time complexity : O(n)        
+    space complexity : O(1)
+'''
