@@ -1,0 +1,52 @@
+class Solution:
+    def removeZeroSumSublists(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        front = ListNode(0, head)
+        start = front
+
+        while start:
+            prefix_sum = 0
+            end = start.next
+
+            while end:
+
+                prefix_sum += end.val
+
+                if prefix_sum == 0:
+                    start.next = end.next
+                end = end.next
+
+            start = start.next
+
+        return front.next
+
+''' time complexity : O(n^2)
+    space complexity : O(1)
+'''
+
+####################################################################################################################################################################################################
+
+class Solution:
+    def removeZeroSumSublists(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(0, head)
+        curr = dummy
+        seen = {}
+        currSum = 0
+        while curr:
+            currSum += curr.val 
+            seen[currSum] = curr
+            curr = curr.next 
+        
+        currSum = 0
+        curr = dummy
+        while curr:
+            currSum += curr.val 
+            curr.next = seen[currSum].next 
+            curr = curr.next 
+        
+        return dummy.next 
+
+''' time complexity : O(2n)
+    space complexity : O(n)
+'''        
+
+####################################################################################################################################################################################################
