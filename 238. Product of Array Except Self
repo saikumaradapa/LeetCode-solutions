@@ -1,5 +1,30 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        res = [1] * n
+    
+        suffix = 1
+        for i in range(n):
+            res[i] *= suffix
+            suffix *= nums[i]
+    
+        postfix = 1
+        for i in range(n-1, -1, -1):
+            res[i] *= postfix
+            postfix *= nums[i]
+
+        return res
+
+
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
+
+######################################################################################################################################################################################################
+
+
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
         arr = [1]*len(nums)
         prefix = 1
         postfix = 1
@@ -16,7 +41,8 @@ class Solution:
             product of both prefix and postfix  [24, 12, 8, 6]
             time complexity O(n)
             space complexity is O(n) to evalute the result """     
-    
+
+######################################################################################################################################################################################################
     
 TLE 
 
@@ -28,3 +54,7 @@ class Solution:
                 if i!=j :
                     a[i] =a[i] * nums[j]
         return a
+
+''' time complexity : O(n^2)
+    space complexity : O(1)
+'''
