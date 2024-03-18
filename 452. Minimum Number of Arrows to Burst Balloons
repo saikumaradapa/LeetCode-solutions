@@ -1,0 +1,15 @@
+class Solution:
+    def findMinArrowShots(self, points: List[List[int]]) -> int:
+        points.sort(key=lambda x:x[1])
+
+        cnt = 0
+        end = float("-inf")
+        for st, ed in points:
+            if end < st:
+                end = ed
+                cnt += 1
+        return cnt 
+
+''' time complexity : O(n logn) + O(n)
+    space complexity : O(1)
+'''
