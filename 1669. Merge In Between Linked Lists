@@ -1,0 +1,33 @@
+class Solution:
+    def mergeInBetween(self, list1: ListNode, a: int, b: int, list2: ListNode) -> ListNode:
+        lstart = list2
+        lend = None 
+        
+        while list2:
+            lend = list2
+            list2 = list2.next 
+        
+        curr = dummy = ListNode(-1, list1)
+        first = second = None 
+        k = 0
+
+        while curr :
+            if k == a:
+                first = curr
+            if k == b+1:
+                second = curr
+
+            if first and second:
+                break 
+            
+            k += 1
+            curr = curr.next 
+        
+        first.next = lstart 
+        lend.next = second.next
+
+        return dummy.next 
+
+''' time complexity : O(n + m)
+    space complexity : O(1)
+'''
