@@ -1,0 +1,37 @@
+class Solution:
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        if not head or not head.next:
+            return head 
+        
+
+        mid = self.findMid(head)
+        rev_mid = self.reverse(mid.next)
+        mid.next = None
+
+        # Merge the two halves alternately
+        while rev_mid:
+            next_head = head.next
+            head.next = rev_mid
+            rev_mid = rev_mid.next
+            head.next.next = next_head
+            head = next_head
+
+    def findMid(self, head):
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
+
+    def reverse(self, head):
+        prev = None
+        while head:
+            next_node = head.next
+            head.next = prev
+            prev = head
+            head = next_node
+        return prev
+
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
