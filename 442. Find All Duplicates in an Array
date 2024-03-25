@@ -1,0 +1,54 @@
+class Solution:
+    def findDuplicates(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        res = []
+        for i in range(n):
+            val = abs(nums[i])
+            indextoCheck = val-1
+            
+            if nums[indextoCheck] < 0:
+                res.append(val)
+            
+            else:
+                nums[indextoCheck] = -nums[indextoCheck]
+            
+        return res
+
+''' time complexity : O(n)        
+    space complexity : O(1)
+'''
+
+########################################################################################################################################################################################################################################
+
+class Solution:
+    def findDuplicates(self, nums: List[int]) -> List[int]:
+        seen = set()
+        res = []
+        for val in nums:
+            if val in seen:
+                res.append(val)
+                continue 
+            seen.add(val)
+        
+        return res
+
+''' time complexity : O(n)        
+    space complexity : O(n)
+'''
+
+########################################################################################################################################################################################################################################
+
+class Solution:
+    def findDuplicates(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        nums.sort()
+        res = []
+        for i in range(1, n):
+            if nums[i] == nums[i-1]:
+                res.append(nums[i])                
+            
+        return res
+
+''' time complexity : O(n logn)        
+    space complexity : O(1)
+'''
