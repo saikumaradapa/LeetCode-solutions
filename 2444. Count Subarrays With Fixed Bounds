@@ -1,0 +1,33 @@
+class Solution:
+    def countSubarrays(self, nums: List[int], minK: int, maxK: int) -> int:
+        res = 0
+        badi, mini, maxi = -1, -1, -1
+
+        for i in range(len(nums)):
+            if nums[i] == minK: mini = i
+            if nums[i] == maxK : maxi = i
+            if not (minK <= nums[i] <= maxK) : badi = i
+        
+            res += max(0, min(mini, maxi) - badi)
+    
+        return res
+
+
+''' 
+just think like possibilities    
+
+1. badi mini maxi 
+2. mini badi maxi 
+3. mini maxi badi 
+
+amoung above, case1 is taken for this problem 
+and the number of sub arrays will badi - mini and also we are not sure that mini will come first 
+so min(mini, maxi) - badi
+
+and to avoid 2 & 3 cases, max(0, min(mini, maxi) - badi) will be taken 
+check 2,3 will gives negative value which will not considerd 
+
+
+    time complexity : O(n)        
+    space cmplexity : O(1)
+'''
