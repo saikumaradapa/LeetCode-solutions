@@ -24,3 +24,48 @@ class Solution:
 ''' time complexity : O(n*m* 4^len(word))        
     space complexity : O(n)
 '''
+
+
+#########################################################################################################################################################################################
+
+
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        n, m = len(board), len(board[0])
+        visited = [[0] * m for _ in range(n)]
+
+        for i in range(n):
+            for j in range(m):
+                if board[i][j] == word[0]:
+                    if self.search(board, i, j, word, 1, n, m, visited):
+                        return True
+        return False
+
+
+    def check(self, n, m, row, col):
+        return 0<= row <n and 0<= col < m
+
+    def search(self, board, i, j, word, idx, n, m, visited):
+        if idx >= len(word) :
+            return True
+        
+        if visited[i][j] == 1: 
+            return False 
+
+        visited[i][j] = 1
+
+        dx = (0, 1, 0, -1, 0)
+        for k in range(4):
+            row = i + dx[k]
+            col = j + dx[k+1]
+
+            if self.check(n, m, row, col) and board[row][col] == word[idx] and visited[row][col] == 0:                
+                if self.search(board, row, col, word, idx+1, n, m, visited):
+                    return True
+
+        visited[i][j] = 0
+        return False        
+
+''' time complexity : O((n*m) * 4 ^ k)                  k - word lenght 
+    space complexity : O(n*m)
+'''
