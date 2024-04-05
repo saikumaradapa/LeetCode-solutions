@@ -1,0 +1,29 @@
+class Solution:
+    def lower(self, ch):
+        if ord(ch) < ord('a'):
+            return chr((ord(ch)-ord('A')) + ord('a'))
+        
+        return ch
+
+        # A -> 1
+        # B -> 2 
+        
+        # a -> 101
+        # b -> 102
+
+        
+
+    def makeGood(self, s: str) -> str:
+        stack = []
+
+        for i in range(len(s)):
+            if stack and stack[-1]!=s[i] and self.lower(stack[-1]) == self.lower(s[i]):
+                stack.pop()
+            else:
+                stack.append(s[i])
+        
+        return "".join(stack)
+
+''' time complexity : O(n)        
+    space complexity : O(n)
+'''
