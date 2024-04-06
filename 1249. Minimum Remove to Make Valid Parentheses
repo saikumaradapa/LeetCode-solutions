@@ -1,0 +1,29 @@
+class Solution:
+    def minRemoveToMakeValid(self, s: str) -> str:
+        stack = []
+        removal_indices = set()
+        
+        # Pass 1: Identify invalid closing parentheses
+        for i, ch in enumerate(s):
+            if ch == ")":
+                if stack and s[stack[-1]] == "(":
+                    stack.pop()
+                else:
+                    removal_indices.add(i)
+            elif ch == "(":
+                stack.append(i)
+        
+        # Pass 2: Identify invalid opening parentheses
+        removal_indices.update(stack)
+        
+        # Generate the resulting string without invalid parentheses
+        result = []
+        for i, ch in enumerate(s):
+            if i not in removal_indices:
+                result.append(ch)
+        
+        return "".join(result)
+
+''' time complexity : O(n)
+    space complexity : O(n)
+'''
