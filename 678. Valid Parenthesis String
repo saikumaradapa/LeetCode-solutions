@@ -1,0 +1,25 @@
+class Solution:
+    def checkValidString(self, s: str) -> bool:
+        openMin, openMax = 0, 0
+        for ch in s:
+            if ch == '(':
+                openMin += 1
+                openMax += 1
+            elif ch == ')':
+                openMin = max(0, openMin-1)
+                openMax -= 1
+
+                if openMax < 0: return False 
+            else:
+                openMin = max(0, openMin-1)
+                openMax += 1
+        return openMin == 0
+
+''' greedy approach 
+
+    openMin considers * as )
+    openMax considers * as (
+
+    time complexity : O(n)        
+    space complexity : O(1)
+'''
