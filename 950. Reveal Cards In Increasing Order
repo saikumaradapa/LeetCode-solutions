@@ -1,0 +1,21 @@
+class Solution:
+    def deckRevealedIncreasing(self, deck: List[int]) -> List[int]:
+        res = [0] * len(deck)
+        deck.sort()
+
+        q = deque(range(len(deck)))
+
+        for val in deck:
+            i = q.popleft()
+            res[i] = val 
+
+            if q:
+                q.append(q.popleft())
+            
+        return res
+
+''' sort then check it is following print and skip pattern 
+
+    time complexity : O(n logn)
+    space complexity : O(1)
+'''
