@@ -1,0 +1,26 @@
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
+        cnt = 0
+        for i in range(31, -1, -1):
+            if (((x>>i) ^ (y>>i)) & 1) :
+                cnt += 1
+        return cnt 
+
+''' time complexity : O(32)        
+    space complexity : O(1)
+'''
+
+########################################################################################################################################################################################################################
+
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
+        cnt = 0
+        xor = x ^ y
+        while xor > 0:
+            cnt += 1
+            xor = xor & (xor-1)
+        return cnt 
+
+''' time complexity : O(k)        
+    space complexity : O(1)
+'''
