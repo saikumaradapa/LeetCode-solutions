@@ -1,0 +1,52 @@
+class Solution:
+    def countBits(self, n: int) -> List[int]:
+        res = [0] * (n+1)
+        for i in range(n+1):
+            num = i 
+            cnt = 0
+            while num > 0:
+                cnt += 1
+                num = num & (num-1)
+            res[i] = cnt 
+        return res
+
+''' time complexity : O(n * k)         k - number of set bits 
+    space complexity : O(1)
+'''
+
+
+##############################################################################################################################################################################
+
+class Solution:
+    def countBits(self, n: int) -> List[int]:
+        res = [0] * (n+1)
+        for i in range(n+1):
+            num = i 
+            cnt = 0
+            while num > 0:
+                if num & 1:
+                    cnt += 1
+                num = num >> 1
+            res[i] = cnt
+        return res
+
+''' time complexity : O(n * 32)        
+    space complexity : O(1)
+'''
+
+##############################################################################################################################################################################
+
+class Solution:
+    def countBits(self, n: int) -> List[int]:
+        dp = [0] * (n+1)
+        offset = 1
+
+        for i in range(1, n+1):
+            if offset * 2 == i:
+                offset = i 
+            dp[i] = 1 + dp[i - offset]
+        return dp
+
+''' time complexity : O(n)         dp solution 
+    space complexity : O(1)
+'''        
