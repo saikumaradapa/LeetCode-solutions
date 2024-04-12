@@ -1,0 +1,14 @@
+class Solution:
+    def readBinaryWatch(self, turnedOn: int) -> List[str]:
+        res = []
+        for h in range(12):
+            for m in range(60):
+                temp = bin(h)+bin(m)
+                if temp.count('1') == turnedOn:
+                    time = "%d:%02d"%(h, m)
+                    res.append(time)
+        return res
+
+''' time complexity : O(12 * 60 * 64)
+    space complexity : O(1)
+'''
