@@ -1,0 +1,46 @@
+from collections import deque
+class Solution:
+    def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
+        q = deque([root])
+        res = 0
+        while q:
+            node = q.popleft()
+
+            if node.left:
+                if not node.left.left and not node.left.right:
+                    res += node.left.val 
+                q.append(node.left)
+            
+            if node.right:
+                q.append(node.right)
+        
+        return res
+
+''' time complexity : O(n)        
+    space complexity : O(n)
+'''
+
+########################################################################################################################################################################################
+
+
+class Solution:    
+    def helper(self, root, curr):
+        if not root : return 0
+
+        if root.left and not root.left.left and not root.left.right: 
+            curr[0] += root.left.val 
+        
+        self.helper(root.left, curr)
+        self.helper(root.right, curr)
+
+        return curr
+
+    def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
+
+        curr = [0]
+        self.helper(root, curr)
+        return curr[0]
+
+''' time complexity : O(n)        
+    space complexity : O(1)
+'''
