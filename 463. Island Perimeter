@@ -1,0 +1,23 @@
+class Solution:
+    def findEdges(self, grid, r, c, n, m):
+        cnt = 0
+        directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+        for dr, dc in directions:
+            nr, nc = r + dr, c + dc
+            if nr < 0 or nr >= n or nc < 0 or nc >= m or grid[nr][nc] == 0:
+                cnt += 1
+        return cnt
+
+    def islandPerimeter(self, grid: List[List[int]]) -> int:
+        res = 0
+        n, m = len(grid), len(grid[0])
+        for i in range(n):
+            for j in range(m):
+                if grid[i][j] == 1:
+                    res += self.findEdges(grid, i, j, n, m)
+        return res
+
+''' 
+Time complexity: O(n * m)
+Space complexity: O(1)
+'''
