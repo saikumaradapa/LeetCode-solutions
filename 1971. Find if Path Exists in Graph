@@ -1,0 +1,28 @@
+class Solution:
+    def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+        graph = [[] for _ in range(n)]
+
+        for [u, v] in edges:
+            graph[u].append(v)
+            graph[v].append(u)
+        
+        visited = [0] * n
+        
+        q = deque([source])
+        visited[source] = 1
+
+        while q:
+            node = q.popleft()
+            if node == destination:
+                return True 
+            
+            for adj in graph[node]:
+                if visited[adj] == 0 :
+                    visited[adj] = 1
+                    q.append(adj)
+        
+        return False 
+
+''' time complexity : O(V + E)        
+    space complexity : O(V + E)
+'''
