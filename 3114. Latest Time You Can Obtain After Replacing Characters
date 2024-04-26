@@ -1,0 +1,35 @@
+class Solution:
+    def findLatestTime(self, s: str) -> str:
+        h,m = s.split(':')
+        newH = None
+        newM = None 
+        
+        if h[0] == '?' and h[1] =='?':
+            newH = '11'
+        elif h[0] =='?':
+            if '2'<=h[1]<='9':
+                newH = '0'+h[1]
+            else:
+                newH = '1'+h[1]
+        elif h[1] =='?':
+            if h[0]=='0':
+                newH = h[0]+'9'
+            else:
+                newH = h[0]+'1'
+        else:
+            newH = h 
+        
+        if m[0]=='?' and m[1]=='?':
+            newM = '59'
+        elif m[0] =='?':
+            newM = '5'+m[1]
+        elif m[1] =='?':
+            newM = m[0]+'9'
+        else:
+            newM = m 
+        
+        return newH+':'+newM 
+
+''' time complexity : O(1)        
+    space complexity : O(1)
+'''
