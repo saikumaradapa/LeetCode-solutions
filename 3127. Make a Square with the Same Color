@@ -1,0 +1,34 @@
+class Solution:
+    def canMakeSquare(self, grid: List[List[str]]) -> bool:
+        n, m = len(grid), len(grid[0])
+
+        # Check for a 2x2 square of the same color in the top left corner
+        for i in range(n - 1):
+            for j in range(m - 1):
+                if (grid[i][j] == grid[i + 1][j]) and (grid[i][j] == grid[i][j + 1]):
+                    return True
+
+        # Check for a 2x2 square of the same color in the top right corner
+        for i in range(n - 1):
+            for j in range(m - 1, 0, -1):
+                if (grid[i][j] == grid[i][j - 1]) and (grid[i][j] == grid[i + 1][j]):
+                    return True
+
+        # Check for a 2x2 square of the same color in the bottom left corner
+        for i in range(n - 1, 0, -1):
+            for j in range(m - 1):
+                if (grid[i][j] == grid[i - 1][j]) and (grid[i][j] == grid[i][j + 1]):
+                    return True
+
+        # Check for a 2x2 square of the same color in the bottom right corner
+        for i in range(n - 1, 0, -1):
+            for j in range(m - 1, 0, -1):
+                if (grid[i][j] == grid[i][j - 1]) and (grid[i][j] == grid[i - 1][j]):
+                    return True
+
+        return False
+
+
+''' time complexity : O(n * m)
+	  space complexity : O(1)
+'''
