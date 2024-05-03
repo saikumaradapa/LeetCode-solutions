@@ -1,0 +1,19 @@
+class Solution:
+    def compareVersion(self, version1: str, version2: str) -> int:
+        v1 = [int(v) for v in version1.split(".")]
+        v2 = [int(v) for v in version2.split(".")]
+
+        n = len(v1)
+        m = len(v2)
+
+        for i in range(max(n, m)):
+            a = v1[i] if i < n else 0
+            b = v2[i] if i < m else 0
+
+            if a < b : return -1
+            if a > b : return 1
+        return 0
+
+''' time complexity : O(n)        
+    space complexity : O(n)
+'''
