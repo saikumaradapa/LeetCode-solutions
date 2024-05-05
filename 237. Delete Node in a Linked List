@@ -1,9 +1,6 @@
 class Solution:
     def deleteNode(self, node):
-        """
-        :type node: ListNode
-        :rtype: void Do not return anything, modify node in-place instead.
-        """
+
         next_node = node.next 
         node.val = next_node.val 
         node.next = next_node.next
@@ -11,3 +8,22 @@ class Solution:
          # copy the next node value 
          # delete the next node 
          # it will not work for tail node
+
+''' time complexity : O(1)
+    space complexity : O(1)
+'''
+
+################################################################################################################################################
+
+class Solution:
+    def deleteNode(self, node):
+        prev = node
+        while node.next :
+            node.val = node.next.val 
+            prev = node 
+            node = node.next 
+        prev.next = None 
+
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
