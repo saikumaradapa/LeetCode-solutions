@@ -1,0 +1,27 @@
+class Solution:
+    def reverse(self, head):
+        curr = head
+        prev = None 
+        while curr:
+            next = curr.next 
+            curr.next = prev 
+            prev = curr 
+            curr = next 
+        return prev 
+
+    def removeNodes(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        curr = head = self.reverse(head) 
+        curr_max = curr.val 
+
+        while curr.next:
+            if curr.next.val < curr_max:
+                curr.next = curr.next.next 
+            else:
+                curr_max = curr.next.val 
+                curr = curr.next         
+
+        return self.reverse(head)
+
+''' time complexity : O(n)        
+    space complexity : O(1)
+'''
