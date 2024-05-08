@@ -1,0 +1,20 @@
+from heapq import heapify, heappop
+class Solution:
+    def findRelativeRanks(self, score: List[int]) -> List[str]:
+        idxArr = dict()
+        for idx, val in enumerate(score):
+            idxArr[val] = idx 
+        
+        res = [""]*len(score)
+        score = [-val for val in score]
+
+        heapify(score)
+        k = 1
+        while score:            
+            res[idxArr[-heappop(score)]] = "Gold Medal" if k == 1 else ("Silver Medal" if k == 2 else ("Bronze Medal" if k == 3 else str(k))) 
+            k += 1
+        return res 
+
+''' time complexity : O(n logn)        
+    space complexity : O(n)
+'''
