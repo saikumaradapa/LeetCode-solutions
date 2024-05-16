@@ -1,0 +1,20 @@
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        res = [-1] * len(nums1)
+        index = {n:i for i,n in enumerate(nums1)}
+
+        stack = []
+        for i, v in enumerate(nums2):
+            while stack and stack[-1] < v:
+                val = stack.pop()
+                idx = index[val]
+                res[idx] = v 
+                
+            if v in index:
+                stack.append(v)
+        
+        return res
+
+''' time complexity : O(m + n)
+    space complexity : O(m)
+'''
