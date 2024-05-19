@@ -1,0 +1,29 @@
+class Solution:
+    def maximumValueSum(self, nums: List[int], k: int, edges: List[List[int]]) -> int:
+        n = len(nums)
+        delta = [(num^k)-num for num in nums]
+
+        res = sum(nums)
+        delta.sort(reverse=True)
+
+        m = n-1 if n&1 == 1 else n
+        
+        for i in range(0, m, 2):
+            a = delta[i]
+            b = delta[i+1]
+
+            if a+b <= 0:
+                break 
+            
+            res += a+b
+        return res
+
+''' time complexity : O(n logn)        
+    space complexity : O(n)
+'''
+
+
+Points to note before solving problem
+
+1. performing xor on n twice gives n only
+2. we can consider any two edges even they need not to be adjacent from above point
