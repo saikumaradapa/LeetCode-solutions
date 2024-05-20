@@ -1,0 +1,21 @@
+class Solution:
+    def dfs(self, pos, n, nums, curr, res):
+        if pos == n:
+            res[0] += curr
+            return 
+        curr ^= nums[pos]
+
+        self.dfs(pos+1, n, nums, curr, res)
+        curr ^= nums[pos]
+        self.dfs(pos+1, n, nums, curr, res)
+
+
+    def subsetXORSum(self, nums: List[int]) -> int:
+        res = [0]
+        self.dfs(0, len(nums), nums, 0, res)
+
+        return res[0]
+
+''' time complexity : O(2^n)
+    space complexity : O(n)
+'''
