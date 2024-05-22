@@ -1,0 +1,30 @@
+class Solution:
+    def dfs(self, s, par, res, pos):
+
+        if pos == len(s): 
+            res.append(par.copy())             
+            return 
+
+        for i in range(pos, len(s)):
+            if self.isPal(s, pos, i):
+                par.append(s[pos:i+1])
+                self.dfs(s, par, res, i+1)
+                par.pop()
+
+
+    def partition(self, s: str) -> List[List[str]]:
+        res = []
+        par = []
+        self.dfs(s, par, res, 0)
+        return res
+
+    def isPal(self, s, l, r):
+        while l<r:
+            if s[l] != s[r]:
+                return False
+            l, r = l+1, r-1
+        return True 
+
+''' time complexity : O(2^n)
+    space complexity : O(n)
+'''
