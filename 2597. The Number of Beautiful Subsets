@@ -1,0 +1,23 @@
+class Solution:
+    def dfs(self, nums, hasMap, pos, n, k):
+        if pos == n:
+            return 1 
+        
+        res = self.dfs(nums, hasMap, pos+1, n, k)
+        if not hasMap[nums[pos] - k] and not hasMap[nums[pos]+k] :
+            hasMap[nums[pos]] += 1
+            res += self.dfs(nums, hasMap, pos+1, n, k)
+            hasMap[nums[pos]] -= 1
+
+        return res
+        
+    def beautifulSubsets(self, nums: List[int], k: int) -> int:
+        hasMap = defaultdict(int)
+    
+        return self.dfs(nums, hasMap, 0, len(nums), k)-1
+
+
+
+''' time complexity : O(2^n)        
+    space complexity : O(n)
+'''
