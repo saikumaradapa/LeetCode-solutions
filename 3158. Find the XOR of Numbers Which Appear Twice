@@ -1,0 +1,12 @@
+class Solution:
+    def duplicateNumbersXOR(self, nums: List[int]) -> int:
+        d = defaultdict(int)
+        
+        for num in nums:
+            d[num] += 1
+        
+        res = 0
+        for k in d:
+            if d[k] == 2: 
+                res ^= k
+        return res
