@@ -1,0 +1,35 @@
+class Solution:
+    def appendCharacters(self, s: str, t: str) -> int:
+        i, j = 0, 0
+        n, m = len(s), len(t)
+
+        while i < n and j < m:
+            if s[i] == t[j]:
+                i, j = i+1, j+1
+            else:
+                i += 1 
+        return m-j        
+
+''' time complexity : O(n + m)        
+    space complexity : O(1)
+''' 
+
+#########################################################################################################################################################################################
+
+class Solution:
+    def appendCharacters(self, s: str, t: str) -> int:
+        idx = 0
+
+        for i, ch in enumerate(t):
+            while idx < len(s) and ch != s[idx]:
+                idx += 1
+            
+            if  idx == len(s):
+                return len(t)-i
+            idx  += 1
+        
+        return 0 
+
+''' time complexity : O(n + m)        
+    space complexity : O(1)
+''' 
