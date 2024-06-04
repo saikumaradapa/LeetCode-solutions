@@ -1,0 +1,68 @@
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        seen = set()
+
+        res = 0
+
+        for ch in s:
+            if ch in seen:
+                res += 2
+                seen.remove(ch)
+            else:
+                seen.add(ch)
+        
+        return res if not seen else res+1
+        
+''' time complexity : O(n)        with hasSet
+    space complexity : O(52)
+'''
+
+
+##########################################################################################################################################################################
+
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        freq = defaultdict(int)
+        res = 0
+
+        for ch in s:
+            freq[ch] += 1 
+            
+            if freq[ch] & 1 == 0:
+                res += 2
+
+        for cnt in freq.values():
+            if cnt & 1 == 1:
+                res += 1
+                break             
+            
+        return res  
+
+''' time complexity : O(n)        with hasMap
+    space complexity : O(52)
+'''
+
+##########################################################################################################################################################################
+
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        freq = defaultdict(int)
+
+        for ch in s:
+            freq[ch] += 1 
+        
+        res = 0
+        odd = False
+
+        for ch, f in freq.items():
+            if f % 2 == 0:
+                res += f 
+            else:
+                odd = True 
+                res += f-1
+                
+        return res + odd
+
+''' time complexity : O(n)        with hasMap
+    space complexity : O(52)
+'''
