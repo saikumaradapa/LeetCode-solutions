@@ -1,0 +1,27 @@
+class Solution:
+    def commonChars(self, words: List[str]) -> List[str]:
+        arr = []
+
+        for word in words:
+            temp = [0] * 26
+            for ch in word:
+                temp[ord(ch)-ord('a')] += 1
+
+            arr.append(temp)
+        
+        res = []
+
+        for i in range(26):
+            cnt = float('inf')
+            for j in range(len(words)):
+                cnt = min(cnt, arr[j][i]) 
+            
+                if cnt == 0:
+                    continue                 
+            for j in range(cnt):
+                res.append(chr(i+ord('a')))
+        return res
+
+''' time complexity : O(n * m)         you can also try with Counter 
+    space complexity : O(n * 26)
+'''
