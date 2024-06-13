@@ -14,8 +14,9 @@ class Solution:
         for i in range(1001):
             if arr[i]:
                 res.extend([i] * arr[i])
-        
+
         return res
+
 
 ''' time complexity : O(n)        
     space complexity : O(1001)
