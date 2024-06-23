@@ -1,0 +1,25 @@
+from heapq import heappush, heappop
+
+class Solution:
+    def longestSubarray(self, nums: List[int], limit: int) -> int:
+        max_heap = []  # To store the negative values for max heap
+        min_heap = []  # To store the values for min heap
+        l = 0
+        res = 0
+
+        for r in range(len(nums)):
+            heappush(max_heap, (-nums[r], r))
+            heappush(min_heap, (nums[r], r))
+
+            # Maintain the window's property
+            while -max_heap[0][0] - min_heap[0][0] > limit:
+                l += 1
+                # Remove elements that are out of the window
+                while max_heap[0][1] < l:
+                    heappop(max_heap)
+                while min_heap[0][1] < l:
+                    heappop(min_heap)
+            
+            res = max(res, r - l + 1)
+
+        return res
