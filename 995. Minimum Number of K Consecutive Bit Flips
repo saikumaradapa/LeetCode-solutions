@@ -1,0 +1,41 @@
+class Solution:
+    def minKBitFlips(self, nums: List[int], k: int) -> int:
+        res = 0
+        q = deque()
+
+        for i in range(len(nums)):
+            while q and i > q[0] + k -1:
+                q.popleft()
+
+            if (len(q) + nums[i]) % 2 == 0:                
+                if i + k > len(nums) :
+                    return -1
+                res += 1
+                q.append(i)
+        return res 
+
+''' time complexity : O(n)        
+    space complexity : O(n)
+'''
+
+
+###############################################################################################################################################################################################################
+
+# TLE 
+
+class Solution:
+
+    def minKBitFlips(self, nums: List[int], k: int) -> int:
+        res = 0
+        for pos in range(len(nums) - k + 1):
+            if not nums[pos]:
+                for i in range(pos, pos+k):
+                    nums[i] = 1-nums[i]
+                
+                res += 1
+        
+        for i in range(len(nums) - k + 1, len(nums)) : 
+            if nums[i] == 0:
+                return -1 
+        return res
+        
