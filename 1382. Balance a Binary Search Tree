@@ -1,0 +1,24 @@
+class Solution:
+    def dfs(self, node, inorder):
+        if node:
+            self.dfs(node.left, inorder)
+            inorder.append(node.val)
+            self.dfs(node.right, inorder)
+        
+
+    def balanceBST(self, root: TreeNode) -> TreeNode:
+        inorder = []
+        self.dfs(root, inorder)
+        return self.buildTree(inorder)
+
+    def buildTree(self, inorder):
+        if inorder:
+            n = len(inorder)
+            node = TreeNode(inorder[n//2])
+            node.left = self.buildTree(inorder[:n//2])
+            node.right = self.buildTree(inorder[n//2+1:])            
+            return node 
+
+''' time complexity : O(n)
+    space complexity : O(n)
+'''
