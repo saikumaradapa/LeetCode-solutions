@@ -1,3 +1,12 @@
+# we can also solve this problem with indegree concept 
+
+class Solution:
+    def findCenter(self, edges: List[List[int]]) -> int:
+        node1, node2 = edges[0]
+        if node1 in edges[1]: return node1 
+        return node2 
+
+
 class Solution:
     def findCenter(self, edges: List[List[int]]) -> int:
         return list((set((edges[0][0], edges[0][1]))).intersection(set((edges[1][0],edges[1][1]))))[0]
