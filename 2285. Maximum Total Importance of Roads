@@ -1,0 +1,20 @@
+class Solution:
+    def maximumImportance(self, n: int, roads: List[List[int]]) -> int:
+        arr = [0] * n 
+
+        for u, v in roads:
+            arr[u] += 1
+            arr[v] += 1 
+
+        arr.sort()
+        res = 0
+        value = 1
+        for num in arr:
+            res += num * value
+            value += 1
+        
+        return res
+
+''' time complexity : O(nlogn + E)        in the worst case E = n^2 
+    space complexity : O(n)
+'''
