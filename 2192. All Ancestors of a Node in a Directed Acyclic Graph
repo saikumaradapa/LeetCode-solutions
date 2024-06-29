@@ -1,0 +1,29 @@
+class Solution:
+    def dfs(self, node, visited, anc, adj):
+        if node not in visited:
+            visited.add(node)
+
+            for adjNode in adj[node]:
+                if adjNode not in visited:
+                    anc.append(adjNode)
+                    self.dfs(adjNode, visited, anc, adj)
+        
+            
+
+
+    def getAncestors(self, n: int, edges: List[List[int]]) -> List[List[int]]:
+        res = []
+        adj = [[] for _ in range(n)]
+        for u, v in edges:
+            adj[v].append(u)        
+
+        for i in range(n):
+            anc = []
+            visited = set()
+            self.dfs(i, visited, anc, adj)
+            res.append(sorted(anc))
+        return res
+
+''' time complexity : O(n^2 +n∗nlogn)=O(n ^2 logn)
+    space complexity : O(n^2)
+'''
