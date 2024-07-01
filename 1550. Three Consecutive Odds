@@ -1,0 +1,32 @@
+class Solution:
+    def threeConsecutiveOdds(self, arr: List[int]) -> bool:
+        cnt = 0
+        for num in arr:
+            if num & 1 :
+                cnt += 1
+            else:
+                cnt = 0 
+            
+            if cnt == 3:
+                return True 
+        return False 
+
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
+
+
+########################################################################################################################################################################################
+
+
+class Solution:
+    def threeConsecutiveOdds(self, arr: List[int]) -> bool:
+        for i in range(1, len(arr)-1):
+            if (arr[i-1] & 1) and  (arr[i] & 1) and (arr[i+1] & 1):
+                return True 
+        
+        return False 
+
+''' time complexity : O(n * 3)
+    space complexity : O(1)
+'''
