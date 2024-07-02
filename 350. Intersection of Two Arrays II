@@ -43,3 +43,26 @@ def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
                 for j in range(dict2[i]):
                     list1.append(i)
     return list1
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        cnt1 = [0] * 1001
+        cnt2 = [0] * 1001
+
+        for i in nums1:
+            cnt1[i] += 1
+        
+        for i in nums2:
+            cnt2[i] += 1
+        
+        res = []
+        for i in range(1001):
+            res.extend([i] * min(cnt1[i], cnt2[i]))
+
+        return res
+
+''' time complexity : O(n)        
+    space complexity : O(n)  n = 1001
+'''
