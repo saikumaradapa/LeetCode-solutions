@@ -1,0 +1,25 @@
+Problem link : https://leetcode.com/problems/merge-nodes-in-between-zeros/description/?envType=daily-question&envId=2024-07-04
+
+class Solution:
+    def mergeNodes(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev = curr = head 
+        currSum = 0 
+
+        curr = curr.next 
+        while curr:
+            if curr.val == 0:
+                prev.val = currSum 
+                prev.next = curr
+                currSum = 0 
+                tail = prev 
+                prev = curr 
+            else:
+                currSum += curr.val 
+            curr = curr.next 
+
+        tail.next = None 
+        return head 
+
+''' time complexity : O(n)    
+    space complexity : O(1)
+'''
