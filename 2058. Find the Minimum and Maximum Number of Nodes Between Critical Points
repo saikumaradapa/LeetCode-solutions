@@ -1,0 +1,38 @@
+Problem link : https://leetcode.com/problems/find-the-minimum-and-maximum-number-of-nodes-between-critical-points/?envType=daily-question&envId=2024-07-05
+
+
+class Solution:
+    def isCritical(self, prev, curr, nxt):
+        return (prev.val < curr.val > nxt.val or prev.val > curr.val < nxt.val)
+
+    def nodesBetweenCriticalPoints(self, head: Optional[ListNode]) -> List[int]:
+        first_ct_idx = 0
+        prev_ct_idx = 0 
+
+        prev, curr = head, head.next 
+        nxt = curr.next 
+
+        min_dist, max_dist = float('inf'), -1
+        curr_idx = 1
+
+        while nxt:
+            if self.isCritical(prev, curr, nxt):
+                if first_ct_idx:
+                    max_dist = curr_idx - first_ct_idx 
+                    min_dist = min(min_dist, curr_idx - prev_ct_idx)
+                else:
+                    first_ct_idx = curr_idx 
+                
+                prev_ct_idx = curr_idx 
+            
+            prev, curr, nxt = curr, curr.next, nxt.next 
+            curr_idx += 1
+        
+        if min_dist == float('inf'):
+            min_dist = -1
+
+        return [min_dist, max_dist]
+
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
