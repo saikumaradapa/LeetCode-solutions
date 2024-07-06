@@ -1,0 +1,8 @@
+Problem link : https://leetcode.com/problems/pass-the-pillow/?envType=daily-question&envId=2024-07-06
+
+class Solution:
+    def passThePillow(self, n: int, time: int) -> int:
+          
+        if (time // (n-1)) & 1 :
+            return n - (time % (n-1)) 
+        return (time %(n-1)) + 1
