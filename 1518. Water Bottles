@@ -1,0 +1,19 @@
+Problem link : https://leetcode.com/problems/water-bottles/description/?envType=daily-question&envId=2024-07-07
+
+class Solution:
+    def numWaterBottles(self, numBottles: int, numExchange: int) -> int:
+        res = 0
+        empty = 0
+
+
+        while numBottles or empty >= numExchange :
+            res += numBottles
+            empty += numBottles
+            numBottles = empty // numExchange
+            empty = empty % numExchange
+        
+        return res 
+
+''' time complexity : O(logN) with Base numExchange
+    space complexity : O(1)
+'''
