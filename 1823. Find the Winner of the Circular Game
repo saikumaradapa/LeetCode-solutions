@@ -1,11 +1,33 @@
+Problem Link : https://leetcode.com/problems/find-the-winner-of-the-circular-game/?envType=daily-question&envId=2024-07-08
+
 class Solution:
     def findTheWinner(self, n: int, k: int) -> int:
-        circle: list[int] = [num for num in range(1, n + 1, 1)]
-        cur_ind: int = 0
+        q = deque(range(1, n+1))
 
-        while len(circle) != 1:
-            next_to_remove: int = (cur_ind + k - 1) % len(circle)
-            circle.pop(next_to_remove)
-            cur_ind = next_to_remove
+        while len(q) > 1:
+            for i in range(k-1):
+                q.append(q.popleft())
+            q.popleft()
+        return q[0]
 
-        return circle[0]
+''' time complexity : O(n * k)        
+    space complexity : O(n)
+'''
+
+####################################################################################################################################################################################
+
+class Solution:
+    def findTheWinner(self, n: int, k: int) -> int:
+        start = 0 
+        arr = [i for i in range(1, n + 1)]
+
+        while len(arr) > 1:
+            n = len(arr)
+            nextStart = (start + k) % n 
+            arr.pop(nextStart - 1)
+            start = (nextStart - 1) % n
+        return arr[0]
+
+''' time complexity : O(n ^ 2)
+    space complexity : O(n)
+'''
