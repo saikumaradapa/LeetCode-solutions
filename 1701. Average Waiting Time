@@ -1,0 +1,20 @@
+Problem Link : https://leetcode.com/problems/average-waiting-time/?envType=daily-question&envId=2024-07-09
+
+class Solution:
+    def averageWaitingTime(self, customers: List[List[int]]) -> float:
+        startTime = customers[0][0]
+        totalWaitTime = 0 
+
+        for arr, time in customers:
+            if startTime < arr:
+                startTime = arr
+            
+            endTime = startTime + time 
+            totalWaitTime += endTime - arr
+
+            startTime = endTime 
+        return (totalWaitTime  / len(customers))
+
+''' time complexity : O(n)        
+    space complexity : O(1)
+'''
