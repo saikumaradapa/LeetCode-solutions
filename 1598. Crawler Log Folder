@@ -1,0 +1,19 @@
+Problem Link : https://leetcode.com/problems/crawler-log-folder/description/?envType=daily-question&envId=2024-07-10
+
+class Solution:
+    def minOperations(self, logs: List[str]) -> int:
+        level = 0
+
+        for log in logs:
+            if log == "./":
+                continue 
+            elif log == "../":
+                level = max(0, level-1)
+            else:
+                level += 1 
+        
+        return level 
+
+''' time complexity : O(n)        
+    space complexity : O(1)
+'''
