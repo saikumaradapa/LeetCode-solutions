@@ -1,0 +1,55 @@
+Problem Link : https://leetcode.com/problems/number-of-atoms/?envType=daily-question&envId=2024-07-14
+
+# Stack of HasMaps 
+
+class Solution:
+    def countOfAtoms(self, formula: str) -> str:
+        n = len(formula)
+        stack = [defaultdict(int)]
+
+        i = 0
+        while i < n:
+            if formula[i] == "(":
+                stack.append(defaultdict(int))
+
+            elif formula[i] == ")":
+                curr_map = stack.pop()
+
+                count = ""
+                while i + 1 < n and formula[i+1].isdigit():
+                    count += formula[i+1]
+                    i += 1
+                
+                count = 1 if not count else int(count)                
+
+                for element in curr_map:
+                    stack[-1][element] += curr_map[element] * count 
+
+                prev_map = stack[-1]
+
+            
+            else:
+                element = formula[i]
+                count = ""
+                if i + 1 < n and formula[i+1].islower():
+                    element = formula[i:i+2]
+                    i += 1 
+                
+                while i + 1 < n and formula[i+1].isdigit():
+                    count += formula[i+1]
+                    i += 1
+                
+                count = 1 if not count else int(count)
+                stack[-1][element] += count
+            i += 1
+            
+        res = ""
+        curr_map = stack[-1]
+        for element in sorted(curr_map.keys()):
+            count = "" if curr_map[element] == 1 else curr_map[element]
+            res += element + str(count) 
+        return res
+
+
+Time Complexity: O(n + k log k), where n is the length of the formula and k is the number of unique elements.
+Space Complexity: O(n), where n is the length of the formula.
