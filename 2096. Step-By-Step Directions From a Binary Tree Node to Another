@@ -1,0 +1,50 @@
+Problem Link : https://leetcode.com/problems/step-by-step-directions-from-a-binary-tree-node-to-another/?envType=daily-question&envId=2024-07-16
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+        
+    def findPath(self, node, path, dest):
+        if not node: return ""
+
+        if node.val == dest:
+            return path
+        
+        path.append('L')
+        res = self.findPath(node.left, path, dest)
+        if res: return path
+
+        path.pop()
+        path.append('R')
+        res = self.findPath(node.right, path, dest)
+        if res: return path 
+        path.pop()
+
+        return ""
+        
+
+
+    def getDirections(self, root: Optional[TreeNode], startValue: int, destValue: int) -> str:
+
+        start_path = self.findPath(root, [], startValue)
+        dest_path = self.findPath(root, [], destValue)
+
+        # print(start_path, dest_path)
+
+        i = 0
+        while i < min(len(start_path), len(dest_path)):
+            if start_path[i] != dest_path[i]:
+                break 
+            i += 1
+
+        res = ['U'] * len(start_path[i:]) + dest_path[i:]
+        return "".join(res)
+
+''' time complexity : O(n)
+    space complexity : O(n)
+'''
