@@ -1,0 +1,74 @@
+Problem Link : https://leetcode.com/problems/number-of-good-leaf-nodes-pairs/description/?envType=daily-question&envId=2024-07-18
+
+class Solution:
+    def helper(self, node, res, distance):
+        if not node:
+            return defaultdict(int)            
+        
+        if not node.left and not node.right:
+            count = defaultdict(int)
+            count[1] = 1
+            return count 
+        
+
+        left = self.helper(node.left, res, distance)
+        right = self.helper(node.right, res, distance)
+
+
+        for i in left:
+            for j in right:
+                if i + j <= distance:
+                    res[0] += left[i] * right[j]
+        
+        all_dist = defaultdict(int)
+        for dist in left:
+            all_dist[dist+1] = left[dist]
+        for dist in right:
+            all_dist[dist+1] += right[dist]
+        
+        return all_dist
+        
+
+    def countPairs(self, root: TreeNode, distance: int) -> int:
+        res = [0]
+        self.helper(root, res, distance)
+        return res[0]
+
+''' time complexity : O(n * d^2)        
+    space complexity : O(n)
+'''
+
+############################################################################################################################################################################################################
+
+
+class Solution:
+    def helper(self, node, res, distance):
+        if not node:
+            return []
+        
+        if not node.left and not node.right:
+            return [1]
+        
+
+        left = self.helper(node.left, res, distance)
+        right = self.helper(node.right, res, distance)
+
+
+        for i in left:
+            for j in right:
+                if i + j <= distance:
+                    res[0] += 1
+        
+        curr = left + right 
+
+        return [x+1 for x in curr]
+        
+
+    def countPairs(self, root: TreeNode, distance: int) -> int:
+        res = [0]
+        self.helper(root, res, distance)
+        return res[0]
+
+''' time complexity : O(n ^ 3)        
+    space complexity : O(n)
+'''
