@@ -1,0 +1,54 @@
+Problem Link : https://leetcode.com/problems/lucky-numbers-in-a-matrix/description/?envType=daily-question&envId=2024-07-19
+
+class Solution:
+    def luckyNumbers (self, matrix: List[List[int]]) -> List[int]:
+        n, m = len(matrix), len(matrix[0])
+        col = [-1] * m 
+        row = [float('inf')] * n
+
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                col[j] = max(col[j], matrix[i][j])
+                row[i] = min(row[i], matrix[i][j])        
+
+        res = []
+
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if col[j] <= matrix[i][j] and row[i] >= matrix[i][j]:
+                    res.append(matrix[i][j])        
+        
+        return res
+
+''' time complexity : O(n * m)        
+    space complexity : O(n + m)
+'''
+
+####################################################################################################################################################################################
+
+class Solution:
+    def luckyNumbers (self, matrix: List[List[int]]) -> List[int]:
+        ROWS, COLS = len(matrix), len(matrix[0])
+
+        max_of_row_min = float('-inf')
+        
+        for r in range(ROWS):
+            row_min = min(matrix[r])
+
+            max_of_row_min = max(max_of_row_min, row_min)
+        
+        for c in range(COLS):
+            col_max = matrix[0][c]
+
+            for r in range(ROWS):
+                col_max = max(col_max, matrix[r][c])
+            
+            if col_max == max_of_row_min:
+                return [col_max]
+        
+        return []
+
+
+''' time complexity : O(n * m)         Greedy solution with proof by contradiction 
+    space complexity : O(1)
+'''
