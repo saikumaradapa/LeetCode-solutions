@@ -1,0 +1,63 @@
+Problem Link : https://leetcode.com/problems/remove-max-number-of-edges-to-keep-graph-fully-traversable/description/
+
+
+class DisjointSet:
+    def __init__(self, n):
+        self.parent = [i for i in range(n)]
+        self.size = [1 for i in range(n)]
+        self.count = n 
+    
+    def findParent(self, node):
+        if self.parent[node] == node:
+            return node 
+        self.parent[node] = self.findParent(self.parent[node])
+        return self.parent[node]
+    
+    def unionBySize(self, u, v):
+        ulp_u = self.findParent(u)
+        ulp_v = self.findParent(v)
+        
+        if ulp_u == ulp_v:
+            return False 
+        
+        if self.size[ulp_u] <= self.size[ulp_v]:
+            self.parent[ulp_u] = ulp_v 
+            self.size[ulp_v] += self.size[ulp_u]
+        else:
+            self.parent[ulp_v] = ulp_u 
+            self.size[ulp_u] += self.size[ulp_v]
+            
+        self.count -= 1
+        return True 
+
+
+class Solution:
+    def maxNumEdgesToRemove(self, n: int, edges: List[List[int]]) -> int:
+        res = 0 
+        ds1 = DisjointSet(n+1)
+        ds2 = DisjointSet(n+1)
+
+        ds1.unionBySize(0, 1)
+        ds2.unionBySize(0, 1)
+       
+
+
+        for etype, u, v in edges:
+            if  etype == 3:
+                res += (ds1.unionBySize(u, v) and ds2.unionBySize(u, v)) 
+        
+        for etype, u, v in edges:
+            if etype == 1:
+                res += ds1.unionBySize(u, v)
+            elif etype == 2:
+                res += ds2.unionBySize(u, v)
+
+        if ds1.count == 1 and ds2.count == 1:
+            return len(edges) - res 
+
+        return -1
+
+
+''' time complexity : O(E * 4 * alpha)
+    space complexity : O(n)
+'''
