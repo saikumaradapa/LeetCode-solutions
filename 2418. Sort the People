@@ -1,0 +1,35 @@
+Problem Link : https://leetcode.com/problems/sort-the-people/description/?envType=daily-question&envId=2024-07-22
+
+
+class Solution:
+    def sortPeople(self, names: List[str], heights: List[int]) -> List[str]:
+        heap = [(-height, name) for name, height in zip(names, heights)]
+        heapify(heap)
+
+        res = []
+        while heap:
+            res.append(heappop(heap)[1])
+        
+        return res
+
+''' time complexity : O(n logn) 
+    space complexity : O(n)
+''' 
+
+############################################################################################################################################################################
+
+class Solution:
+    def sortPeople(self, names: List[str], heights: List[int]) -> List[str]:
+        height_to_name = dict()
+        for h, n in zip(heights, names):
+            height_to_name[h] = n 
+
+        res = []
+        for num in reversed(sorted(height_to_name)):
+            res.append(height_to_name[num])
+        
+        return res
+
+''' time complexity : O(n logn) 
+    space complexity : O(n)
+''' 
