@@ -1,0 +1,35 @@
+Problem Link : https://leetcode.com/problems/sort-array-by-increasing-frequency/description/?envType=daily-question&envId=2024-07-23
+
+
+class Solution:
+    def frequencySort(self, nums: List[int]) -> List[int]:
+        freq = Counter(nums)        
+        nums.sort(key = lambda n: (freq[n], -n))
+        return nums
+
+''' time complexity : O(n logn)        
+    space complexity : O(n)
+'''
+
+############################################################################################################################################################################################################
+
+class Solution:
+    def frequencySort(self, nums: List[int]) -> List[int]:
+        freq = defaultdict(int)
+        for num in nums:
+            freq[num] += 1 
+        
+        heap = [(freq[num], -num) for num in freq]
+        heapify(heap)
+
+        res = []
+        while heap:
+            f, num = heappop(heap)
+            res.extend([-num] * f)
+        return res 
+
+
+''' time complexity : O(n logn)        
+    space complexity : O(n)
+'''
+############################################################################################################################################################################################################
