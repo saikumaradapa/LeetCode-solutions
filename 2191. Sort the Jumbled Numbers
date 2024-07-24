@@ -1,0 +1,24 @@
+class Solution:
+    def sortJumbled(self, mapping: List[int], nums: List[int]) -> List[int]:
+        nums_mapped = []
+        for idx, num in enumerate(nums):
+            newNum = 0
+            if num == 0:
+                newNum = mapping[num]
+        
+            base = 1
+            while num:
+                digit = num % 10 
+                num = num // 10 
+
+                newNum += base * mapping[digit]
+                base *= 10
+            
+            nums_mapped.append((newNum, idx))
+        nums_mapped.sort()
+
+        return [nums[idx] for num, idx in nums_mapped]
+
+''' time complexity : O(n logn)        
+    space complexity : O(n)
+'''
