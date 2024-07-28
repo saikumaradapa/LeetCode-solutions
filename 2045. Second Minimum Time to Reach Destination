@@ -1,0 +1,37 @@
+Problem Link : https://leetcode.com/problems/second-minimum-time-to-reach-destination/description/?envType=daily-question&envId=2024-07-28
+
+class Solution:
+    def secondMinimum(self, n: int, edges: List[List[int]], time: int, change: int) -> int:
+        adj = defaultdict(list)
+        for u, v in edges:
+            adj[u].append(v)
+            adj[v].append(u)
+        
+        q = deque([1])
+        curr_time = 0
+        res = -1 
+        visit_times = defaultdict(list)
+        
+        while q:
+            levels = len(q)
+            for level in range(levels):
+                node = q.popleft()
+
+                if node == n:
+                    if res != -1:
+                        return curr_time 
+                    res = curr_time
+
+                for nei in adj[node]:
+                    nei_times = visit_times[nei]
+                    if len(nei_times) == 0 or (len(nei_times) == 1 and nei_times[0] != curr_time):
+                        q.append(nei)
+                        visit_times[nei].append(curr_time)
+                                                
+            if (curr_time // change) % 2 == 1:
+                curr_time +=  change - (curr_time % change)
+            curr_time += time 
+
+''' time complexity : O(n + e)
+    space complexity : O(n)
+'''
