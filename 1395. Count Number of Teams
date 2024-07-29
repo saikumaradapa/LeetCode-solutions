@@ -1,0 +1,29 @@
+Problem Link : https://leetcode.com/problems/count-number-of-teams/description/?envType=daily-question&envId=2024-07-29
+
+
+class Solution:
+    def numTeams(self, rating: List[int]) -> int:
+        n = len(rating)
+        res = 0
+        
+        for mid in range(1, n-1):
+            left_smaller = 0
+            right_larger = 0 
+
+            i, j = mid-1, mid+1
+            
+            for i in range(mid):
+                if rating[i] < rating[mid]:
+                    left_smaller += 1
+            
+            for j in range(mid+1, n):
+                if rating[mid] < rating[j]:
+                    right_larger += 1
+            
+            res += left_smaller * right_larger
+            res += (mid - left_smaller) * (n - mid - 1 - right_larger)
+        return res
+
+''' time complexity : O(n ^ 2)
+    space complexity : O(1)
+'''
