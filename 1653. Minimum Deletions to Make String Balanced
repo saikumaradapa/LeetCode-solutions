@@ -1,0 +1,84 @@
+Problem Link : https://leetcode.com/problems/minimum-deletions-to-make-string-balanced/description/?envType=daily-question&envId=2024-07-30
+
+
+
+
+class Solution:
+    def minimumDeletions(self, s: str) -> int:
+        char_stack = []
+        delete_count = 0
+
+        # Iterate through each character in the string
+        for char in s:
+            # If stack is not empty, top of stack is 'b',
+            # and current char is 'a'
+            if char_stack and char_stack[-1] == "b" and char == "a":
+                char_stack.pop()  # Remove 'b' from stack
+                delete_count += 1  # Increment deletion count
+            else:
+                char_stack.append(char)  # Append current character to stack
+
+        return delete_count
+         
+
+''' time complexity : O(n)         
+    space complexity : O(n)
+'''
+
+##############################################################################################################################################################################################################################
+
+class Solution:
+    def minimumDeletions(self, s: str) -> int:
+        n = len(s)
+        
+        total_a_count = s.count('a')
+
+        b_count_left = 0 
+        a_count_left = 0
+        a_count_right = 0 
+        res = n
+
+        for i in range(n):
+            if s[i] == 'a':
+                a_count_left += 1 
+            a_count_right = total_a_count - a_count_left
+
+            res = min(res, a_count_right + b_count_left)
+
+            if s[i] == 'b':
+                b_count_left += 1 
+        
+        return res
+         
+
+''' time complexity : O(n)         
+    space complexity : O(1)
+'''
+
+##############################################################################################################################################################################################################################
+
+class Solution:
+    def minimumDeletions(self, s: str) -> int:
+        arr = [[0, 0] for _ in range(len(s))] # [b's before, a's after]
+        n = len(s)
+
+        currb = 0
+        curra = 0 
+        for i in range(len(s)):
+            arr[i][0] = currb
+            if s[i] == 'b':
+                currb += 1
+            
+            arr[n-i-1][1] = curra
+            if s[n-i-1] == 'a':
+                curra += 1 
+        
+        res = n 
+        for i in range(n):
+            res = min(res, arr[i][0] + arr[i][1])
+        return res
+
+''' time complexity : O(n)         
+    space complexity : O(n)
+'''
+
