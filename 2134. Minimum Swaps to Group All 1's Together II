@@ -1,0 +1,25 @@
+Problem Link : https://leetcode.com/problems/minimum-swaps-to-group-all-1s-together-ii/description/?envType=daily-question&envId=2024-08-02
+
+
+class Solution:
+    def minSwaps(self, nums: List[int]) -> int:
+        N = len(nums)
+        total_ones_count = nums.count(1)
+        window_ones_count, max_window_ones_count = 0, 0
+        l = 0 
+        
+        for r in range(2 * N):
+            if nums[r % N]:
+                window_ones_count += 1
+
+            if r - l + 1 > total_ones_count:
+                window_ones_count -= nums[l % N]
+                l += 1
+        
+            max_window_ones_count = max(max_window_ones_count, window_ones_count)
+
+        return total_ones_count - max_window_ones_count 
+
+''' time complexity : O(2N)        
+    space complexity : O(1)
+'''
