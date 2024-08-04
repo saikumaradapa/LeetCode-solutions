@@ -1,0 +1,56 @@
+Problem Link : https://leetcode.com/problems/range-sum-of-sorted-subarray-sums/description/?envType=daily-question&envId=2024-08-04
+
+
+class Solution:
+    def rangeSum(self, nums: List[int], n: int, left: int, right: int) -> int:
+        MOD = 1000000007
+        minHeap = [(n, i) for i, n in enumerate(nums)]
+        heapq.heapify(minHeap)
+        res = 0 
+
+        for i in range(right):
+            num, index = heappop(minHeap)
+
+            if i >= left - 1:
+                res = (res + num) % MOD
+            
+            if index + 1 < n:
+                next_pair = (num + nums[index+1], index+1)
+                heapq.heappush(minHeap, next_pair)
+        
+        return res
+
+
+''' time complexity : O(n^2 log n)
+    space complexity : O(n)             space optimised
+
+
+
+
+    sorted sub_arr_sum 
+    [1, 2, 4, 6] -- 3rd min is 1+2 might not 4
+
+    [          [left,.. right]
+    [ #, #, #, [1, 2, 3......]]
+'''
+
+
+
+
+############################################################################################################################################################################################################
+
+class Solution:
+    def rangeSum(self, nums: List[int], n: int, left: int, right: int) -> int:
+        res = []
+        for i in range(n):
+            currSum = 0 
+            for j in range(i, n):
+                currSum += nums[j]
+                res.append(currSum)        
+        res.sort()
+
+        return sum(res[left -1 : right]) % 1000000007
+
+''' time complexity : O(n^2 log n)
+    space complexity : O(n^2)  
+'''
