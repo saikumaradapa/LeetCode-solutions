@@ -1,0 +1,21 @@
+Problem Link : https://leetcode.com/problems/kth-distinct-string-in-an-array/description/?envType=daily-question&envId=2024-08-05
+
+
+class Solution:
+    def kthDistinct(self, arr: List[str], k: int) -> str:
+        hasMap = defaultdict(int)
+        for s in arr:
+            hasMap[s] += 1
+
+        for s in arr:
+            if hasMap[s] > 1:
+                continue             
+            if k == 1:
+                return s 
+            k -= 1
+
+        return ""
+
+''' time complexity : O(n)        
+    space complexity : O(n)
+'''
