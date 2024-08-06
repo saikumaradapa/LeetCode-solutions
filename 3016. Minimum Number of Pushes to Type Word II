@@ -1,0 +1,19 @@
+Problem Link : https://leetcode.com/problems/minimum-number-of-pushes-to-type-word-ii/description/?envType=daily-question&envId=2024-08-06
+
+class Solution:
+    def minimumPushes(self, word: str) -> int:
+        counts = [0] * 26 
+        for ch in word:
+            counts[ord(ch)-ord('a')] += 1 
+        
+        counts.sort(reverse=True)
+        res = 0 
+        for idx, val in enumerate(counts):
+            if val == 0:
+                return res 
+            res += val * (1 + (idx // 8))
+        return res
+
+''' time complexity : O(n)
+    space complexity : O(26)
+'''
