@@ -1,0 +1,68 @@
+Problem Link : https://leetcode.com/problems/find-eventual-safe-states/description/
+
+
+class Solution:
+    def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
+        N = len(graph)
+        adj = defaultdict(list)
+        indegree = [0] * N 
+        
+        for i in range(N):
+            for j in graph[i]:
+                adj[j].append(i)
+                indegree[i] += 1
+        
+        q = deque()
+        for i in range(N):
+            if indegree[i] == 0:
+                q.append(i)
+        
+        while q:
+            node = q.popleft()
+            for adjNode in adj[node]:
+                indegree[adjNode] -= 1
+                if indegree[adjNode] == 0:
+                    q.append(adjNode)
+        
+        res = [node for node in range(N) if indegree[node] == 0]        
+        return res
+
+            
+''' time complexity : O(V + E)   solution with BFS Kahn's algorithm
+    space complexity : O(V)
+'''
+
+
+##########################################################################################################################################################################################
+
+# TLE 
+
+
+class Solution:  
+    def dfs(self, visited, path, adj, node):
+        visited[node] = 1
+        path[node] = 1 
+        for adjNode in adj[node]:
+            if not visited[adjNode]:
+                if self.dfs(visited, path, adj, adjNode):
+                    return True 
+            elif path[adjNode]:
+                return True 
+        
+        path[node] = 0 
+    
+    def eventualSafeNodes(self, V : int, adj : List[List[int]]) -> List[int]:
+        visited = [0] * V
+        path = [0] * V 
+        
+        for i in range(V):
+            if not visited[i]:
+                self.dfs(visited, path, adj, i)
+        
+        res = [node for node in range(V) if path[node] == 0]
+        return res
+
+
+''' time complexity : O(V + 2E)
+    space complexity : O(V)
+'''
