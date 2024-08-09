@@ -1,0 +1,41 @@
+Problem Link : https://leetcode.com/problems/magic-squares-in-grid/description/?envType=daily-question&envId=2024-08-09
+
+
+class Solution:
+    def numMagicSquaresInside(self, grid: List[List[int]]) -> int:
+        N, M = len(grid), len(grid[0])
+        res = 0 
+
+        def isMagic(r, c):
+            arr = [0] * 9
+            rowSum = [0] * 3 
+            colSum = [0] * 3 
+            digSum = [0] * 2 
+
+            for x in range(3):
+                for y in range(3):
+                    rowSum[x] += grid[r+x][c+y]
+                    colSum[y] += grid[r+x][c+y]
+                    if x == y:
+                        digSum[0] += grid[r+x][c+y]
+                    if x + y == 2:
+                        digSum[1] += grid[r+x][c+y]
+
+                    if not (0 < grid[r+x][c+y] < 10)  or arr[grid[r+x][c+y] -1] != 0:
+                        return False 
+                    arr[grid[r+x][c+y] -1] += 1
+            # print(rowSum, colSum, digSum, arr)
+
+            if sum(arr) == 9 and rowSum[0] == rowSum[1] == rowSum[2] == colSum[0] == colSum[1] == colSum[2] == digSum[0] == digSum[1]:
+                return True 
+            return False 
+
+        for i in range(N-2):
+            for j in range(M-2):
+                if isMagic(i, j):
+                    res += 1
+        return res 
+
+''' time complexity : O(n * m)
+    space complexity : O(1)
+'''
