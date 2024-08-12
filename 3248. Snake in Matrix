@@ -1,0 +1,17 @@
+class Solution:
+    def finalPositionOfSnake(self, n: int, commands: List[str]) -> int:
+        r, c = 0, 0 
+        for command in commands:
+            if command == "UP": 
+                r -= 1
+            if command == "RIGHT":
+                c += 1
+            if command == "DOWN":
+                r += 1
+            if command == "LEFT":
+                c -= 1
+        return (r * n) + c 
+
+''' time complexity : O(n * m)
+    space complexity : O(1)
+'''
