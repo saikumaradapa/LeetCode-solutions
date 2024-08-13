@@ -1,0 +1,37 @@
+Problem Link : https://leetcode.com/problems/combination-sum-ii/description/?envType=daily-question&envId=2024-08-13
+
+
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        candidates.sort()
+        currArr = []
+        res = []
+
+        def dfs(pos, currSum):
+            if currSum == target:
+                res.append(currArr[:])
+                return 
+
+            if pos >= len(candidates) or currSum > target:
+                return 
+                        
+            currSum += candidates[pos]
+            currArr.append(candidates[pos])
+            dfs(pos+1, currSum)
+
+            currSum -= candidates[pos]
+            currArr.pop()
+
+            while pos + 1 < len(candidates) and candidates[pos] == candidates[pos+1]:
+                pos += 1
+            
+            dfs(pos+1, currSum)
+
+
+
+        dfs(0, 0)
+        return res
+
+''' time complexity : O(2^n)
+    space complexity : O(n)
+'''
