@@ -1,0 +1,28 @@
+Problem Link : https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/?envType=daily-question&envId=2024-08-14
+
+
+class Solution:
+    def smallestDistancePair(self, nums: List[int], k: int) -> int:
+        nums.sort()
+        def numPairs(x):
+            l = 0 
+            res = 0 
+            for r in range(len(nums)):
+                while l < r and nums[r]-nums[l] > x:
+                    l += 1
+                res += r - l 
+            return res
+
+        left, right = 0, max(nums)
+        while left < right :
+            mid = (left + right) >> 1 
+            if numPairs(mid) >= k:
+                right = mid 
+            else:
+                left = mid + 1 
+            
+        return left
+
+''' time complexity : O(n log(max(nums)))        
+    space complexity : O(1)
+'''
