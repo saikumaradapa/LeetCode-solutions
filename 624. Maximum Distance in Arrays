@@ -1,0 +1,21 @@
+Problem Link : https://leetcode.com/problems/maximum-distance-in-arrays/description/?envType=daily-question&envId=2024-08-16
+
+
+class Solution:
+    def maxDistance(self, a: List[List[int]]) -> int:
+        minSoFar = a[0][0]
+        maxSoFar = a[0][-1]
+
+        res = float('-inf')
+        for i in range(1, len(a)):
+            temp1 = abs(a[i][-1] - minSoFar)
+            temp2 = abs(maxSoFar - a[i][0])
+            res = max(res, temp1, temp2)
+            minSoFar = min(minSoFar, a[i][0])
+            maxSoFar = max(maxSoFar, a[i][-1])      
+        return res 
+
+
+''' time complexity : O(n)
+    space complexity : O(1)
+'''
