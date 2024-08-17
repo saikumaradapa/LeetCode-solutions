@@ -1,0 +1,29 @@
+Problem Link : https://leetcode.com/problems/maximum-number-of-points-with-cost/description/?envType=daily-question&envId=2024-08-17
+
+
+class Solution:
+    def maxPoints(self, points: List[List[int]]) -> int:
+        N, M = len(points), len(points[0])
+        
+        row = points[0]
+        for r in range(1, N):
+            left, right = [0] * M, [0] * M
+            next_row = points[r].copy()
+
+            left[0] = row[0]
+            right[M-1] = row[M-1]
+
+            for c in range(1, M):
+                left[c] = max(row[c], left[c-1] - 1)
+            for c in range(M-2, -1, -1):
+                right[c] = max(row[c], right[c+1] - 1)
+            
+            for c in range(M):
+                next_row[c] += max(left[c], right[c])
+            
+            row = next_row 
+        return max(row)
+
+''' time complexity : O(n * m)
+    space complexity : O(m)
+'''
