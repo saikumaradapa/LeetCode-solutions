@@ -1,0 +1,26 @@
+Problem Link : https://leetcode.com/problems/ugly-number-ii/description/?envType=daily-question&envId=2024-08-18
+
+class Solution:
+    def nthUglyNumber(self, n: int) -> int:
+        minHeap = [1]
+
+        pp = (2, 3, 5)
+        visited = {1}
+
+        while minHeap:
+            val = heappop(minHeap)
+
+            if n == 1:
+                return val 
+            n -= 1
+
+            for p in pp:
+                if val * p not in visited:
+                    heappush(minHeap, val * p)     
+                    visited.add(val * p)
+
+        return -1
+
+''' time complexity : O(n logn)        
+    space complexity : O(n)
+'''
