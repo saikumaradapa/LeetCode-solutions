@@ -1,0 +1,63 @@
+Problem Link : https://leetcode.com/problems/2-keys-keyboard/description/?envType=daily-question&envId=2024-08-19
+
+
+class Solution:
+    def minSteps(self, n: int) -> int:
+        cache = {}
+        def dfs(count, paste):            
+            if count == n:
+                return 0             
+            if count > n:
+                return 1000   # possible max val 
+
+            if (count, paste) in cache:
+                return cache[(count, paste)]
+
+            # paste 
+            res1 = 1 + dfs(count + paste, paste)
+
+            # copy and paste
+            res2 = 2 + dfs(count + count, count)
+
+            cache[(count, paste)] = min(res1, res2)
+            return cache[(count, paste)]
+        
+        if n == 1:
+            return 0 
+        
+        return 1 + dfs(1, 1)
+
+
+''' time complexity : O(n^2)            O(n^2) possible unique states
+    space complexity : O(n^2)
+'''
+
+############################################################################################################################################################################################################
+
+class Solution:
+    def minSteps(self, n: int) -> int:
+
+        def dfs(count, paste):
+            if count == n:
+                return 0 
+            
+            if count > n:
+                return 1000   # possible max val 
+
+            # paste 
+            res1 = 1 + dfs(count + paste, paste)
+
+            # copy and paste
+            res2 = 2 + dfs(count + count, count)
+
+            return min(res1, res2)
+        
+        if n == 1:
+            return 0 
+        
+        return 1 + dfs(1, 1)
+
+
+''' time complexity : O(2 ^ n)            
+    space complexity : O(n)
+'''
