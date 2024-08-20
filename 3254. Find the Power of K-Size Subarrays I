@@ -1,0 +1,21 @@
+Problem Link : https://leetcode.com/problems/find-the-power-of-k-size-subarrays-i/description/
+
+
+class Solution:
+    def resultsArray(self, nums: List[int], k: int) -> List[int]:
+        n = len(nums)
+        res = []
+        for i in range(n - k + 1):
+            flag = True 
+            for j in range(i+1, i+k):
+                if nums[j-1] + 1 != nums[j]:
+                    res.append(-1)
+                    flag = False 
+                    break 
+            if flag:
+                res.append(nums[i+k-1])
+        return res
+                
+''' time complexity : O(n * k)                
+    space complexity : O(1)
+'''
