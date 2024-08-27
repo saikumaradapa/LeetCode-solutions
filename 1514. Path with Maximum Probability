@@ -1,0 +1,66 @@
+Problem Link : https://leetcode.com/problems/path-with-maximum-probability/description/?envType=daily-question&envId=2024-08-27
+
+
+class Solution:
+    def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start_node: int, end_node: int) -> float:
+        res = 0 
+        adj = defaultdict(list)
+        for i in range(len(edges)):
+            u, v = edges[i][0], edges[i][1]
+
+            adj[u].append((v, succProb[i]))
+            adj[v].append((u, succProb[i]))
+
+        probability = [0] * n 
+        probability[start_node] = 1
+        q = deque([(start_node, 1)])
+
+        while q:
+            node, prob = q.popleft()
+
+            for nei, nei_prob in adj[node]:
+                if prob * nei_prob > probability[nei]:
+                    q.append((nei, prob * nei_prob))
+                    probability[nei] = prob * nei_prob
+        
+        return probability[end_node]
+        
+''' time complexity : O(V + E)
+    space complexity : O(V + E)
+'''
+
+########################################################################################################################################################################################################################
+
+import heapq
+from collections import defaultdict
+from typing import List
+
+class Solution:
+    def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start_node: int, end_node: int) -> float:  
+        adj = defaultdict(list)
+        for i in range(len(edges)):
+            u, v = edges[i][0], edges[i][1]
+            adj[u].append((v, succProb[i]))
+            adj[v].append((u, succProb[i]))
+
+        probability = [0] * n
+        probability[start_node] = 1
+        max_heap = [(-1, start_node)]  # Use negative because heapq is a min-heap by default
+
+        while max_heap:
+            curr_prob, node = heapq.heappop(max_heap)
+            curr_prob = -curr_prob  # Convert back to positive
+
+            if node == end_node:
+                return curr_prob
+
+            for nei, nei_prob in adj[node]:
+                if curr_prob * nei_prob > probability[nei]:
+                    probability[nei] = curr_prob * nei_prob
+                    heapq.heappush(max_heap, (-probability[nei], nei))
+
+        return probability[end_node]
+
+''' time complexity : O((V+E)logV)
+    space complexity : O(V + E)
+'''    
