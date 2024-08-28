@@ -1,0 +1,32 @@
+Problem Link : https://leetcode.com/problems/count-sub-islands/description/?envType=daily-question&envId=2024-08-28
+
+class Solution:
+    def countSubIslands(self, grid1: List[List[int]], grid2: List[List[int]]) -> int:
+        n, m = len(grid1), len(grid1[0])        
+        visited = [[0] * m for _ in range(n)]
+        cnt = 0 
+
+        def dfs(r, c):
+            if r < 0 or c < 0 or r == n or c == m or visited[r][c] or not grid2[r][c]:
+                return True 
+
+            visited[r][c] = 1 
+            flag = True 
+            if not grid1[r][c]:
+                flag = False                
+            
+            for dr, dc in [(0, -1), (-1, 0), (0, 1), (1, 0)]:
+                flag =  dfs(r + dr, c + dc) and flag
+
+            return flag                    
+
+        for i in range(n):
+            for j in range(m):
+                if grid1[i][j] and grid2[i][j] and not visited[i][j] and dfs(i, j):
+                    cnt += 1 
+        return cnt 
+
+
+''' time complexity : O(n * m)
+    space complexity : O(n * m)
+'''
