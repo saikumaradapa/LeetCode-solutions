@@ -1,0 +1,55 @@
+Problem Link : https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/?envType=daily-question&envId=2024-08-29
+
+
+class DisjointSet:
+    def __init__(self, n):
+        self.parent = [i for i in range(n)]
+        self.size = [1] * n 
+        self.count = n
+
+    def findPar(self, node):
+        if self.parent[node] == node:
+            return node 
+        self.parent[node] = self.findPar(self.parent[node])
+        return self.parent[node]
+    
+    def union(self, u, v):
+        ulp_u, ulp_v = self.findPar(u), self.findPar(v)
+        if ulp_u == ulp_v:
+            return False 
+        if self.size[ulp_u] >= self.size[ulp_v]:
+            self.parent[ulp_v] = ulp_u
+            self.size[ulp_u] += self.size[ulp_v]
+        else:
+            self.parent[ulp_u] = ulp_v 
+            self.size[ulp_v] += self.size[ulp_u]
+        self.count -= 1
+        return True 
+
+class Solution:
+    def removeStones(self, stones: List[List[int]]) -> int:
+        n, m = 0, 0
+        for u, v in stones:
+            n = max(n, u)
+            m = max(m, v)
+        
+        ds = DisjointSet(n + m + 2)
+
+        stoneNodes = set()
+        for u, v in stones:
+            ds.union(u, n + v + 1)
+            stoneNodes.add(u)
+            stoneNodes.add(n + v + 1)
+        
+        cnt = 0 
+        for stone in stoneNodes:
+            if ds.findPar(stone) == stone:
+                cnt += 1 
+
+        # print(ds.size, ds.parent, ds.count, cnt)
+
+        return len(stones) - cnt
+
+''' time Complexity: O(n + m + k)
+    space Complexity: O(n + m + k)
+'''
