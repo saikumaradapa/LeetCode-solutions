@@ -1,0 +1,39 @@
+Problem Link : https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/description/
+               https://www.geeksforgeeks.org/problems/number-of-ways-to-arrive-at-destination/1
+
+from collections import deque
+class Solution:
+    def countPaths(self, n: int, roads: List[List[int]]) -> int:
+        adj = defaultdict(list)
+        for u, v, w in roads:
+            adj[u].append((v, w))
+            adj[v].append((u, w))
+        
+        mod = 10 ** 9 + 7
+        res = [0] * n 
+        time = [float('inf')] * n 
+        res[0] = 1 
+        time[0] = 0
+
+        heap = [(0, 0)]    # (time, node)
+        while heap:
+            t, node = heappop(heap)
+
+            for nei in adj[node]:
+                nei_node = nei[0]
+                nei_time = nei[1]
+                curr_time = t + nei_time 
+                
+                if curr_time == time[nei_node]:
+                    res[nei_node] += (res[node]) % mod
+
+                if curr_time < time[nei_node]:
+                    time[nei_node] = curr_time 
+                    heappush(heap, (curr_time, nei_node))
+                    res[nei_node] = res[node]                 
+
+        return res[n-1] % mod
+
+''' time complexity : O(E logV)
+    space complexity : O(n)
+'''
