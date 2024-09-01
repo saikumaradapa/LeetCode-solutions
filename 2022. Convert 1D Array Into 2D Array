@@ -1,0 +1,20 @@
+Problem Link : https://leetcode.com/problems/convert-1d-array-into-2d-array/description/?envType=daily-question&envId=2024-09-01
+
+class Solution:
+    def construct2DArray(self, original: List[int], m: int, n: int) -> List[List[int]]:
+        if len(original) != n * m:
+            return []
+        
+        idx = 0 
+
+        res = [[0] * n for _ in range(m)]
+        for i in range(m):
+            for j in range(n):
+                res[i][j] = original[idx] 
+                idx += 1 
+        
+        return res
+
+''' time complexity : O(m * n)        
+    space complexity : O(m * n)
+'''
