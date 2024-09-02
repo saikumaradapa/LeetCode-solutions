@@ -1,0 +1,17 @@
+Problem Link : https://leetcode.com/problems/find-the-student-that-will-replace-the-chalk/description/?envType=daily-question&envId=2024-09-02
+
+class Solution:
+    def chalkReplacer(self, chalk: List[int], k: int) -> int:
+        chalk_for_one_iteration = sum(chalk)
+
+        curr_chalk = k % chalk_for_one_iteration 
+
+        for i in range(len(chalk)):
+            if 0<= curr_chalk < chalk[i]:
+                return i 
+            curr_chalk -= chalk[i]
+        return 0
+
+''' time complexity : O(n)        
+    space complexity : O(1)
+'''
