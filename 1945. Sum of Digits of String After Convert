@@ -1,0 +1,10 @@
+Problem Link : https://leetcode.com/problems/sum-of-digits-of-string-after-convert/description/?envType=daily-question&envId=2024-09-03
+
+class Solution:
+    def getLucky(self, s: str, k: int) -> int:
+        digits = ''.join(str(ord(ch) - ord('a') + 1) for ch in s)
+        
+        for _ in range(k):
+            digits = str(sum(int(d) for d in digits))
+        
+        return int(digits)
