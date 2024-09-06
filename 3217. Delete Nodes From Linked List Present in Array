@@ -1,0 +1,42 @@
+Problem Link : https://leetcode.com/problems/delete-nodes-from-linked-list-present-in-array/description/?envType=daily-question&envId=2024-09-06
+
+
+
+class Solution:
+    def modifiedList(self, nums: List[int], head: Optional[ListNode]) -> Optional[ListNode]:
+        nums = set(nums)
+        prev = dummy = ListNode(-1, head)
+        curr = prev.next
+        while curr:
+            if curr.val in nums:
+                curr = curr.next
+            else:
+                prev.next = curr
+                prev = curr 
+                curr = curr.next 
+        prev.next = curr
+        
+        return dummy.next
+
+''' time complexity : O(n)        
+    space complexity : O(k)
+'''
+
+############################################################################################################################################################################################################################
+
+class Solution:
+    def modifiedList(self, nums: List[int], head: Optional[ListNode]) -> Optional[ListNode]:
+        nums = set(nums)
+        curr = dummy = ListNode(-1, head)
+        while curr and curr.next:
+            if curr.next.val in nums:
+                curr.next = curr.next.next 
+            
+            if curr and curr.next and curr.next.val not in nums:
+                curr = curr.next 
+        
+        return dummy.next
+
+''' time complexity : O(n)        
+    space complexity : O(k)
+'''
