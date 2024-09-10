@@ -1,3 +1,25 @@
+Problem Link : https://leetcode.com/problems/insert-greatest-common-divisors-in-linked-list/description/?envType=daily-question&envId=2024-09-10
+
+
+class Solution:
+    def insertGreatestCommonDivisors(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        curr = head
+        while curr and curr.next:            
+            curr.next, curr = ListNode(self.gcd(curr.val, curr.next.val), curr.next), curr.next    
+        return head 
+
+    def gcd(self, a, b):
+        if b == 0:
+            return a
+        return self.gcd(b, a % b)
+
+''' time complexity : O(n * log(min(a, b)))        
+    space complexity : O(log(min(a, b)))
+'''
+
+#######################################################################################################################################################################################
+
+
 
 import math
 class Solution:
