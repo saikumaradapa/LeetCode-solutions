@@ -1,0 +1,13 @@
+Problem Link : https://leetcode.com/problems/minimum-bit-flips-to-convert-number/description/?envType=daily-question&envId=2024-09-11
+
+
+class Solution:
+    def minBitFlips(self, start: int, goal: int) -> int:
+        res = 0
+        for i in range(32):
+            res += ((start >> i) & 1) ^ ((goal >> i) & 1)
+        return res 
+
+''' time complexity : O(32)
+    space complexity : O(1)        
+'''
