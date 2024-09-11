@@ -1,6 +1,24 @@
 Problem Link : https://leetcode.com/problems/minimum-bit-flips-to-convert-number/description/?envType=daily-question&envId=2024-09-11
 
 
+
+class Solution:
+    def minBitFlips(self, start: int, goal: int) -> int:
+        res = 0
+        xor = start ^ goal
+        while xor:
+            xor = xor & (xor - 1)
+            res += 1
+        return res 
+
+''' time complexity : O(32)   # actually number of set bits
+    space complexity : O(1)        
+'''
+
+
+###########################################################################################################################################################################################
+
+
 class Solution:
     def minBitFlips(self, start: int, goal: int) -> int:
         res = 0
