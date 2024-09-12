@@ -1,0 +1,22 @@
+Problem Link : https://leetcode.com/problems/count-the-number-of-consistent-strings/description/?envType=daily-question&envId=2024-09-12
+
+class Solution:
+    def countConsistentStrings(self, allowed: str, words: List[str]) -> int:
+        allowedArr = [0] * 26
+        for ch in allowed:
+            allowedArr[ord(ch)-ord('a')] = 1
+
+        res = 0
+        for word in words:     
+            flag = True   
+            for ch in word:
+                if not allowedArr[ord(ch)-ord('a')]: 
+                    flag = False
+                    break
+            if flag:
+                res += 1
+        return res
+
+''' time complexity : O(n)        
+    space complexity : O(1)
+'''
