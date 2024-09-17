@@ -1,0 +1,21 @@
+https://leetcode.com/problems/uncommon-words-from-two-sentences/description/?envType=daily-question&envId=2024-09-17
+
+class Solution:
+    def uncommonFromSentences(self, s1: str, s2: str) -> List[str]:
+        dit = defaultdict(int)
+
+        for word in s1.split(' '):
+            dit[word] += 1
+        
+        for word in s2.split(' '):
+            dit[word] += 1         
+
+        res = []
+        for word, freq in dit.items():
+            if freq == 1:
+                res.append(word)
+        return res
+
+''' time complexity : O(n + m)        
+    space complexity : O(n + m)
+'''
