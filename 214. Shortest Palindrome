@@ -1,0 +1,69 @@
+Problem Link : https://leetcode.com/problems/shortest-palindrome/description/?envType=daily-question&envId=2024-09-20
+
+
+
+class Solution:
+    def shortestPalindrome(self, s: str) -> str:
+        n = len(s)
+
+        suffix = 0 
+        prefix = 0 
+        last_index = 0 
+        power = 1
+        mod = 10 ** 9 + 7
+
+        for i, ch in enumerate(s):
+            char = (ord(ch) - ord('a') + 1)
+
+            prefix = (prefix * 29 + char) % mod 
+            suffix = (suffix + char * power) % mod 
+
+            power = (power * 29) % mod 
+
+            if suffix == prefix:
+                last_index = i         
+
+        sufiix_word = s[last_index+1:]
+        return sufiix_word[::-1]+s
+
+
+
+''' time complexity : O(n)        Rabin Karp Algorithm
+    space complexity : O(n) 
+
+    113
+    aacecaaa 
+
+    aaacecaa
+         311
+
+    define custom base to encode string into integer so that we can compare two strings in constant time
+    to get longest palindromic prefix 
+
+'''
+
+
+##########################################################################################################################################################################################################################
+
+
+
+class Solution:
+    def shortestPalindrome(self, s: str) -> str:
+        n = len(s)
+
+        def is_palindrome(i, j):
+            while i <= j:
+                if s[i] != s[j]:
+                    return False 
+                i, j = i + 1, j - 1
+            return True 
+
+        for r in range(n-1, -1, -1):
+            if is_palindrome(0, r):
+                suffix = s[r+1:]
+                return suffix[::-1]+s
+        return ""
+
+''' time complexity : O(n ^ 2)        
+    space complexity : O(n)
+'''
