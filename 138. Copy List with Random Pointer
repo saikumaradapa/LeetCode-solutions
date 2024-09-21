@@ -1,0 +1,64 @@
+Problem Link : https://leetcode.com/problems/copy-list-with-random-pointer/description/
+
+
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head : return None 
+
+        curr = head 
+        while curr:
+            temp = Node(curr.val)
+            temp.next = curr.next 
+            curr.next = temp 
+            curr = temp.next 
+
+        curr = head 
+        while curr and curr.next:
+            curr.next.random = curr.random.next if curr.random else None 
+            curr = curr.next.next
+        
+        newCurr = dummy = Node(-1)
+        curr = head 
+        while curr:
+            temp = curr.next 
+            curr.next = temp.next 
+            newCurr.next = temp
+            newCurr = newCurr.next 
+            curr = curr.next 
+         
+        return dummy.next
+
+
+''' time complexity : O(3n)        
+    space complexity : O(1)
+
+
+    1. copy nodes in between 
+    2. connect random pointers
+    3. connect next pointers 
+'''
+
+
+########################################################################################################################################################################################################################
+
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head : return None 
+        
+        hasMap = dict()
+
+        curr = head 
+        while curr:
+            hasMap[curr] = Node(curr.val)
+            curr = curr.next 
+        
+        curr = head 
+        while curr:
+            hasMap[curr].next = hasMap[curr.next] if curr.next else None 
+            hasMap[curr].random = hasMap[curr.random] if curr.random else None 
+            curr = curr.next 
+        return hasMap[head]
+
+''' time complexity : O(2n)        
+    space complexity : O(n)
+'''
