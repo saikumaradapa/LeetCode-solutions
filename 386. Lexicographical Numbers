@@ -1,0 +1,45 @@
+Problem Link : https://leetcode.com/problems/lexicographical-numbers/description/?envType=daily-question&envId=2024-09-21
+
+class Solution:
+    def lexicalOrder(self, n: int) -> List[int]:
+        res = []
+        curr = 1
+
+        while len(res) < n:
+            res.append(curr)
+
+            if curr * 10 <= n:
+                curr *= 10 
+            else:
+                while curr == n or curr % 10 == 9:
+                    curr = curr // 10 
+                curr += 1
+
+        return res 
+
+''' time complexity : O(n)        iterative solutioni without stack 
+    space complexity : O(1)
+'''
+
+########################################################################################################################################################################################################################
+
+class Solution:
+    def lexicalOrder(self, n: int) -> List[int]:
+        res = []
+
+        def dfs(res, num, n):
+            if num > n:
+                return 
+            
+            res.append(num)
+
+            for i in range(0, 10):
+                dfs(res, num * 10 + i, n)
+        
+        for k in range(1, 10):
+            dfs(res, k, n)
+        return res 
+
+''' time complexity : O(n)        
+    space complexity : O(5)
+'''
