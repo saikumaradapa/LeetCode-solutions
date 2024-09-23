@@ -1,0 +1,24 @@
+Problem Link : https://leetcode.com/problems/extra-characters-in-a-string/description/?envType=daily-question&envId=2024-09-23
+
+class Solution:
+    def minExtraChar(self, s: str, dictionary: List[str]) -> int:
+        words = set(dictionary)
+        n = len(s)
+        dp = {n : 0}
+
+        def dfs(i):
+            if i in dp:
+                return dp[i]                
+
+            res = 1 + dfs(i + 1)
+            for j in range(i, n):
+                if s[i:j+1] in words:
+                    res = min(res, dfs(j + 1))            
+            dp[i] = res
+            return res
+        
+        return dfs(0)
+
+''' time complexity : O(n ^ 3)
+    space complexity : O(n)
+'''
