@@ -1,5 +1,6 @@
 Problem Link : https://leetcode.com/problems/lexicographical-numbers/description/?envType=daily-question&envId=2024-09-21
 
+
 class Solution:
     def lexicalOrder(self, n: int) -> List[int]:
         res = []
