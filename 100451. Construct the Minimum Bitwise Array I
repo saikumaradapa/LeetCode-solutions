@@ -1,0 +1,18 @@
+Problem Link : https://leetcode.com/contest/biweekly-contest-141/problems/construct-the-minimum-bitwise-array-i/description/
+
+
+class Solution:
+    def minBitwiseArray(self, nums: List[int]) -> List[int]:
+        ans = []
+        
+        for num in nums:
+            found = False
+            for x in range(num):  # We'll try values starting from 0 up to num - 1
+                if (x | (x + 1)) == num:
+                    ans.append(x)
+                    found = True
+                    break
+            if not found:
+                ans.append(-1)  # Append -1 if no suitable ans[i] was found
+                
+        return ans
