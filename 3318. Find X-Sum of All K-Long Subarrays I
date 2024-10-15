@@ -1,0 +1,30 @@
+class Solution:
+    def findXSum(self, nums: List[int], k: int, x: int) -> List[int]:
+
+        n = len(nums)
+        answer = []
+
+        for i in range(n - k + 1):
+            # Step 1: Get the subarray nums[i:i + k]
+            subarray = nums[i:i + k]
+
+            # Step 2: Count occurrences
+            freq = Counter(subarray)
+
+            # Step 3: Sort by frequency (desc), then by value (desc for ties)
+            most_common = sorted(freq.items(), key=lambda item: (-item[1], -item[0]))
+
+            # Step 4: Take the top x elements and calculate their contribution to the sum
+            x_sum = 0
+            count = 0
+            for value, occurrence in most_common:
+                if count < x:
+                    x_sum += value * occurrence
+                    count += 1
+                else:
+                    break
+
+            # Step 5: Store the x-sum for this subarray
+            answer.append(x_sum)
+
+        return answer
