@@ -1,0 +1,24 @@
+Problem Link : https://leetcode.com/problems/delete-characters-to-make-fancy-string/description/?envType=daily-question&envId=2024-11-01
+
+class Solution:
+    def makeFancyString(self, s: str) -> str:
+        cnt = 0 
+        stack = []
+
+        for ch in s:
+            if not stack or cnt == 0:
+                stack.append(ch)
+                cnt += 1                
+            elif cnt == 1:                
+                if stack[-1] == ch:
+                    cnt += 1                
+                stack.append(ch)
+            elif cnt == 2:
+                if stack[-1] != ch:
+                    stack.append(ch)
+                    cnt = 1             
+        return "".join(stack)
+
+''' time complexity : O(n)        
+    space complexity : O(n)
+'''
