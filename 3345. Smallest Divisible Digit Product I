@@ -1,0 +1,22 @@
+Problem Link : https://leetcode.com/problems/smallest-divisible-digit-product-i/description/
+
+class Solution:
+    def smallestNumber(self, n: int, t: int) -> int:
+        
+        
+        while True:
+            temp = n 
+            digit_product = 1
+            while temp:
+                digit = temp % 10 
+                temp //= 10 
+                
+                digit_product *= digit
+                
+            # print(n, t, digit_product, sep=':')
+            if digit_product % t == 0:            
+                return n 
+            
+            n += 1
+        return -1
+        
