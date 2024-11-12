@@ -20,3 +20,6 @@ class Solution:
             n += 1
         return -1
         
+''' time complexity : O(k logn)
+    space complexity : O(1)
+'''
