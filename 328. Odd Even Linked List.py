@@ -19,9 +19,7 @@ class Solution:
         odd.next = evenhead 
         return head 
                               
-        
-        
-        
+#####################################################################################################################################################################
         
 class Solution:
     def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]: 
