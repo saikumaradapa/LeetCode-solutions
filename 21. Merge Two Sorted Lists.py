@@ -22,25 +22,24 @@ class Solution:
             head = temp 
         return head
         
-        
+############################################################################################################################################################## 
         
 class Solution:
     def mergeTwoLists(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
     # use the property of sorted lists 
     # solution with O(1) space complexity 
-        dummy = head = ListNode(0)
+        dummy = curr = ListNode(-1)
         while l1 and l2 :
             if l1.val < l2.val :
-                dummy.next = l1
+                curr.next = l1
                 l1 = l1.next
             else :
-                dummy.next = l2 
+                curr.next = l2 
                 l2 = l2.next
-            print(dummy.val)
-            dummy = dummy.next 
+            curr = curr.next 
         if l1 :
-                dummy.next  = l1
-        elif l2 :
-                dummy.next = l2
+                curr.next  = l1
+        if l2 :
+                curr.next = l2
                 
-        return head.next
+        return dummy.next
