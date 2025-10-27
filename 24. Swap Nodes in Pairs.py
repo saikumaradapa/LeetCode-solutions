@@ -18,3 +18,7 @@ class Solution:
             point = s1 
         
         return dummy.next
+
+''' time complexity : O(n)        
+    space complexity : O(1)
+'''
