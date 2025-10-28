@@ -16,6 +16,6 @@ class Solution:
         return result 
 
 
-''' time complexity : O(n)    BFS 
-    space complexity : O(n/2)
+''' time complexity : O(n)    BFS - considering q.pop() takes O(1) time
+    space complexity : O(n/2)     - max no. of nodes in a level of BT 
 '''    
