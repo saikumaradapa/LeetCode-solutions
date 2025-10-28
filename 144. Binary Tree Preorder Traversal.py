@@ -3,17 +3,19 @@ class Solution:
         res = []
         stack = []
         curr = root 
-        while curr or stack : 
-            if curr :
+        while curr or stack :
+            while curr :
                 res.append(curr.val)
-                stack.append(curr.right)
-                curr = curr.left 
-            else :
-                curr = stack.pop()
+                stack.append(curr)
+                curr = curr.left
+            curr = stack.pop()
+            curr = curr.right
         return res
+        
 ''' iterative solution
     time complexity : O(n)
     space complexity : O(n) 
+'''
 
 ################################################################################################################################################
 # recursion solution 
