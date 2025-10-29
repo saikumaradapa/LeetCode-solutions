@@ -12,13 +12,11 @@ class Solution:
                     q.append((node.left, c-1, r+1))
                     q.append((node.right, c+1, r+1))
         for i in range(min(dit.keys()), max(dit.keys())+1) :
-
             temp = sorted(dit[i])
             temp = [ele[1] for ele in temp ]
             res.append(temp)
-        # print(res)
         return res
 
-''' time complexity : O(n) + O( k log k)        
+''' time complexity : O(n) + O( k log k)       - considering q.pop() takes O(1)
     space complexity : O(n)
 '''
