@@ -11,9 +11,8 @@ class Solution:
                     if first == -1 :
                         first = idx
                     second = idx
-                    q.append((node.left, 2*idx-first))
-                    q.append((node.right, 2*idx+1-first))
-            # print(first, second)      
+                    q.append((node.left, 2*idx))
+                    q.append((node.right, 2*idx+1))      
             if first != -1 and second != -1 :            
                 res = max(res, second-first+1)
         return res
@@ -29,7 +28,7 @@ class Solution:
 
 class Solution:
     def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        q = [(root, 1)]  
+        q = [(root, 0)]  
         res = 0       
         while q :
             first, second = -1, -1
@@ -40,35 +39,13 @@ class Solution:
                     if first == -1 :
                         first = idx
                     second = idx
-                    q.append((node.left, 2*idx))
-                    q.append((node.right, 2*idx+1))      
+                    q.append((node.left, 2*(idx-first)+1))
+                    q.append((node.right, 2*(idx-first)+2))      
             if first != -1 and second != -1 :            
                 res = max(res, second-first+1)
         return res
 
-''' time complexity : O(n)
+''' 
+    time complexity : O(n)  - idx variable will be not exceed int range
     space complexity : O(n)
 '''
-
-######################################################################################################################################################################
-
-def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        if not root :
-            return 0
-        width = 1  
-        q = [(root,0)]
-        while q :
-            level  = []
-            if len(q) != 0 :
-                width = max(width, q[-1][1]-q[0][1]+1)
-
-            while q :
-                node, position = q.pop(0)
-                if node.left :
-                    level.append((node.left,position*2))
-                if node.right :
-                    level.append((node.right,position*2+1))
-            q = level
-
-        return width
-
