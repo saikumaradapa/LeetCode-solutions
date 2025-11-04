@@ -16,7 +16,7 @@ class Solution:
         return False 
 
 ''' time complexity : O(n)    # with help of iterator preorder traversal 
-    space complexity : O(n)
+    space complexity : O(h)
 '''
 
 ################################################################################################################################################################################
