@@ -12,7 +12,7 @@ class Solution:
     space complexity : O(n) auxiliary space
 '''
 
-########################################################################################################################################################################################
+#########################################################################################################################################################
 
 # use property that inorder traversal gives a sorted list with BST
 
@@ -25,11 +25,13 @@ class Solution:
                 list1.append(root.val)
                 inorder(root.right)
         inorder(root)
-        # print(list1)
         max = -math.inf
         for i in list1 :
             if max >= i :
-                print(max, i)
                 return False 
             max = i
         return True
+
+''' time complexity : O(n)        
+    space complexity : O(n)
+'''
