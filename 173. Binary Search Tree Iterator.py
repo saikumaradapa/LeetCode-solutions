@@ -19,7 +19,7 @@ class BSTIterator:
         return self.stack != []
         
 
-''' time complexity : O(n)        
+''' time complexity : O(1) -- on avg next() calls        
     space complexity : O(h)  -- optimized version (no need of storing entire tree nodes)
 '''
 
@@ -51,6 +51,6 @@ class BSTIterator:
         return self.i < self.n 
         
 
-''' time complexity : O(n)        
+''' time complexity : O(1)        
     space complexity : O(n)  -- to store all node values 
 '''
