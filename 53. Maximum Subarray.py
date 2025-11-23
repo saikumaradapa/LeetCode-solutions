@@ -3,7 +3,7 @@
 # if current_sum is (useless to sum) negative then restart current_sum 
 # take max_sum_so_far from current_sum
 
-O(N)
+# O(N)
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         cur_sum = 0
@@ -17,7 +17,7 @@ class Solution:
 
 
 
-O(N^2) 
+# O(N^2) 
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         max_s = nums[0]
