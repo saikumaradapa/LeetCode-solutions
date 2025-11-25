@@ -5,14 +5,25 @@
 
 # O(N)
 class Solution:
-    def maxSubArray(self, nums: List[int]) -> int:
-        cur_sum = 0
+    def maxSubArray(self, nums: List[int]) -> Tuple[int, int, int]:
+        cur_sum = nums[0]
         max_sum = nums[0]
+        start = 0
+        end = 0
+        temp_start = 0
 
-        for n in nums :
-            cur_sum  += n
-            cur_sum = max(cur_sum, n) 
-            max_sum = max(max_sum, cur_sum)
+        for i in range(1, len(nums)):
+            if cur_sum + nums[i] < nums[i]:
+                cur_sum = nums[i]
+                temp_start = i
+            else:
+                cur_sum += nums[i]
+
+            if cur_sum > max_sum:
+                max_sum = cur_sum
+                start = temp_start
+                end = i
+        print(start, end)
         return max_sum
 
 
