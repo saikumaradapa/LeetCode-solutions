@@ -8,3 +8,7 @@ class Solution:
             maxp = max(i-minv , maxp)
         return maxp
 
+''' we are memorizing that the reason tag as Dynamic Programming
+    time complexity : O(n)
+    space complexity : O(1)
+'''
