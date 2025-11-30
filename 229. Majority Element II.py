@@ -1,29 +1,5 @@
 class Solution:
-    def majorityElement(self, nums: List[int]) -> List[int]:
-        dit = dict()
-        res = []
-        for n in nums :
-            if n in dit :
-                dit[n] += 1
-            else :
-                dit[n] = 1
-        for n, c in dit.items() :
-            if c > len(nums)//3 :
-                res.append(n)
-        return res
-
-''' time complexity O(n) 
-    space complexity O(n) '''
-
-
-
-
-------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-class Solution:
     def majorityElement(self, v: List[int]) -> List[int]:
-        ''' Extended Boyer Moore’s Voting Algorithm '''
         cnt1, cnt2 = 0, 0 # counts
         el1, el2 = None, None
         n = len(v)
@@ -56,5 +32,27 @@ class Solution:
         return res
             
 
-''' time complexity O(n)
-    space complexity O(1) '''
+''' Extended Boyer Moore’s Voting Algorithm
+    time complexity O(n)
+    space complexity O(1) 
+'''
+
+########################################################################################################################################################
+
+class Solution:
+    def majorityElement(self, nums: List[int]) -> List[int]:
+        dit = dict()
+        res = []
+        for n in nums :
+            if n in dit :
+                dit[n] += 1
+            else :
+                dit[n] = 1
+        for n, c in dit.items() :
+            if c > len(nums)//3 :
+                res.append(n)
+        return res
+
+''' time complexity O(n) 
+    space complexity O(n)
+'''
