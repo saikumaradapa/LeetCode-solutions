@@ -12,13 +12,10 @@ class Solution:
 
             left, right = left+1, right-1 
 
-
-
-
+########################################################################################################################################################
 
 class Solution:
     def rotate(self, matrix: List[List[int]]) -> None:
-
         n = len(matrix)
         for i in range((n+1)// 2) :
             for j in range((n)//2) :
@@ -28,3 +25,25 @@ class Solution:
                 matrix[n-1-i][n-1-j] = matrix[j][n-1-i]
                 matrix[j][n-1-i] = matrix[i][j]
                 matrix[i][j] = temp
+
+########################################################################################################################################################
+
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        n = len(matrix)
+        for i in range(n):
+            for j in range(n):
+                if i < j:
+                    matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+
+        for row in range(n):
+            left, right = 0, n-1
+            while left < right:
+                matrix[row][left], matrix[row][right] = matrix[row][right], matrix[row][left]
+                left += 1
+                right -= 1
+
+''' 
+    time complexity : O(n * m)
+    space complexity : O(1)
+'''
