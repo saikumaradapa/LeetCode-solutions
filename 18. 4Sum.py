@@ -25,10 +25,14 @@ class Solution:
                         left += 1
                         right -= 1
         return res
-''' time complexiyy O(N^3) and space complxity O(N) for result '''
+        
+''' 
+    time complexity O(n ^ 3) - two pointer approach
+    space complexity O(1)  
+'''
 
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+########################################################################################################################################################
 
 
 class Solution:
@@ -67,4 +71,33 @@ class Solution:
         return res
 
 
-        ''' ksum solution with time complexity O(k-1) and O(n) space complexity '''
+''' 
+    time complexity O(k - 1) - ksum solution
+    space complexity O(n)  
+'''
+
+########################################################################################################################################################
+
+
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        res = set()
+        n = len(nums)
+
+        for i in range(n):
+            for j in range(i + 1, n):
+                seen = set()
+                for k in range(j + 1, n):
+                    fourth = target - (nums[i] + nums[j] + nums[k])
+                    if fourth in seen:
+                        temp = [nums[i], nums[j], nums[k], fourth]
+                        temp.sort()
+                        res.add(tuple(temp[:]))
+                    seen.add(nums[k])
+        return list(res)
+
+
+''' 
+    time complexity O(n ^ 3) - taken set operations as constant 
+    space complexity O(n)  
+'''
