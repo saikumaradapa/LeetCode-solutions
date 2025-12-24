@@ -2,10 +2,8 @@ class Solution:
     def check(self, nums: List[int]) -> bool:
         decrease_count = 0
         for i in range(len(nums)):
-
             if nums[i] > nums[(i + 1) % len(nums)]:
                 decrease_count += 1
-            print(nums[i], nums[(i + 1) % len(nums)],"-->",decrease_count)
         return decrease_count <= 1
 
 ''' time complexity O(n)
@@ -22,7 +20,6 @@ class Solution:
                 sortd = False
                 break
         if sortd :
-            # print("sorted")
             return True
 
         snums = sorted(nums)
