@@ -8,7 +8,8 @@ class Solution:
         return max(nums)
 
 ''' time complexity O(n) 
-    space complexity O(1) '''
+    space complexity O(1) 
+'''
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -24,4 +25,5 @@ class Solution:
         return max(maxCount, count)
 
 ''' time complexity O(n) 
-    space complexity O(1) ''' 
+    space complexity O(1) 
+''' 
