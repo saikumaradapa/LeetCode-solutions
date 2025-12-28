@@ -1,5 +1,22 @@
 class Solution:
     def rotate(self, matrix: List[List[int]]) -> None:
+        n = len(matrix)
+        for i in range(n):
+            for j in range(n):
+                if i < j:
+                    matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+
+        for row in matrix:
+            row.reverse()
+
+''' 
+    time complexity : O(n ^ 2)
+    space complexity : O(1)
+'''
+########################################################################################################################################################
+
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
         left, right = 0, len(matrix)-1
         while left < right :
             for i in range(right-left) :
@@ -12,6 +29,10 @@ class Solution:
 
             left, right = left+1, right-1 
 
+''' 
+    time complexity : O(n ^ 2)
+    space complexity : O(1)
+'''
 ########################################################################################################################################################
 
 class Solution:
@@ -26,24 +47,7 @@ class Solution:
                 matrix[j][n-1-i] = matrix[i][j]
                 matrix[i][j] = temp
 
-########################################################################################################################################################
-
-class Solution:
-    def rotate(self, matrix: List[List[int]]) -> None:
-        n = len(matrix)
-        for i in range(n):
-            for j in range(n):
-                if i < j:
-                    matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
-
-        for row in range(n):
-            left, right = 0, n-1
-            while left < right:
-                matrix[row][left], matrix[row][right] = matrix[row][right], matrix[row][left]
-                left += 1
-                right -= 1
-
 ''' 
-    time complexity : O(n * m)
+    time complexity : O(n ^ 2)
     space complexity : O(1)
 '''
