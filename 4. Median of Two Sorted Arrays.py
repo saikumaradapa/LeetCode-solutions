@@ -32,7 +32,7 @@ class Solution:
             else:
                 r = mid1 - 1
 
-''' optimal approach 
+''' optimal approach | binary search
     time complexity : O(log(min(n, m)))
     space complexity : O(1)
 '''
