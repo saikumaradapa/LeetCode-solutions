@@ -1,5 +1,34 @@
 class Solution:
     def myPow(self, x: float, n: int) -> float:
+        # Handle negative power
+        if n < 0:
+            x = 1 / x
+            n = -n
+        
+        result = 1
+        
+        while n > 0:
+            # If current bit is 1 → include this power
+            if n % 2 == 1:
+                result *= x
+            
+            # Square base
+            x *= x
+            
+            # Move to next bit
+            n //= 2
+        
+        return result
+
+''' engineers default to iterative when possible
+    time complexity : O(log n)
+    space complexity : O(1)
+'''
+
+###########################################################################################################################################################################
+
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
         if n < 0 :
             return self.myPow(1/x,-n)
         elif n == 0 :
@@ -11,3 +40,8 @@ class Solution:
             return temp*temp
         else :
             return x*self.myPow(x,n-1)
+
+''' recursion
+    time complexity : O(log n)
+    space complexity : O(log n)
+'''
