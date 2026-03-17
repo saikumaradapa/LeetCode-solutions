@@ -15,7 +15,7 @@ class Solution:
 
         return ans
 
-''' 
+''' precomputing 
     time complexity : O(m n logn )
-    space complexity : O(m n)
+    space complexity : O(n)
 '''
