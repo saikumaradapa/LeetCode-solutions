@@ -1,6 +1,7 @@
-# Eulerian path problem | Hierholzer | 332. Reconstruct Itinerary
+# Eulerian path problem | Hierholzer Algorithm | 332. Reconstruct Itinerary
 # marked for revisit the approach
 # O(nlogn) - time complexity 
+# psudo code : https://youtu.be/8MpoO2zA2l4?si=563k7SsjwYiQCOt_
 
 from collections import defaultdict
 
