@@ -15,7 +15,6 @@ class Solution:
 
 
 
-
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
         nums = list(set(nums))
