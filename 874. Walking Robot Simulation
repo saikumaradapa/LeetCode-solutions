@@ -24,6 +24,7 @@ class Solution:
             res = max(res, x ** 2 + y ** 2)
         return res 
 
+
 ''' time complexity : O(n + m)        
     space complexity : O(m)
 '''
