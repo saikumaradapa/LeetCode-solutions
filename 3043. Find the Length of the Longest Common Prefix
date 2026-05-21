@@ -21,4 +21,5 @@ class Solution:
                 # Length of the matched prefix using log10 to determine the number of digits
                 longest_prefix = max(longest_prefix, len(str(val)))
 
+
         return longest_prefix
