@@ -2,24 +2,25 @@ Problem Link : https://leetcode.com/problems/smallest-divisible-digit-product-i/
 
 class Solution:
     def smallestNumber(self, n: int, t: int) -> int:
-        
-        
-        while True:
-            temp = n 
-            digit_product = 1
-            while temp:
-                digit = temp % 10 
-                temp //= 10 
-                
-                digit_product *= digit
-                
-            # print(n, t, digit_product, sep=':')
-            if digit_product % t == 0:            
-                return n 
-            
-            n += 1
+
+        def digit_product(num):
+            product = 1
+            while num:
+                product *= num % 10
+                num //= 10
+            return product
+
+        for i in range(n, n + 11):
+            if digit_product(i) % t == 0:
+                return i
+
         return -1
-        
-''' time complexity : O(k logn)
+
+''' time complexity : O(k * logn)  [k = at most 10 numbers, logn = digits per number]
     space complexity : O(1)
+
+    - helper function extracts digit product via mod 10 and floor divide
+    - iterate from n to n+10 (guaranteed answer within 10 steps)
+    - reason: next number with a 0 digit has product 0, divisible by anything
+    - return first number whose digit_product is divisible by t
 '''
