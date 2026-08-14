@@ -13,6 +13,6 @@ class Solution:
 
 ''' 
     time complexity : O(n)
-    space complexity : O(n)
+    space complexity : O(26) - at max 26 characters
     sliding window approach
 '''
