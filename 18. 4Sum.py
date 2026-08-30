@@ -37,44 +37,52 @@ class Solution:
 
 class Solution:
     def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        """
+        Generalized kSum via recursion + two-pointer base case.
+        Reduce k-sum to (k-1)-sum by fixing one element, until k == 2,
+        then solve 2-sum with two pointers on the sorted array.
+
+        Time:  O(n^(k-1))  -> O(n^3) for 4Sum
+        Space: O(k) recursion depth (excluding output)
+        """
         nums.sort()
         res, quad = [], []
         n = len(nums)
 
-        def kSum(k, start, t) :
-            if k != 2 :
-                for i in range(start, n-k+1) :
-                    if i > start and nums[i] == nums[i-1] :
-                        continue                    
+        def kSum(k, start, t):
+            # Recursive case: fix one number, recurse on remaining (k-1)-sum
+            if k != 2:
+                # n-k+1: stop early when fewer than k elements remain
+                for i in range(start, n - k + 1):
+                    # skip duplicate values at this level to avoid duplicate tuples
+                    if i > start and nums[i] == nums[i - 1]:
+                        continue
                     quad.append(nums[i])
-                    kSum(k-1, i+1, t-nums[i]) 
+                    kSum(k - 1, i + 1, t - nums[i])
                     quad.pop()
-                return 
+                return
 
-
-            left, right = start, n-1
-            while left < right :
-                if nums[left]+nums[right] > t :
+            # Base case: 2-sum with two pointers
+            left, right = start, n - 1
+            while left < right:
+                total = nums[left] + nums[right]
+                if total > t:
                     right -= 1
-                elif nums[left]+nums[right] < t :
+                elif total < t:
                     left += 1
-                else :
-                    res.append(quad+[nums[left],nums[right]])
-                    left += 1
-                    # right -= 1
-                    while left<right and nums[left] == nums[left-1] :
+                else:
+                    res.append(quad + [nums[left], nums[right]])
+                    # skip duplicates on both ends, then advance past them
+                    while left < right and nums[left] == nums[left + 1]:
                         left += 1
-                    while left<right and nums[right] == nums[right-1] :
-                        right -= 1                        
-                            
+                    while left < right and nums[right] == nums[right - 1]:
+                        right -= 1
+                    left += 1
+                    right -= 1
+
         kSum(4, 0, target)
         return res
 
-
-''' 
-    time complexity O(k - 1) - ksum solution
-    space complexity O(n)  
-'''
 
 ########################################################################################################################################################
 
